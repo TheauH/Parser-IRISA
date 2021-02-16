@@ -11,7 +11,7 @@ pdf = pdftotext.PDF(entrée)  # Conversion de P.D.F. en texte brut
 
 page = pdf[0]
 
-colonne = largeur = longueur = 0
+largeur = 0
 matrice = page.split("\n")  # Lignes : lignes ; colonnes : caractères
 
 # Chercher la largeur maximale du document

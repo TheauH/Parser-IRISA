@@ -1,14 +1,17 @@
 from typing import List
 from gouttière import Gouttière
 
+
 class Page(List[str]):
     """
     Représente une page de texte, composée d’une chaîne de caractères par ligne.
     """
 
-    def __init__(self, texte: str):
-        for ligne in texte.split("\n"):
-            self.append(ligne)
+    def __init__(self, texte: str = None):
+        if texte:
+            for ligne in texte.splitlines():
+                self.append(ligne)
+        self.a_deux_colonnes = False
 
     def largeur(self) -> int:
         """
@@ -31,7 +34,7 @@ class Page(List[str]):
 
     def gouttière(self):
         """
-        Trouve la gouttière séparant les deux colonnes.
+        Trouve la gouttière séparant les deux colonnes dans une page
         """
         # 1. Recherche de l’abscisse de la gouttière
         largeur = self.largeur()
@@ -55,6 +58,7 @@ class Page(List[str]):
         # Si aucune colonne n’a été plus vide que le seuil, la recherche s’arrêti ici.
         if colonne_max_vide:
             colonne_max_vide += marge
+            self.a_deux_colonnes = True
         else:
             return None
 
@@ -69,18 +73,53 @@ class Page(List[str]):
                 len(self[début]) > colonne_max_vide
                 and self[début][colonne_max_vide] != " "
             ):
-                print("bute sur le caractère", self[début][colonne_max_vide])
                 début += 1
                 break
             début -= 1
         while fin < len(self) - 1:
             if len(self[fin]) > colonne_max_vide and self[fin][colonne_max_vide] != " ":
-                print("bute sur le caractère", self[fin][colonne_max_vide])
                 fin -= 1
                 break
             fin += 1
 
         return Gouttière(colonne_max_vide, début, fin)  # C’est prêt
+
+    def découpe_page(self):
+        """
+        Réécrit la page en tenant compte de la présence
+        de deux colonnes
+        """
+        g = self.gouttière()
+        if not g:  # Pas de gouttière, pas de découpage.
+            return
+
+        # S’il y a bel et bien deux colonnes :
+        pos_gouttière = g.get_abscisse()
+        début = g.get_début()  # Première ligne séparée
+        fin = g.get_fin()  # Dernière ligne séparée
+
+        # Sous-pages représentant les deux colonnes
+        self.colonne_gauche = Page()
+        self.colonne_droite = Page()
+
+        nouvelle_page = Page()
+
+        # 1. Avant les colonnes
+        for x in range(début):
+            nouvelle_page.append(self[x])
+
+        # 2. Gestion des colonnes
+        for x in range(début, fin + 1):
+            self.colonne_gauche.append(self[x][:pos_gouttière].rstrip())
+            self.colonne_droite.append(self[x][pos_gouttière:])
+
+        nouvelle_page += self.colonne_gauche + self.colonne_droite
+
+        # 3. Après les colonnes
+        for x in range(fin + 1, len(self)):
+            nouvelle_page.append(self[x])
+
+        return nouvelle_page
 
 
 """ Exemple

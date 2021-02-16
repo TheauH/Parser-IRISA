@@ -4,7 +4,7 @@ from page import Page
 from typing import List
 
 class Transcription(List[Page]):
-    def __init__(self, fichier_PDF: BufferedReader) -> None:
+    def __init__(self, fichier_PDF: BufferedReader):
         for page in PDF(fichier_PDF):
             self.append(Page(page))
 

@@ -53,7 +53,9 @@ class Page(List[str]):
                 colonne_max_vide = x
 
         # Si aucune colonne n’a été plus vide que le seuil, la recherche s’arrêti ici.
-        if not colonne_max_vide:
+        if colonne_max_vide:
+            colonne_max_vide += marge
+        else:
             return None
 
         # 2. Recherche des ordonnées de la gouttière

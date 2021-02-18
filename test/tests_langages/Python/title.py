@@ -6,6 +6,7 @@ Created on Tue Feb  9 15:52:15 2021
 """
 from PyPDF2 import PdfFileReader
 import PyPDF2
+import re
 
 def extract_information(pdf_path):
     with open(pdf_path, 'rb') as f:
@@ -23,7 +24,12 @@ def extract_information(pdf_path):
         msg_splitlines = txt2.splitlines()
         headerTo = msg_splitlines[0]
         headerFrom= msg_splitlines[1]
-        print("Titre : "+headerTo+headerFrom)
+        
+        concatenation = headerTo +headerFrom
+
+        p = re.compile(r'([a-z])([A-Z])')
+        title = re.sub(p, r"\1 \2", concatenation)
+        print("Titre : "+title)
     else :
         print(txt)
     return information

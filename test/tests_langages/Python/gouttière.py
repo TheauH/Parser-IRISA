@@ -9,21 +9,3 @@ class Gouttière:
         self.abscisse = abscisse
         self.début = première_ligne
         self.fin = dernière_ligne
-
-    def get_abscisse(self):
-        return self.abscisse
-
-    def set_abscisse(self, n: int):
-        self.abscisse = n
-
-    def get_début(self):
-        return self.début
-
-    def set_début(self, n: int):
-        self.début = n
-
-    def get_fin(self):
-        return self.fin
-
-    def set_fin(self, n: int):
-        self.fin = n

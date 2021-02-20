@@ -94,9 +94,9 @@ class Page(List[str]):
             return
 
         # S’il y a bel et bien deux colonnes :
-        pos_gouttière = g.get_abscisse()
-        début = g.get_début()  # Première ligne séparée
-        fin = g.get_fin()  # Dernière ligne séparée
+        pos_gouttière = g.abscisse
+        début = g.début  # Première ligne séparée
+        fin = g.fin  # Dernière ligne séparée
 
         # Sous-pages représentant les deux colonnes
         self.colonne_gauche = Page()

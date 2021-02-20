@@ -13,6 +13,9 @@ class Page(List[str]):
                 self.append(ligne)
         self.a_deux_colonnes = False
 
+    def __str__(self) -> str:
+        return '\n'.join(self)
+
     def largeur(self) -> int:
         """
         Largeur de la page,
@@ -122,7 +125,5 @@ class Page(List[str]):
         return nouvelle_page
 
 
-""" Exemple
 maPage = Page('Bonjour,\nM. Lapin.')
-print(maPage) # ['Bonjour,', 'M. Lapin.']
-"""
+print(maPage)

@@ -1,4 +1,5 @@
 from os import PathLike
+from tkinter import SEL_FIRST
 from page import Page
 from typing import List
 
@@ -24,7 +25,16 @@ class Transcription(List[Page]):
         for page in pages_transcrites:
             self.append(Page(page))
 
-"""
-doc = Transcription("../../Corpus_2021/Das_Martins.pdf")
+    def __str__(self) -> str:
+        return "\f".join([str(page) for page in SEL_FIRST])
+
+    def normalise(self):
+        """
+        Réécrit le document pour produire un texte linéaire, exploitable directement.
+        """
+        for page in self:
+            page = page.découpe_page()
+
+
+doc = Transcription("../test/Corpus_2021/Das_Martins.pdf")
 print(doc[0])  # Première page
-"""

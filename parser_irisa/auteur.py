@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from transcription import *
+from .transcription import *
 from pathlib import Path
 from os import scandir
 

@@ -1,0 +1,38 @@
+from sys import argv
+from pathlib import Path
+from os import scandir, mkdir
+from shutil import rmtree
+
+from transcription import Transcription
+
+if len(argv) < 2:
+    print("Usage :", argv[0], "dossier")
+    exit(1)
+
+chemin_entrées = Path(argv[1])
+chemin_sorties = chemin_entrées / "txt"
+
+try:
+    dossier_entrées = scandir(chemin_entrées)  # itérateur sur les fichiers de l’entrée
+except NotADirectoryError:
+    print("Erreur :", chemin_entrées, " n’est pas un dossier.")
+    exit()
+
+# Suppression s’il y a lieu, et création du dossier de sortie
+rmtree(chemin_sorties, ignore_errors=True)
+mkdir(chemin_sorties)
+
+# Traitement de chaque fichier P.D.F.
+for entrée in dossier_entrées:
+    if entrée.name.endswith(".pdf") and entrée.is_file:
+        with open(chemin_sorties / (entrée.name[:-3] + "txt"), "wb") as sortie:
+
+            résultat = Transcription(
+                chemin_entrées / entrée.name
+            )  # Conversion de P.D.F. en texte brut
+
+            résultat.normalise()
+            
+            r = str(résultat)
+
+            sortie.write(r.encode())

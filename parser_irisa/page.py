@@ -1,5 +1,5 @@
 from typing import List
-from gouttière import Gouttière
+from .gouttière import Gouttière
 
 
 class Page(List[str]):
@@ -14,7 +14,7 @@ class Page(List[str]):
         self.a_deux_colonnes = False
 
     def __str__(self) -> str:
-        return '\n'.join(self)
+        return "\n".join(self)
 
     def largeur(self) -> int:
         """
@@ -125,5 +125,6 @@ class Page(List[str]):
         return nouvelle_page
 
 
-maPage = Page('Bonjour,\nM. Lapin.')
-print(maPage)
+if __name__ == "_main__":
+    maPage = Page("Bonjour,\nM. Lapin.")
+    print(maPage)

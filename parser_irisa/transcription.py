@@ -1,11 +1,10 @@
 from os import PathLike
-from tkinter import SEL_FIRST
-from page import Page
-from typing import List
+from .page import Page
+from typing import List, Union
 
 
 class Transcription(List[Page]):
-    def __init__(self, chemin_source: PathLike):
+    def __init__(self, chemin_source: Union[str, bytes, PathLike]):
         source = open(chemin_source, "rb")
         try:  # On essaie d’abord avec le module `pdftotext`
             from pdftotext import PDF
@@ -26,15 +25,15 @@ class Transcription(List[Page]):
             self.append(Page(page))
 
     def __str__(self) -> str:
-        return "\f".join([str(page) for page in SEL_FIRST])
+        return "\f".join([str(page) for page in self])
 
     def normalise(self):
         """
         Réécrit le document pour produire un texte linéaire, exploitable directement.
         """
         for page in self:
-            page = page.découpe_page()
+            page.découpe_page()
 
-
-doc = Transcription("../test/Corpus_2021/Das_Martins.pdf")
-print(doc[0])  # Première page
+if __name__ == "__main__":
+    doc = Transcription("../test/Corpus_2021/Das_Martins.pdf")
+    print(doc[0])  # Première page

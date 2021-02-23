@@ -1,15 +1,16 @@
 from os import PathLike
 from parser_irisa.page import Page
-from typing import Union
+from typing import Union, List
 
 
-class Transcription(list[Page]):
+class Transcription(List[Page]):
     def __init__(self, chemin_source: Union[str, bytes, PathLike]):
         source = open(chemin_source, "rb")
         try:  # On essaie d’abord avec le module `pdftotext`
             from pdftotext import PDF
 
             pages_transcrites = PDF(source)
+
         except ModuleNotFoundError:  # à défaut, on utilise la commande système
             print("Module introuvable, recours à pdftotext du système...")
             from os import system, remove

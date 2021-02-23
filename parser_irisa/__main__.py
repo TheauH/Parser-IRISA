@@ -28,10 +28,7 @@ for entrée in dossier_entrées:
     if entrée.name.endswith(".pdf") and entrée.is_file:
         with open(chemin_sorties / (entrée.name[:-3] + "txt"), "wb") as sortie:
 
-            transcr = Transcription(chemin_entrées / entrée.name)
-            transcr.normalise()
+            art = Article(chemin_entrées / entrée.name)
 
-            art = Article(transcr)
-            art.auteurs
-
-            sortie.write()
+            sortie.write("Nom du fichier : ".encode())
+            sortie.write(art.nom.encode())

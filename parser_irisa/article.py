@@ -1,3 +1,6 @@
+from os import PathLike, path
+from typing import Union, List
+
 from .transcription import Transcription
 
 
@@ -9,20 +12,18 @@ class Article:
 
     def __init__(
         self,
-        texte: Transcription,
-        nom: str = "",
-        titre: str = "",
-        auteurs: list[str] = [],
-        résumé: str = "",
+        source: Union[str, PathLike],
     ):
         """
         Constructeur principal, le seul paramètre obligatoire
         est la transcription de l’article, objet `Transcription`.
         """
-        self.texte = texte  # La transcription du fichier d’origine
-        self.nom = nom  # Le nom du fichier d’origine
-        self.titre = titre
-        self.auteurs = auteurs
-        self.résumé = résumé
+        self.nom = path.basename(source)  # Nom du fichier d’origine
+        self.texte = Transcription(source)
 
-    
+        # Faire appel aux fonctions adéquates pour déterminer ces attributs.
+        self.titre: str
+        self.auteurs: List[str]
+
+        # self.texte.normalise() ?
+        self.résumé: str

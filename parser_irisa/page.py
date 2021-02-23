@@ -105,26 +105,12 @@ class Page(List[str]):
         self.colonne_gauche = Page()
         self.colonne_droite = Page()
 
-        nouvelle_page = Page()
-
-        # 1. Avant les colonnes
-        for x in range(début):
-            nouvelle_page.append(self[x])
-
-        # 2. Gestion des colonnes
+        # Gestion des colonnes de part et d’autre de la gouttière
         for x in range(début, fin + 1):
             self.colonne_gauche.append(self[x][:pos_gouttière].rstrip())
             self.colonne_droite.append(self[x][pos_gouttière:])
 
-        nouvelle_page += self.colonne_gauche + self.colonne_droite
-
-        # 3. Après les colonnes
-        for x in range(fin + 1, len(self)):
-            nouvelle_page.append(self[x])
-
-        return nouvelle_page
-
-
-if __name__ == "_main__":
-    maPage = Page("Bonjour,\nM. Lapin.")
-    print(maPage)
+        self[fin + 1 :] = (
+            self.colonne_droite + self[fin + 1 :]
+        )  # Insertion de la colonne droite
+        self[début : fin + 1] = self.colonne_gauche

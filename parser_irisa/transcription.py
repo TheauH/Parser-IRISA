@@ -1,9 +1,9 @@
 from os import PathLike
-from .page import Page
-from typing import List, Union
+from parser_irisa.page import Page
+from typing import Union
 
 
-class Transcription(List[Page]):
+class Transcription(list[Page]):
     def __init__(self, chemin_source: Union[str, bytes, PathLike]):
         source = open(chemin_source, "rb")
         try:  # On essaie d’abord avec le module `pdftotext`
@@ -33,7 +33,3 @@ class Transcription(List[Page]):
         """
         for page in self:
             page.découpe_page()
-
-if __name__ == "__main__":
-    doc = Transcription("../test/Corpus_2021/Das_Martins.pdf")
-    print(doc[0])  # Première page

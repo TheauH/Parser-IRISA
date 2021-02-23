@@ -3,7 +3,8 @@ from pathlib import Path
 from os import scandir, mkdir
 from shutil import rmtree
 
-from transcription import Transcription
+from .transcription import Transcription
+from .article import Article
 
 if len(argv) < 2:
     print("Usage :", argv[0], "dossier")
@@ -27,12 +28,10 @@ for entrée in dossier_entrées:
     if entrée.name.endswith(".pdf") and entrée.is_file:
         with open(chemin_sorties / (entrée.name[:-3] + "txt"), "wb") as sortie:
 
-            résultat = Transcription(
-                chemin_entrées / entrée.name
-            )  # Conversion de P.D.F. en texte brut
+            transcr = Transcription(chemin_entrées / entrée.name)
+            transcr.normalise()
 
-            résultat.normalise()
-            
-            r = str(résultat)
+            art = Article(transcr)
+            art.auteurs
 
-            sortie.write(r.encode())
+            sortie.write()

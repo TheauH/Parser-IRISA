@@ -3,6 +3,7 @@ from typing import Union, List
 
 from .transcription import Transcription
 from .title import extract_information as trouve_titre
+from .auteur import auteur as trouve_auteurs
 
 
 class Article:
@@ -23,8 +24,8 @@ class Article:
         self.texte = Transcription(source)
 
         # Faire appel aux fonctions adéquates pour déterminer ces attributs.
-        self.titre: str = trouve_titre(source, self.texte[0])
-        self.auteurs: List[str] = []
+        self.titre = trouve_titre(source, self.texte)
+        self.auteurs: List[str] = [trouve_auteurs(self.texte, titre=self.titre)]
 
         # self.texte.normalise() ?
         self.résumé: str = ""

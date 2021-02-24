@@ -11,12 +11,11 @@ import re
 from typing import Union
 
 from .transcription import Transcription
-from .page import Page
 
 
 def extract_information(
     pdf_path: Union[str, bytes, PathLike],
-    page: Union[Page, None] = None,
+    pdf_text: Union[Transcription, None] = None,
 ):
     # Récupération des métadonnées
     with open(pdf_path, "rb") as f:
@@ -26,7 +25,7 @@ def extract_information(
     # si le titre est égale à None ou null alors vient forcer la recherche de celui ci
     if not txt or len(txt) <= 4 or txt.startswith("/"):
         # Récupération de la première page, donnée ou à retrouver
-        txt2 = page if page else Transcription(pdf_path)[0]
+        txt2 = pdf_text[0] if pdf_text else Transcription(pdf_path)[0]
         # Récupération et concaténation des 2 premières lignes du texte
         concatenation = txt2[0] + txt2[1]
         # Regex pour venir rajouter un espace entre chaque majuscule de la chaine de caractère

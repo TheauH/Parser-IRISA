@@ -4,37 +4,37 @@ Created on Tue Feb  9 15:52:15 2021
 
 @author: sosob
 """
-from PyPDF2 import PdfFileReader
+from os import PathLike
+from PyPDF2 import PdfFileReader, generic
 import PyPDF2
 import re
+from typing import Union
+
+from .transcription import Transcription
+from .page import Page
 
 
-def extract_information(pdf_path):
+def extract_information(
+    pdf_path: Union[str, bytes, PathLike],
+    page: Union[Page, None] = None,
+):
     # Récupération des métadonnées
     with open(pdf_path, "rb") as f:
         pdf = PdfFileReader(f)
         information = pdf.getDocumentInfo()
-    txt = f"""Titre : {information.title}"""
+    txt: Union[generic.TextStringObject, None] = information.title
     # si le titre est égale à None ou null alors vient forcer la recherche de celui ci
-    if len(txt) <= 12 or txt.startswith("Titre : /"):
-        # parcours première page du texte
-        pdfFileObj = open(pdf_path, "rb")
-        pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-        pageObj = pdfReader.getPage(0)
-        txt2 = pageObj.extractText()
-        # Recupération des premières lignes du texte (le titre)
-        msg_splitlines = txt2.splitlines()
-        headerTo = msg_splitlines[0]
-        headerFrom = msg_splitlines[1]
-        # Concatenation des 2 premières lignes du texte
-        concatenation = headerTo + headerFrom
+    if not txt or len(txt) <= 4 or txt.startswith("/"):
+        # Récupération de la première page, donnée ou à retrouver
+        txt2 = page if page else Transcription(pdf_path)[0]
+        # Récupération et concaténation des 2 premières lignes du texte
+        concatenation = txt2[0] + txt2[1]
         # Regex pour venir rajouter un espace entre chaque majuscule de la chaine de caractère
         p = re.compile(r"([a-z])([A-Z])")
         title = re.sub(p, r"\1 \2", concatenation)
-        return "Titre : " + title
-    else:
-        return txt
-    return information
+        txt = title
+    
+    return str(txt).strip()
 
 
 if __name__ == "__main__":

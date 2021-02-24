@@ -2,6 +2,7 @@ from os import PathLike, path
 from typing import Union, List
 
 from .transcription import Transcription
+from .title import extract_information as trouve_titre
 
 
 class Article:
@@ -22,8 +23,8 @@ class Article:
         self.texte = Transcription(source)
 
         # Faire appel aux fonctions adéquates pour déterminer ces attributs.
-        self.titre: str
-        self.auteurs: List[str]
+        self.titre: str = trouve_titre(source, self.texte[0])
+        self.auteurs: List[str] = []
 
         # self.texte.normalise() ?
-        self.résumé: str
+        self.résumé: str = ""

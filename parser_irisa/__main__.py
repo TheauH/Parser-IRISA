@@ -3,7 +3,6 @@ from pathlib import Path
 from os import scandir, mkdir
 from shutil import rmtree
 
-from .transcription import Transcription
 from .article import Article
 
 if len(argv) < 2:
@@ -30,5 +29,14 @@ for entrée in dossier_entrées:
 
             art = Article(chemin_entrées / entrée.name)
 
-            sortie.write("Nom du fichier : ".encode())
-            sortie.write(art.nom.encode())
+            for élément in [
+                "Nom du fichier : ",
+                art.nom,
+                "\nTitre du papier : ",
+                art.titre,
+                "\nAuteurs : ",
+                ", ".join(art.auteurs),
+                "\nRésumé : ",
+                art.résumé,
+            ]:
+                sortie.write(élément.encode())

@@ -4,6 +4,7 @@ from typing import Union, List
 from .transcription import Transcription
 from .title import extract_information as trouve_titre
 from .auteur import auteur as trouve_auteurs
+from .pars_abstract import pars_Abstract
 
 
 class Article:
@@ -27,5 +28,5 @@ class Article:
         self.titre = trouve_titre(source, self.texte)
         self.auteurs: List[str] = [trouve_auteurs(self.texte, titre=self.titre)]
 
-        # self.texte.normalise() ?
-        self.résumé: str = ""
+        self.texte.normalise()
+        self.résumé = pars_Abstract(self.texte)

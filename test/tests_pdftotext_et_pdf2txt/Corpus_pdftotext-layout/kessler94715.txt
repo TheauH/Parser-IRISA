@@ -1,0 +1,395 @@
+               Extraction of terminology in the field of
+                             construction
+
+                1st Rémy Kessler                       2nd Nicolas Béchet                         3rd Giuseppe Berio
+             Université Bretagne Sud                Université Bretagne Sud                    Université Bretagne Sud
+                   CNRS 6074A                              CNRS 6074A                                  CNRS 6074A
+               56017 Vannes,France                    56017 Vannes,France                          56017 Vannes,France
+             remy.kessler@univ-ubs.fr                 nicolas.bechet@irisa.fr                   giuseppe.berio@univ-ubs.fr
+
+
+
+
+   Abstract—We describe a corpus analysis method to extract           dialogue and correctly understanding the meaning of the word.
+terminology from a collection of technical specifications in the      The knowledge model is mainly an ontology of the domain (in
+field of construction. Using statistics and word n-grams analysis,    this case, the construction domain) providing the standardized
+we extract the terminology of the domain and then perform
+pruning steps with linguistic patterns and internet queries to        concepts and their relationships. As well-known, building such
+improve the quality of the final terminology. Results are evaluated   knowledge models needs time and is costly; one of the earlier
+by using a manual evaluation carried out by 6 experts in the field.   questions raised by our industrial partners has been about
+                                                                      “how to build, as automaticaly as possible, such a knowledge
+   Index Terms—terminology extraction, Internet queries, linguis-     model”. This question is closely related to the interest of
+tic patterns.
+                                                                      quickly adapting the application to other domains (than the
+                       I. I NTRODUCTION                               construction one) for reaching new markets. We developed a
+                                                                      complete methodology and system for partially answering the
+   The current era is increasingly influenced by the prominence
+                                                                      question, focusing on how to extract a relevant terminology
+of smart data and mobile applications. The work presented
+                                                                      from a collection of technical specifications.
+in this paper has been carried out in one industrial project
+                                                                         The rest of the paper is organized as follow. Section II
+(VOCAGEN) aiming at automating the production of struc-
+                                                                      present context of the project. Related work are reviewed in
+tured data from human machine dialogues. Specifically, the
+                                                                      Section III. Section IV presents collected resources and some
+targeted application drives dialogues with people working in
+                                                                      statistics about them. Section V describes the methodology de-
+a construction area for populating a database reporting key
+                                                                      veloped for extracting relevant terms from collected resources.
+data extracted from those dialogues. This application requires
+                                                                      The details about the evaluation are presented in Section VI-A
+complex processing for both transcripting speeches but also for
+                                                                      and results obtained, are given in Section VI-B.
+driving dialogues. The first process is required for good speech
+recognition in a noisy environment. The second processing is                              II. I NDUSTRIAL CONTEXT
+required because the database needs to be populated with both
+right and complete data; indeed, people tend to apply a broad            Figure 1 presents the context of this work in VOCA-
+(colloquial) vocabulary and the transcripted words need to be         GEN project. Our industrial partner Script&Go1 develop an
+used for filling in the corresponding data. Additionally, if some     application for the construction management dedicated to
+data populate the database, additional data may be required           touch devices and wishes to set up an oral dialogue module
+for completeness, thus the dialogue should enable to get those        to facilitate on construction site seizure. The second industrial
+additional data (e.g. if the word ”room” is recognised and used       partner (Tykomz) develops a vocal recognition suite based on
+to populate the database, the location of the room must also          toolkit sphynx 4 [1]. This toolkit includes hierarchical agglom-
+be got; this can be done by driving the dialogue).                    erative clustering methods using well-known measures such as
+   The application provides people with “hand-free” device,           BIC and CLR and provides elementary tools, such as segment
+enabling a complete, quick and standardized reporting. First          and cluster generators, decoder and model trainers. Fitting
+usages of this application will be oriented to reporting failures     those elementary tools together is an easy way of developing
+and problems in constructions.                                        a specific diarization system. To work, it is necessary to build
+   The two processing steps mentioned above require on the            a model of knowledge, i.e. a model describing the expressions
+one side a “language model” (for transcripting the sentences)         that must be recognized by the program. To improve the
+and on the other side a “knowledge model” for driving the             performance of the system, this knowledge model must be
+                                                                        1 http://www.scriptandgo.com/en/
+                                                                      field of nanotechnology. [14] propose TAXI, which combines
+                                                                      statistics and learning approach. TAXI is a system for building
+                                                                      a taxonomy using 2 corpora, a generic, the other specific.
+                                                                      It ranks the relevance of candidates by measure (frequency-
+                                                                      based), and by learning with SVM. [15], [16] present TexSIS,
+                                                                      a bilingual terminology extraction system with chunk-based
+                                                                      alignment method for the generation of candidate terms. After
+                                                                      the corpus alignment step, they use an approach combining
+                                                                      log likelihood measure and Mutual Expectation measure [17]
+                                                                      to rank candidate terms in each language. In the same or-
+                                                                      der, [18], [19] present an approach to extract grammatical
+                                                                      terminology from linguistic corpora. They compare a series
+           Fig. 1. figure describing the context of the project       of well-established statistical measures that have been used
+                                                                      in similar automatic term extraction tasks and conclude that
+powered by a domain-specific vocabulary. For example, in the          corpus-comparing methods perform better than metrics that
+sentence ”there is a stain of paint in the kitchen”, the system       are not based on corpus comparison. [20] and [21] present
+must understand that it is a stain of paint and that the kitchen is   methods with word embeddings. With a small data set for
+a room. To our knowledge, there is no ontology or taxonomy            learning phase, they improve the term extraction results in
+specific to the construction industry in French. A version is         n-gram terms. However, these papers involve labelled data
+under development by [2] but ontology is in English and very          sets for learning phase, which is the main difference with
+generic. We therefore choose to extract useful knowledge from         our proposed approach. The originality of our approach is to
+textual data, and then, in a second step, to organize them.           combine a lexico-syntactical and a statistical approach while
+                                                                      using external resources.
+                      III. R ELATED WORKS
+                                                                                     IV. R ESOURCES AND STATISTICS
+   The goal of ontology learning (OL) is to build knowledge
+models from text. OL use NLP knowledge extraction tools                  First experiments were carried out using technical reports
+to extract terminology (concepts) and links between them              collected from some customers from our industrial partners
+(relationships). The main approaches found in the literature are      who will be called as NC collection thereafter. Each document
+rule-based systems, statistical or learning based approaches.         contains all the non-compliance that was found on one work
+   The reference in the field of rule-based systems was de-           site and describe solutions to resolve it. However heterogeneity
+veloped by [3]. General Architecture for Text Engineering             of the formats as well as the artificial repetition of the informa-
+(GATE) is a Java collection of tools initially developed at the       tion between two reports found in the same construction site
+University of Sheffield since 1995. An alternative is offered by      made the term extraction quite difficult. An insightful analysis
+the existing semi-automatic ontology learning text2onto [4].          of those reports reveals vocabulary richness, however, difficult
+More recently, [5] developed UIMA, a system that can be               to exploit given numerous misspellings, typing shortcuts, very
+positioned as an alternative to GATE. Amongst other things,           ”telegraphic” style with verbs in the infinitive, little punctu-
+UIMA makes possible to generate rules from a collection of            ation, few determinants, etc. As a consequence, we used a
+annotated documents. Exit, introduced by [6] is an iterative          collection of technical specifications called CCTP2 . CCTPs are
+approach that finds the terms in an incremental way.                  available online on public sector websites3 . Several thousand
+    [7] with TERMINAE is certainly the oldest statistic ap-           documents were collected by our industrial partner using an
+proach. Developed for French and based on lexical frequen-            automatic web collecting process. Figure 2 presents some key
+cies, it requires pre-processing with TermoStat [8] and ANNIE         descriptive statistics of theses collections.
+(GATE). [9] presents a method for extracting terminology spe-
+cific to a domain from a corpus of domain-specific text, where         Collection                          NC                        CCTP
+no external general domain reference corpus is required. They          Total number of documents         58 402                         3665
+present an adaptation of the classic tf-idf as ranking measure                          Without pre-processing
+and use different filters to produce a specific terminology.           Total number of words            130 309                    230 962 734
+More recently, the efficiency of ranking measure like mutual           Total number of different words   93 000                        20 6264
+information developed for statistical approach is discussed in         Average words/document              125.3                     63 018.48
+[10] and [11]. [12] proposes Termolator a terminology extrac-                              Fig. 2. statistics of the collection.
+tion system using a chunking procedure, and using internet
+queries for ranking candidate terms. Approach is interesting
+                                                                         2 The technical specifications book (CCTP in French) is a contractual
+but the authors emphasize the fact that the runtime for each
+queries is a limiting factor to produce a relevant ranking.           document that gathers the technical clauses of a public contract in the field
+                                                                      of construction.
+   Closer to our work, [13] presents an approach combining               3 For      example,         https://www.marches-publics.gouv.fr/        or
+linguistic pattern and Z-score to extract terminology in the          http://marchespublics.normandie.fr/.
+                                                                                                     4 presents main patterns we selected using this knowledge
+                             CCTP
+    CR 1 06/02
+
+    Lot A :    CR 2 15/02
+    Siphon indépendant
+                                                                                                     model. The sum of the percentages is less than 100% because
+                                                                                     words ngrams
+    sous évier Lot A :
+               - Siphon indépendant
+               sous évier
+                                                            pre-processing
+                                                                                      extraction ➁
+               Lot B CR
+                      : 3 22/02
+               - Pose des plinthes
+               sur la Lot
+                       cloison
+                          A:                                                 ①
+                      - Siphon indépendant
+                      sous évier
+                      Lot B :
+                                                                                                                                              Number         Percentage
+                      - suppression de la
+                      cloison entre wc et sdb
+
+                                                                                                             1-grams                           1360           65.24%
+         citernea
+             u
+
+
+         marche
+                          devant
+
+
+                           chez
+                                                entree
+
+
+                                            techniplan
+                                                                                                             NOUN                              1037           76.25%
+           s
+
+
+         coulage           par                  defaut
+                                                                                                             VERB                               194           14.26%
+                                                               ranking                 pruning
+         proposit           d'                   auge
+           ions
+
+
+         typologi
+            e
+
+
+         espace
+                           des
+
+
+                            d'
+                                            citerneaux
+
+
+                                                activite
+                                                                         ④                       ➂           ADJ                                120            8.82%
+          vision          depuis            ascenseur
+
+
+         vaissell
+            e
+                           sous                   bar                                                        2-grams                            390           19.57%
+          mise              en                  place
+
+
+         coulisse
+           au
+                           pour             douchette
+                                                                                                             NOUN-NOUN                          346           88.72%
+       terminology                                                                                           ADJ-NOUN                            11            2.82%
+                                                                                                             PREP-NOUN                            7            1,79%
+                                                           Fig. 3. System overview                           VERB-NOUN                            5            1,28%
+                                                                                                             3-grams                            188            9.43%
+                                                           V. M ETHODOLOGY                                   NOUN-NOUN-NOUN                    150            79.79%
+A. System Overview                                                                                           PREP-NOUN-NOUN                      15            7.98%
+                                                                                                             NOUN-PREP-NOUN                       6            3,19%
+    Figure 3 presents an overview of the system designed and                                                 VERB-NOUN-NOUN                       6            3,19%
+implemented: steps are further explained in Sections V-B to
+                                                                                                     Fig. 4. Distribution of linguistic patterns according to the knowledge model.
+V-E. In Step 1 pre-processing of raw information extracted
+from CCTP collection takes place; this is required for nor-
+                                                                                                     patterns with a very low frequency are not included in the
+malizing the entire set of documents. In Step 2 n-grams are
+                                                                                                     table. We observed that the noun based patterns are the most
+extracted (by using measures). 1,2,3 grams are extracted. In
+                                                                                                     frequent patterns, whatever the size of the n-gram. The other
+Step 3, n-grams are filtered by using linguistic patterns and
+                                                                                                     selected patterns also contain nouns, but they are n-grams
+Internet queries. Finally, in Step 4 a ranking is applied to the
+                                                                                                     with verbs, adjectives or prepositions. Therefore, we have
+filtered n-grams.
+                                                                                                     configured our system to keep only the ngrams corresponding
+B. Normalization, pre-processing and word ngrams extraction                                          to these patterns.
+   In Step 1, a text normalization is performed to improve the                                       D. Pruning step
+quality of the process. We remove special characters such as
+                                                                                                        This step uses the Internet to prune n-grams for which no
+“/” or “()”. Different pretreatments are done to reduce noise
+                                                                                                     information is returned after querying Bing4 search engine.
+in the model: we remove numbers (numeric and/or textual),
+                                                                                                     We count the number of links in the result pages that contain
+special symbols. “.” are tagged with a special character to
+                                                                                                     exactly the ngram. We save the number of exact matches
+not create artificial n-grams. Specific words (including named
+                                                                                                     between the ngram and the title and snippet of each result.
+entities) like company names, dates, etc. are normalized and
+                                                                                                     We keep only the n-grams whose number of matches exceeds
+will be removed in the next module. We do not include a
+                                                                                                     a defined threshold. We varied this threshold between 1 and
+stop list to keep n-grams with prepositions, for the purpose
+                                                                                                     50 and results presented in Section VI-B have been obtained
+described in the remainder. Then, we tokenize the entire
+                                                                                                     with a threshold of 10.
+collection before using TreeTagger [22] to get the part-of-
+speech tags and lemmas of each word. After this step we                                              E. Ranking step
+transform all vocabulary from the CCTP collection into 1-
+                                                                                                        We tested several measures as provided in [6], [16] like
+grams, 2-grams and 3-grams. Special characters or normalized
+                                                                                                     maximum likelihood estimation or mutual information in
+words resulting from the previous processing are discarded. N-
+                                                                                                     order to rank selected n-grams by quality but results were
+grams with a very low frequency (2) are also discarded.
+                                                                                                     disappointing. We finally use classical Z score [23] with
+C. Linguistic patterns module                                                                        twenty years of the French newspaper Le Monde5 as generic
+                                                                                                     collection. This metric considers word frequencies weighted
+   We use grammatical labels generated in the previous step
+                                                                                                     over two different corpora, in order to assign high values to
+(section V-B) and linguistic patterns to retrieve collocations
+                                                                                                     words having much higher or lower frequencies than expected
+such as NOUN-NOUN, NOUN-PREP-NOUN. These patterns
+                                                                                                     in a generic collection. We defined it as follows :
+are frequently found in the literature [6] to capture specific
+words in French like ”carte de crédit”(credit card) and discard
+3-gram like ’créditer sa carte’ (credit his card) with the                                                                         p1 = a0 /b0                               (1)
+pattern VERB-PREP-NOUN. Among frequent patterns found                                                                               p2 = a1 /b1                               (2)
+in literature, those patterns have been selected according to the
+statistics obtained from a knowledge model of another field                                            4 https://www.bing.com/
+
+(agriculture), given by one of our industrial partners. Figure                                         5 http://www.islrn.org/resources/421-401-527-366-2/
+                       p = (a0 + a1 )/(b0 + b1 )                         (3)       Strict evaluation shows good quality results (0.77). Anal-
+                                 p1 − p2                                        ysis of the results shows that the main error is related to
+               ZS core = q                                               (4)    ”incomplete n-grams”. For example, the 3-gram “personne
+                          (p ∗ (1 − p) ∗ ( b10 +         1
+                                                         b1 )                   à mobilité” (person with mobility) is not relevant while the
+                                                                                4-gram “personne à mobilité réduite” (person with reduced
+   Where a is the lexical unit considered (1-gram, 2-gram or                    mobility ) can belong to the field of construction. Some errors
+3-gram), a0 the frequency of a in the CCTP collection, b0 the                   can also be traced back to the CCTP documents. For example,
+total size in words of CCTP collection, b1 the frequency of a                   “engin de guerre” (war machine) is a term which does not
+in the collection Le Monde.                                                     belong to the field but a law relating to the presence of war
+                 VI. E XPERIMENTS AND RESULTS                                   machine on the building sites is reported in every CCTP. The
+                                                                                flexible evaluation shows very good results (0.91) and the
+A. Experimental protocol                                                        difficulty of assessing class of some terms such as “absence de
+   We have made a manual evaluation on all 3 grams retained                     remise” which has 2 distinct meanings in French (no outhouse
+by the system. Manual evaluation was realized by 6 specialists                  and no discount). The first meaning is relevant in the field of
+in the field of construction. Each specialist evaluating one third              construction but not the second.
+of the results. 5144 3-grams were evaluated with this method
+and each n-gram was evaluated by 2 different specialists.                                   VII. C ONCLUSION AND PERSPECTIVES
+For each n-grams, the specialist can choose between three                          The paper reports our experiments and results for building
+possibilities:                                                                  a precise and large terminology for the construction domain.
+   • 0 3-gram is irrelevant                                                     Collecting terminology is indeed the first step towards a
+   • 1 3-gram is relevant but does not belong to the domain                     complete knowledge model containing both concepts and
+   • 2 3-gram is relevant and belongs to the domain                             relationships. During our work we were faced to several
+   Evaluation was done in two steps and we use Kappa                            problems: finding resources and selecting them for building
+measure6 [24] and inter-annotator agreement at the end of the                   an appropriate corpus, thinking and developing pre-processing
+first step to show the difficulty of the task. At the end of the                for cleaning those resources, experimenting distinct measures
+first step, we obtained a Kappa score of 0.62 and a global                      for n-grams and selecting the most appropriate, improving
+inter-annotator agreement of 0.74, which is quite good as                       results by adding linguistic patterns and Internet queries. The
+explained in [25]. The difficulty of the task was to distinguish                current results are quite promising according to the evaluation
+the domain-specific vocabulary from the generic vocabulary                      of the extracted terminology carried out by 6 experts in the
+used in the field of construction. Each disagreement was re-                    field. As a perspective, we will develop generic modules and
+evaluated in the second step by a pair of experts. Figure 5                     guidelines for adapting these pre-processing modules to other
+shows the final results of the evaluation.                                      languages. Most importantly, the results of our work are useful
+                                                                                for extracting taxonomical and non-taxonomical relationships.
+B. Results                                                                      For the both purposes, we are currently working on SemEval
+  In this section, we present the results obtained during the                   collection [26]. Applying our method to other domain corpora
+manual evaluation of the 3-grams retained by the system. We                     and datasets is another future direction for this research.
+only compute the accuracy and the error rate, because we are
+not able to compute the recall for this collection7 . We have                                                R EFERENCES
+merged the assessments of each expert using two different                       [1] S. Meignier and T. Merlin, “Lium spkdiarization: an open source toolkit
+evaluation rules:                                                                   for diarization,” in in CMU SPUD Workshop, 2010.
+                                                                                [2] P. Pauwels and W. Terkaj, “Express to owl for construction industry:
+  • a strict evaluation where a n-gram is considered correct                        Towards a recommendable and usable ifcowl ontology,” Automation in
+     if both experts have rated it relevant and in the domain .                     Construction, vol. 63, pp. 100–133, 03 2016.
+                                                                                [3] H. Cunningham, “Gate, a general architecture for text engineering,” in
+  • a flexible evaluation where a n-gram is considered correct
+                                                                                    Computers and the Humanities, vol. 36, 2002, pp. 223–254.
+     if both experts consider it relevant and at least one of the               [4] P. Cimiano and J. Völker, “text2onto,” in International conference on
+     experts consider it in the domain.                                             application of natural language to information systems. Springer, 2005,
+                                                                                    pp. 227–238.
+                                                                                [5] P. Kluegl, M. Toepfer, P.-D. Beck, G. Fette, and F. Puppe, “Uima ruta:
+                       strict evaluation      flexible evaluation                   Rapid development of rule-based information extraction applications,”
+                                                                                    Natural Language Engineering, vol. 22, no. 1, p. 1–40, 2016.
+         accuracy             0.77                    0.91                      [6] M. Roche and Y. Kodratoff, “Exit: Un système itératif pour l’extraction
+         error rate           0.23                    0.09                          de la terminologie du domaine à partir de corpus spécialisés,” in
+                                                                                    Proceedings of JADT 4, 2004, pp. 946–956.
+            Fig. 5. Results of manual evaluation on the 3-grams.
+                                                                                [7] B. Biébow, S. Szulman, and A. J. B. Clément, “Terminae: A linguistics-
+                                                                                    based tool for the building of a domain ontology,” in Knowledge
+                                                 0 −Ae
+  6 We   use general formula as follows : κ = A1−A      where A0 = observed         Acquisition, Modeling and Management, D. Fensel and R. Studer, Eds.,
+                                                    e
+agreement and Ae = expected (chance) agreement.                                     1999, pp. 49–66.
+  7 Indeed, we do not know every the relevant terms existing in the corpus,     [8] P. Drouin, “Term extraction using non technical corpora as point of lever-
+so we cannot estimate the recall for the collection of terms we automatically       age,” in John Benjamins Publishing Company: Amsterdam/Philadelphia,
+extract.                                                                            n. Terminology, vol. 9, Ed., 2003, pp. 99–115.
+ [9] M. F. M. Chowdhury, A. M. Gliozzo, and S. M. Trewin, “Domain-
+     specific terminology extraction by boosting frequency metrics,” Sep. 27
+     2018, uS Patent App. 15/469,766.
+[10] G. Bouma, “Normalized (pointwise) mutual information in collocation
+     extraction,” Proceedings of GSCL, 2009.
+[11] Y. Bestgen, “Evaluation de mesures d’association pour les bigrammes et
+     les trigrammes au moyen du test exact de fisher,” Proceedings of TALN
+     2017, pp. 10–19, 2017.
+[12] A. L. Meyers, Y. He, Z. Glass, J. Ortega, S. Liao, A. Grieve-Smith,
+     R. Grishman, and O. Babko-Malaya, “The termolator: Terminology
+     recognition based on chunking, statistical and search-based scores,”
+     Frontiers in Research Metrics and Analytics, vol. 3, p. 19, 2018.
+[13] L. Gillam, M. Tariq, and K. Ahmad, “Terminology and the construction
+     of ontology,” TERMINOLOGY, vol. 11, pp. 55–81, 2005.
+[14] A. Panchenko, S. Faralli, E. Ruppert, S. Remus, H. Naets, C. Fairon, S. P.
+     Ponzetto, and C. Biemann, “TAXI at semeval-2016 task 13: a taxonomy
+     induction method based on lexico-syntactic patterns, substrings and
+     focused crawling,” in Proceedings of the 10th International Workshop
+     on Semantic Evaluation, SemEval@NAACL-HLT 2016, San Diego, CA,
+     USA, June 16-17, 2016, 2016, pp. 1320–1327.
+[15] E. Lefever, L. Macken, and V. Hoste, “Language-independent
+     bilingual terminology extraction from a multilingual parallel corpus,”
+     in Proceedings of the 12th Conference of the European Chapter
+     of the Association for Computational Linguistics, ser. EACL ’09.
+     Stroudsburg, PA, USA: Association for Computational Linguistics,
+     2009, pp. 496–504. [Online]. Available: http://dl.acm.org/citation.cfm?
+     id=1609067.1609122
+[16] L. Macken, E. Lefever, and V. Hoste, “Texsis: bilingual terminology
+     extraction from parallel corpora using chunk-based alignment,”
+     Terminology, vol. 19, no. 1, pp. 1–30, 2013. [Online]. Available:
+     http://dx.doi.org/10.1075/term.19.1.01mac
+[17] G. Dias and H.-J. Kaalep, “Automatic extraction of multiword units
+     for estonian : Phrasal verbs,” in Languages in Development, 2003, p.
+     41:81–91.
+[18] B. Daille, “Study and implementation of combined techniques for
+     automatic extraction of terminology,” The Balancing Act: Combining
+     Symbolic and Statistical Approaches to Language, 12 2002.
+[19] C. Lang, R. Schneider, and K. Suchowolec, “Extracting specialized
+     terminology from linguistic corpora,” GRAMMAR AND CORPORA, p.
+     425, 2018.
+[20] E. Amjadian, D. Inkpen, T. S. Paribakht, and F. Faez, “Local-global
+     vectors to improve unigram terminology extraction,” in Proceedings of
+     the 5th International Workshop on Computational Terminology, 2016.
+[21] G. Wohlgenannt and F. Minic, “Using word2vec to build a simple
+     ontology learning system.” in International Semantic Web Conference
+     (Posters & Demos), 2016.
+[22] H. Schmid, “Probabilistic part-of-speech tagging using decision trees,”
+     1994.
+[23] E. Altman, “Financial ratios, discriminant analysis and the predic-
+     tion of corporate bankruptcy.” in The Journal of Finance, 23(4).
+     doi:10.2307/2978933, 1968, pp. 589–609.
+[24] J. Cohen, “A Coefficient of Agreement for Nominal Scales,” Educational
+     and Psychological Measurement, vol. 20, no. 1, p. 37, 1960.
+[25] M. L. McHugh, “Interrater reliability: the kappa statistic,” in Biochemia
+     medica, 2012.
+[26] M. Apidianaki, S. M. Mohammad, J. May, E. Shutova, S. Bethard,
+     and M. Carpuat, “Proceedings of the 12th international workshop on
+     semantic evaluation,” in Proceedings of The 12th International Workshop
+     on Semantic Evaluation. Association for Computational Linguistics,
+     2018. [Online]. Available: http://aclweb.org/anthology/S18-1000
+

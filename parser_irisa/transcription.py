@@ -15,7 +15,7 @@ class Transcription(List[Page]):
             print("Module introuvable, recours à pdftotext du système...")
             from os import system, remove
 
-            system("pdftotext -layout " + chemin_source + " tmp.txt")
+            system("pdftotext -layout " + str(chemin_source) + " tmp.txt")
             with open("tmp.txt", "r") as résultat:
                 pages_transcrites = résultat.read().split("\f")  # Résultat découpé
             remove("tmp.txt")

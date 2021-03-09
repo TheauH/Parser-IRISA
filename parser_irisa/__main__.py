@@ -26,8 +26,6 @@ rmtree(chemin_sorties_xml, ignore_errors=True)
 mkdir(chemin_sorties_txt)
 mkdir(chemin_sorties_xml)
 
-
-
 # Traitement de chaque fichier P.D.F.
 for entrée in dossier_entrées:
     if entrée.name.endswith(".pdf") and entrée.is_file:
@@ -51,15 +49,17 @@ for entrée in dossier_entrées:
             with open(chemin_sorties_xml / (entrée.name[:-3] + "xml"), "wb") as sortie:
 
                 art = Article(chemin_entrées / entrée.name)
-
+    
                 for élément in [
-                    "Nom du fichier : ",
-                    art.nom,
+                    "<article\n>"
+                    "Nom du fichier :",
+                    "<preamble>",art.nom,"</preamble>",
                     "\nTitre du papier : ",
-                    art.titre,
+                    "<titre>",art.titre, "</titre>",
                     "\nAuteurs : ",
-                    ", ".join(art.auteurs),
+                    "<auteur>",", ".join(art.auteurs),"</auteur>",
                     "\nRésumé : ",
-                    art.résumé,
+                    "<abstract>",art.résumé,"</abstract>",
+                    "</article>"
                 ]:
                     sortie.write(élément.encode())

@@ -1,10 +1,12 @@
+from genericpath import exists
 from typing import List
 from .gouttière import Gouttière
 
 
 class Page(List[str]):
     """
-    Représente une page de texte, composée d’une chaîne de caractères par ligne.
+    Représente une page de texte,
+    composée d’une chaîne de caractères par ligne.
     """
 
     def __init__(self, texte: str = None):
@@ -38,7 +40,11 @@ class Page(List[str]):
     def gouttière(self):
         """
         Trouve la gouttière séparant les deux colonnes dans une page
+
+        `première` : indique s’il s’agit de la première page du document,
+        pour prendre en compte la présence éventuelle de blocs d’auteurs.
         """
+
         # 1. Recherche de l’abscisse de la gouttière
         largeur = self.largeur()
         # Largeur, à gauche et à droite, sur laquelle on ne cherchera pas la gouttière
@@ -90,7 +96,7 @@ class Page(List[str]):
     def découpe_page(self):
         """
         Réécrit la page en tenant compte de la présence
-        de deux colonnes
+        de deux colonnes.
         """
         g = self.gouttière()
         if not g:  # Pas de gouttière, pas de découpage.
@@ -114,3 +120,67 @@ class Page(List[str]):
             self.colonne_droite + self[fin + 1 :]
         )  # Insertion de la colonne droite
         self[début : fin + 1] = self.colonne_gauche
+
+
+class Première_page(Page):
+    """
+    Sous-classe pour tenir compte des particularités
+    de la première page.
+    """
+
+    def trouve_début_corps(self):
+        """
+        Renvoie le numéro de la première ligne du corps de texte,
+        après l’en-tête contenant le titre et les auteurs.
+        """
+        # Nombre de lignes vides consécutives venant d’être parcourues
+        lignes_vides = 0
+
+        # Numéros de lignes vides susceptibles de marquer le début du corps
+        lignes_suspectes: List[int] = []
+
+        for numéro, ligne in enumerate(self):
+            if ligne == "":
+                lignes_vides += 1
+            else:
+                if lignes_vides >= 2:
+                    # Si l’on vient de passer un groupe
+                    # de plusieurs lignes vides, c’est suspect.
+                    lignes_suspectes.append(numéro)
+                    lignes_vides = 0
+
+                    # Cas délicieux où l’on tombe
+                    # sur le mot _Abstract_ en début de ligne
+                    if (
+                        len(ligne) >= 8
+                        and ligne.lstrip()[:8] == "Abstract"
+                        and numéro == lignes_suspectes[-1]
+                    ):
+                        return numéro
+
+        # Cas plus embêtant où l’on ne tombe pas sur le mot _Abstract_.
+        # On fait le pari que la limite se trouvera vers le tiers des
+        # lignes suspectes trouvées au fil du texte.
+        if lignes_suspectes:
+            return lignes_suspectes[len(lignes_suspectes) // 3]
+        else:
+            # Cas catastrophique où l’on n’a même pas trouvé une ligne suspecte.
+            return 0
+
+    def gouttière(self):
+        g = super().gouttière()
+
+        # Pas de gouttière... Pas de gouttière.
+        if not g:
+            return g
+
+        # On redécoupe éventuellement la gouttière en fonction
+        # de la présence d’un en-tête.
+
+        if not hasattr(self, "début_corps"):
+            self.début_corps = self.trouve_début_corps()
+
+        if self.début_corps > g.début:
+            g.début = self.début_corps
+
+        return g

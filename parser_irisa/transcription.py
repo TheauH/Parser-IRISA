@@ -9,7 +9,7 @@ class Transcription(List[Page]):
         try:  # On essaie d’abord avec le module `pdftotext`
             # TODO trouver une alternative qui fonctionne mieux.
 
-            # raise ModuleNotFoundError # pour utiliser la commande système
+            raise ModuleNotFoundError # pour utiliser la commande système
             from pdftotext import PDF
 
             pages_transcrites = PDF(source)

@@ -6,7 +6,6 @@ Created on Tue Feb  9 15:52:15 2021
 """
 from os import PathLike
 from PyPDF2 import PdfFileReader, generic
-import PyPDF2
 import re
 from typing import Union
 
@@ -16,14 +15,10 @@ from .transcription import Transcription
 def extract_information(
     pdf_path: Union[str, bytes, PathLike],
     pdf_text: Union[Transcription, None] = None,
+    métatitre: Union[generic.TextStringObject, None] = None,
 ):
-    # Récupération des métadonnées
-    with open(pdf_path, "rb") as f:
-        pdf = PdfFileReader(f)
-        information = pdf.getDocumentInfo()
-    txt: Union[generic.TextStringObject, None] = information.title
     # si le titre est égale à None ou null alors vient forcer la recherche de celui ci
-    if not txt or len(txt) <= 4 or txt.startswith("/"):
+    if not métatitre or len(métatitre) <= 4 or métatitre.startswith("/"):
         # Récupération de la première page, donnée ou à retrouver
         txt2 = pdf_text[0] if pdf_text else Transcription(pdf_path)[0]
         # Récupération et concaténation des 2 premières lignes du texte
@@ -31,9 +26,12 @@ def extract_information(
         # Regex pour venir rajouter un espace entre chaque majuscule de la chaine de caractère
         p = re.compile(r"([a-z])([A-Z])")
         title = re.sub(p, r"\1 \2", concatenation)
-        txt = title
-    
-    return str(txt).strip()
+        titre = title
+
+    else:
+        titre = métatitre
+
+    return str(titre).strip()
 
 
 if __name__ == "__main__":

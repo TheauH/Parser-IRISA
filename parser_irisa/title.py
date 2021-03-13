@@ -5,7 +5,7 @@ Created on Tue Feb  9 15:52:15 2021
 @author: sosob
 """
 from os import PathLike
-from PyPDF2 import PdfFileReader, generic
+from PyPDF2 import generic
 import re
 from typing import Union
 
@@ -13,14 +13,13 @@ from .transcription import Transcription
 
 
 def extract_information(
-    pdf_path: Union[str, bytes, PathLike],
-    pdf_text: Union[Transcription, None] = None,
+    pdf_text: Transcription,
     métatitre: Union[generic.TextStringObject, None] = None,
 ):
     # si le titre est égale à None ou null alors vient forcer la recherche de celui ci
     if not métatitre or len(métatitre) <= 4 or métatitre.startswith("/"):
         # Récupération de la première page, donnée ou à retrouver
-        txt2 = pdf_text[0] if pdf_text else Transcription(pdf_path)[0]
+        txt2 = pdf_text[0]
         # Récupération et concaténation des 2 premières lignes du texte
         concatenation = txt2[0] + txt2[1]
         # Regex pour venir rajouter un espace entre chaque majuscule de la chaine de caractère

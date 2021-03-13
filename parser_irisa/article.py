@@ -34,7 +34,6 @@ class Article:
 
         # Faire appel aux fonctions adéquates pour déterminer ces attributs.
         self.titre = trouve_titre(
-            source,
             self.texte,
             métatitre=métadonnées
             and métadonnées.title,  # fourni seulement si on a les métadonnées

@@ -33,7 +33,12 @@ class Article:
         début_corps = self.texte[0].trouve_début_corps()
 
         # Faire appel aux fonctions adéquates pour déterminer ces attributs.
-        self.titre = trouve_titre(source, self.texte, métatitre=métadonnées.title)
+        self.titre = trouve_titre(
+            source,
+            self.texte,
+            métatitre=métadonnées
+            and métadonnées.title,  # fourni seulement si on a les métadonnées
+        )
         self.auteurs: List[str] = [
             trouve_auteurs(self.texte, titre=self.titre, début_corps=début_corps)
         ]

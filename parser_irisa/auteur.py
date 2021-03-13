@@ -4,7 +4,7 @@ from pathlib import Path
 from os import scandir
 
 
-def auteur(trans: Transcription, titre: str = ""):
+def auteur(trans: Transcription, titre: str = "", début_corps: int=-1):
     page = trans[0]
     i = 0
     while page[i] == "":  # Saute jusqu'au début du titre
@@ -20,7 +20,13 @@ def auteur(trans: Transcription, titre: str = ""):
             i += 1
     while page[i] == "":  # Saute jusqu'au début des auteurs
         i += 1
-    return " ".join(page[i].split())
+    result=""
+    if début_corps==-1:
+        return " ".join(page[i].split())
+    while i<début_corps:
+        result+=" "+" ".join(page[i].split())
+        i+=1
+    return result
 
 
 """ Test de tout le corpus

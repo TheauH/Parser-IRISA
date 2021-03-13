@@ -39,7 +39,8 @@ class Page(List[str]):
 
     def gouttière(self):
         """
-        Trouve la gouttière séparant les deux colonnes dans une page
+        Trouve la gouttière séparant les deux colonnes dans une page.
+        Sert à la normalisation.
 
         `première` : indique s’il s’agit de la première page du document,
         pour prendre en compte la présence éventuelle de blocs d’auteurs.
@@ -132,6 +133,7 @@ class Première_page(Page):
         """
         Renvoie le numéro de la première ligne du corps de texte,
         après l’en-tête contenant le titre et les auteurs.
+        Sert à la normalisation (découpe-page)
         """
         # Nombre de lignes vides consécutives venant d’être parcourues
         lignes_vides = 0
@@ -147,7 +149,6 @@ class Première_page(Page):
                     # Si l’on vient de passer un groupe
                     # de plusieurs lignes vides, c’est suspect.
                     lignes_suspectes.append(numéro)
-                    lignes_vides = 0
 
                     # Cas délicieux où l’on tombe
                     # sur le mot _Abstract_ en début de ligne
@@ -158,11 +159,13 @@ class Première_page(Page):
                     ):
                         return numéro
 
+                lignes_vides = 0
+
         # Cas plus embêtant où l’on ne tombe pas sur le mot _Abstract_.
-        # On fait le pari que la limite se trouvera vers le tiers des
+        # On fait le pari que la limite se trouvera vers le quart des
         # lignes suspectes trouvées au fil du texte.
         if lignes_suspectes:
-            return lignes_suspectes[len(lignes_suspectes) // 3]
+            return lignes_suspectes[len(lignes_suspectes) // 4]
         else:
             # Cas catastrophique où l’on n’a même pas trouvé une ligne suspecte.
             return 0
@@ -183,4 +186,17 @@ class Première_page(Page):
         if self.début_corps > g.début:
             g.début = self.début_corps
 
+        # Début du corps fixé au début de la gouttière si non déjà trouvé
+        elif not self.début_corps:
+            self.début_corps = g.début
+
         return g
+
+    def découpe_page(self):
+        """
+        Fonction de normalisation de la page.
+        Pour la première page,
+        définit aussi le début du corps de texte.
+        """
+        self.début_corps = self.trouve_début_corps()
+        super().découpe_page()

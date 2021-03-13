@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from .transcription import Transcription
-from pathlib import Path
-from os import scandir
 
 
-def auteur(trans: Transcription, titre: str = "", début_corps: int=-1):
+def auteur(trans: Transcription, titre: str = "", début_corps: int = -1):
     page = trans[0]
-    i = 0
+    i = 1
     while page[i] == "":  # Saute jusqu'au début du titre
         i += 1
     # Saut du titre :
@@ -20,13 +18,16 @@ def auteur(trans: Transcription, titre: str = "", début_corps: int=-1):
             i += 1
     while page[i] == "":  # Saute jusqu'au début des auteurs
         i += 1
-    result=""
-    if début_corps==-1:
+    if i == 0:
+        i = 1  # Les auteurs ne sont jamais sur la première ligne.
+
+    result = []
+    if début_corps == -1:
         return " ".join(page[i].split())
-    while i<début_corps:
-        result+=" "+" ".join(page[i].split())
-        i+=1
-    return result
+    while i < début_corps:
+        result += " " + " ".join(page[i].split())
+        i += 1
+    return "".join(result)
 
 
 """ Test de tout le corpus

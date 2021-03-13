@@ -19,4 +19,5 @@ for entrée in dossier_entrées:
         with open(Path("txt") / (entrée.name[:-3] + "txt"), "wb") as sortie:
             t = transcription.Transcription(chemin_entrées / entrée.name)
             t.normalise()
+            t[0][t[0].début_corps] = "Début ​→ " + t[0][t[0].début_corps]
             sortie.write(str(t).encode())

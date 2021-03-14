@@ -5,8 +5,7 @@
 from .transcription import Transcription
 
 
-def find_references(transcri):
-    transcri
+def find_references(transcri: Transcription):
     """ motif rechercher : """
     string = "References"
     string2 = "REFERENCES"
@@ -24,7 +23,7 @@ def find_references(transcri):
                 break
     n = 0
     # on se positionne à la page p et après la ligne n et on renvoie 3 lignes :
-    for ligne in transcri[p - 1]:
+    for ligne in transcri[-p]:
         if j > 0 and n < 5:
             buf += "\n" + ligne.strip()
             n += 1

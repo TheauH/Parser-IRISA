@@ -2,7 +2,7 @@
 
 Bienvenue sur Parseur-Irisa !
 
-Ce projet a pour but de résumer de produires des résumés d'articles scientifiques, au format texte ou xml.
+Ce projet a pour but de produires des résumés d'articles scientifiques, au format texte ou xml.
 
 Equipe de dévelopement : Sofiane Ben Massaoud, Antoine Jamelot, Baptiste Colas, Théau Huteau
 Scrum master : Théau Huteau

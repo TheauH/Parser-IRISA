@@ -8,8 +8,24 @@ Created on Wed Feb 17 12:30:22 2021
 import os
 
 from .transcription import Transcription
+from .page import Première_page
 
-"création fichier txt ou ecrire les résultats a partir du pdf convertit en txt"
+
+def pars_Abstract(texte: Transcription):
+    """fonction de parsage qui résume la partie Abstract :"""
+    """TODO : a optimiser par la suite"""
+    lines: Première_page = texte[0]  # On ne s’intéresse qu’à la première page
+    # string = "Abstract"
+    # buf = ""
+    # for i in range(len(lines)):
+    #     if string in lines[i]:
+    #         buf = "\n".join(lines[i : i + 3]) + "..."
+    #         break
+
+    return "\n".join(lines[lines.début_corps : lines.début_corps + 3]) + "…"
+
+
+"""création fichier txt ou ecrire les résultats a partir du pdf convertit en txt"""
 
 
 def creationFichierResumer(f):
@@ -24,20 +40,6 @@ def creationFichierResumer(f):
 def rechercheMot(mot):
     pos = mot.find("Abstract")
     return mot[pos:]
-
-
-def pars_Abstract(texte: Transcription):
-    "fonction de parsage qui résume la partie Abstract :"
-    "TODO : a optimiser par la suite"
-    lines = texte[0]  # On ne s’intéresse qu’à la première page
-    string = "Abstract"
-    buf = ""
-    for i in range(len(lines)):
-        if string in lines[i]:
-            buf = "\n".join(lines[i : i + 3]) + "..."
-            break
-
-    return buf
 
 
 if __name__ == "__main__":

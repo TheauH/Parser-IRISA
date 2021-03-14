@@ -165,10 +165,16 @@ class Première_page(Page):
         # On fait le pari que la limite se trouvera vers le quart des
         # lignes suspectes trouvées au fil du texte.
         if lignes_suspectes:
-            return lignes_suspectes[len(lignes_suspectes) // 4]
+            début = lignes_suspectes[len(lignes_suspectes) // 4]
         else:
             # Cas catastrophique où l’on n’a même pas trouvé une ligne suspecte.
-            return 0
+            début = 0
+
+        # Enfin, descente jusqu’à une ligne non vide
+        while not self[début]:
+            début += 1
+
+        return début
 
     def gouttière(self):
         g = super().gouttière()

@@ -6,13 +6,19 @@ import codecs
 
 from .article import Article
 
-if len(argv) < 2:
-    print("Usage :", argv[0], "dossier")
+if len(argv) < 3:
+    print("Usage :", argv[0], "dossier (-t|-x)")
+    """TODO Meilleure doc (trouver un module dédié ?)"""
     exit(1)
 
+if not argv[2] in ("-t", "-x"):
+    print("Erreur : format incorrect.\nFormats acceptés : -t (texte) ; -x (xml)")
+    exit(1)
+
+demandeXML = argv[2] == "-x"  # Si l’utilisateur demande une sortie en X.M.L.
+
 chemin_entrées = Path(argv[1])
-chemin_sorties_txt = chemin_entrées / "txt"
-chemin_sorties_xml = chemin_entrées / "xml"
+chemin_sorties = chemin_entrées / ("xml" if demandeXML else "txt")
 
 try:
     dossier_entrées = scandir(chemin_entrées)  # itérateur sur les fichiers de l’entrée
@@ -21,16 +27,41 @@ except NotADirectoryError:
     exit()
 
 # Suppression s’il y a lieu, et création du dossier de sortie
-rmtree(chemin_sorties_txt, ignore_errors=True)
-rmtree(chemin_sorties_xml, ignore_errors=True)
-mkdir(chemin_sorties_txt)
-mkdir(chemin_sorties_xml)
+
+rmtree(chemin_sorties, ignore_errors=True)
+mkdir(chemin_sorties)
 
 # Traitement de chaque fichier P.D.F.
 for entrée in dossier_entrées:
     if entrée.name.endswith(".pdf") and entrée.is_file:
-        if argv[2] == '-t':
-            with open(chemin_sorties_txt / (entrée.name[:-3] + "txt"), "wb") as sortie:
+        if demandeXML: # Si demande une sortie en X.M.L.
+            with open(chemin_sorties / (entrée.name[:-3] + "xml"), "wb") as sortie:
+
+                art = Article(chemin_entrées / entrée.name)
+
+                for élément in [
+                    "<article>",
+                    "<preamble>",
+                    art.nom,
+                    "</preamble>",
+                    "<titre>",
+                    art.titre,
+                    "</titre>",
+                    "<auteur>",
+                    ", ".join(art.auteurs),
+                    "</auteur>",
+                    "<abstract>",
+                    art.résumé,
+                    "</abstract>",
+                    "<biblio>",
+                    art.references,
+                    "</biblio>",
+                    "</article>",
+                ]:
+                    sortie.write(élément.encode() + b"\n")
+
+        else: # Si demande une sortie en texte
+            with open(chemin_sorties / (entrée.name[:-3] + "txt"), "wb") as sortie:
 
                 art = Article(chemin_entrées / entrée.name)
 
@@ -44,26 +75,6 @@ for entrée in dossier_entrées:
                     "\nRésumé : ",
                     art.résumé,
                     "\nRéférences : ",
-                    art.references
-                ]:
-                    sortie.write(élément.encode())
-        if argv[2] == '-x':
-            with open(chemin_sorties_xml / (entrée.name[:-3] + "xml"), "wb") as sortie:
-
-                art = Article(chemin_entrées / entrée.name)
-    
-                for élément in [
-                    "<article\n>"
-                    "Nom du fichier :",
-                    "<preamble>",art.nom,"</preamble>",
-                    "\nTitre du papier : ",
-                    "<titre>",art.titre, "</titre>",
-                    "\nAuteurs : ",
-                    "<auteur>",", ".join(art.auteurs),"</auteur>",
-                    "\nRésumé : ",
-                    "<abstract>",art.résumé,"</abstract>",
-                    "</article>"
-                    "\nRéférences : ",
-                    "<referenes>",art.references,"</references>"
+                    art.references,
                 ]:
                     sortie.write(élément.encode())

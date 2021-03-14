@@ -61,5 +61,7 @@ for entrée in dossier_entrées:
                     "\nRésumé : ",
                     "<abstract>",art.résumé,"</abstract>",
                     "</article>"
+                    "\nRéférences : ",
+                    "<referenes>",art.references,"</references>"
                 ]:
                     sortie.write(élément.encode())

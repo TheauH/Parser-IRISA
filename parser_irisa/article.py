@@ -6,7 +6,8 @@ from .transcription import Transcription
 from .title import extract_information as trouve_titre
 from .auteur import auteur as trouve_auteurs
 from .pars_abstract import pars_Abstract
-from .find_references import references
+from .references import find_references
+
 
 class Article:
     """
@@ -44,4 +45,4 @@ class Article:
 
         self.texte.normalise()
         self.résumé = pars_Abstract(self.texte)
-        self.references = references(self.texte)
+        self.references = find_references(self.texte)

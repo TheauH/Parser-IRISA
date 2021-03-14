@@ -43,6 +43,8 @@ for entrée in dossier_entrées:
                     ", ".join(art.auteurs),
                     "\nRésumé : ",
                     art.résumé,
+                    "\nRéférences : ",
+                    art.references
                 ]:
                     sortie.write(élément.encode())
         if argv[2] == '-x':

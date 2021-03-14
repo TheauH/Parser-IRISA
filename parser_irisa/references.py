@@ -2,7 +2,7 @@
 @author: Théau Huteau
 """
 
-from transcription import Transcription
+from .transcription import Transcription
 
 def find_references(transcri):
     texte = Transcription(transcri)

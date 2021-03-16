@@ -37,7 +37,7 @@ def find_references(transcri: Transcription):
     #     else:
     #         j -= 1
     # buf += "..."
-    return "\n".join(transcri[page][ligne : ligne + 3]) + "…"
+    return "\n".join(transcri[page][ligne + 1 : ligne + 4]) + "…"
 
 
 """Test sur un document"""

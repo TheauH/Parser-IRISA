@@ -14,30 +14,18 @@ def find_references(transcri: Transcription):
     buf = ""
     """compteur de page"""
     # Page et numéro de la ligne qui nous intéressent
+    page = None
     ligne = 0
-    page = 0
-    for np in range(len(transcri) - 1, -1, -1):
-        for nl in range(len(transcri[np])):
-            if (
-                (string in transcri[np][nl])
-                or (string2 in transcri[np][nl])
-                or (string3 in transcri[np][nl])
-            ):
-                page = np
+    for p in reversed(transcri):
+        for nl, l in enumerate(p):
+            if string in l or string2 in l or string3 in l:
+                page = p
                 ligne = nl
-                break
-        if page and ligne:
-            break
-    # n = 0
-    # on se positionne à la page p et après la ligne n et on renvoie 3 lignes :
-    # for ligne in transcri[-p]:
-    #     if j > 0 and n < 5:
-    #         buf += "\n" + ligne.strip()
-    #         n += 1
-    #     else:
-    #         j -= 1
-    # buf += "..."
-    return "\n".join(transcri[page][ligne + 1 : ligne + 4]) + "…"
+                # Champ trouvé
+                return "\n".join(page[ligne + 1 : ligne + 4]) + "…"
+
+    # Champ non trouvé
+    return "—"
 
 
 """Test sur un document"""

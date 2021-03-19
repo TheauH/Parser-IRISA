@@ -39,7 +39,7 @@ class Article:
             métatitre=métadonnées
             and métadonnées.title,  # fourni seulement si on a les métadonnées
         )
-        self.auteurs: List[str] = [
+        self.auteurs = [
             trouve_auteurs(self.texte, titre=self.titre, début_corps=début_corps)
         ]
 

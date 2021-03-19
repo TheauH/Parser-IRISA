@@ -5,25 +5,24 @@ from typing import Union, List
 
 class Transcription(List[Page]):
     def __init__(self, chemin_source: Union[str, bytes, PathLike]):
-        source = open(chemin_source, "rb")
         try:  # On essaie d’abord avec le module `pdftotext`
-            # TODO trouver une alternative qui fonctionne mieux.
+            from textract import process
 
-            raise ModuleNotFoundError # pour utiliser la commande système
-            from pdftotext import PDF
+            pages_transcrites = [
+                page.decode()
+                for page in process(
+                    chemin_source, method="pdftotext", layout=True
+                ).split(b"\f")
+            ]
 
-            pages_transcrites = PDF(source)
-
-        except ModuleNotFoundError:  # à défaut, on utilise la commande système
-            print("Module introuvable, recours à pdftotext du système...")
+        except Exception:  # à défaut, on utilise la commande système
+            print("Échec de Textract, recours à la commande du système...")
             from os import system, remove
 
             system('pdftotext -layout "' + str(chemin_source) + '" tmp.txt')
             with open("tmp.txt", "r") as résultat:
                 pages_transcrites = résultat.read().split("\f")  # Résultat découpé
             remove("tmp.txt")
-
-        source.close()
 
         self.append(Première_page(pages_transcrites[0]))
         for i in range(1, len(pages_transcrites)):

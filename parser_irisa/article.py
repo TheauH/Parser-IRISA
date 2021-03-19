@@ -26,7 +26,7 @@ class Article:
 
         # Récupération des métadonnées
         with open(source, "rb") as fichier:
-            pdf = PyPDF2.PdfFileReader(fichier)
+            pdf = PyPDF2.PdfFileReader(fichier, strict=False)
             métadonnées = pdf.getDocumentInfo()
 
         self.nom = path.basename(source)  # Nom du fichier d’origine

@@ -23,7 +23,7 @@ chemin_sorties = chemin_entrées / ("xml" if demandeXML else "txt")
 try:
     dossier_entrées = scandir(chemin_entrées)  # itérateur sur les fichiers de l’entrée
 except NotADirectoryError:
-    print("Erreur :", chemin_entrées, " n’est pas un dossier.")
+    print("Erreur :", chemin_entrées, "n’est pas un dossier.")
     exit()
 
 # Suppression s’il y a lieu, et création du dossier de sortie

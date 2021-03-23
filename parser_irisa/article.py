@@ -7,7 +7,8 @@ from .title import extract_information as trouve_titre
 from .auteur import auteur as trouve_auteurs
 from .pars_abstract import pars_Abstract
 from .references import find_references
-
+from .conclusion import find_conclusion
+from .discussion import find_discussion
 
 class Article:
     """
@@ -39,10 +40,12 @@ class Article:
             métatitre=métadonnées
             and métadonnées.title,  # fourni seulement si on a les métadonnées
         )
-        self.auteurs = [
+        self.auteurs: List[str] = [
             trouve_auteurs(self.texte, titre=self.titre, début_corps=début_corps)
         ]
 
         self.texte.normalise()
         self.résumé = pars_Abstract(self.texte)
         self.references = find_references(self.texte)
+        self.conclusion = find_conclusion(self.texte)
+        self.discussion = find_discussion(self.texte)

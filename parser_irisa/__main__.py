@@ -53,10 +53,17 @@ for entrée in dossier_entrées:
                     "<abstract>",
                     art.résumé,
                     "</abstract>",
+                    "<Conclusion>",
+                    art.conclusion,
+                    "</conclusion>",
+                    "<discussion>",
+                    art.discussion,
+                    "</discussion>",
                     "<biblio>",
                     art.references,
                     "</biblio>",
                     "</article>",
+
                 ]:
                     sortie.write(élément.encode() + b"\n")
 
@@ -74,7 +81,12 @@ for entrée in dossier_entrées:
                     ", ".join(art.auteurs),
                     "\nRésumé : ",
                     art.résumé,
+                    "\nConclusion : ",
+                    art.conclusion,
+                    "\nDiscussion : ",
+                    art.discussion,
                     "\nRéférences : ",
                     art.references,
+
                 ]:
                     sortie.write(élément.encode())

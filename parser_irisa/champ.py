@@ -18,3 +18,6 @@ class Champ:
         self.ligne_début = ligne_début
         self.page_fin = page_fin
         self.ligne_fin = ligne_fin
+
+    def __str__(self) -> str:
+        return str(self.contenu)

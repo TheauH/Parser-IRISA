@@ -2,20 +2,10 @@
 from .transcription import Transcription
 
 
-def auteur(trans: Transcription, titre: str = "", début_corps: int = -1):
+def auteur(trans: Transcription, fin_titre: int, début_corps: int = -1):
     page = trans[0]
-    i = 1
-    while page[i] == "":  # Saute jusqu'au début du titre
-        i += 1
     # Saut du titre :
-    if not titre:  # Cas où le titre n’est pas connu
-        a = 0
-        while page[i] != "" and a < 2:
-            i += 1
-            a += 1
-    else:  # Cas où il l’est (à améliorer)
-        while page[i].strip() in titre:
-            i += 1
+    i = fin_titre
     while page[i] == "":  # Saute jusqu'au début des auteurs
         i += 1
     if i == 0:

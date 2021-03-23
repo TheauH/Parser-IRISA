@@ -34,7 +34,7 @@ mkdir(chemin_sorties)
 # Traitement de chaque fichier P.D.F.
 for entrée in dossier_entrées:
     if entrée.name.endswith(".pdf") and entrée.is_file:
-        if demandeXML: # Si demande une sortie en X.M.L.
+        if demandeXML:  # Si demande une sortie en X.M.L.
             with open(chemin_sorties / (entrée.name[:-3] + "xml"), "wb") as sortie:
 
                 art = Article(chemin_entrées / entrée.name)
@@ -45,7 +45,7 @@ for entrée in dossier_entrées:
                     art.nom,
                     "</preamble>",
                     "<titre>",
-                    art.titre,
+                    str(art.titre),
                     "</titre>",
                     "<auteur>",
                     ", ".join(art.auteurs),
@@ -63,11 +63,10 @@ for entrée in dossier_entrées:
                     art.references,
                     "</biblio>",
                     "</article>",
-
                 ]:
                     sortie.write(élément.encode() + b"\n")
 
-        else: # Si demande une sortie en texte
+        else:  # Si demande une sortie en texte
             with open(chemin_sorties / (entrée.name[:-3] + "txt"), "wb") as sortie:
 
                 art = Article(chemin_entrées / entrée.name)
@@ -76,7 +75,7 @@ for entrée in dossier_entrées:
                     "Nom du fichier : ",
                     art.nom,
                     "\nTitre du papier : ",
-                    art.titre,
+                    str(art.titre),
                     "\nAuteurs : ",
                     ", ".join(art.auteurs),
                     "\nRésumé : ",
@@ -87,6 +86,5 @@ for entrée in dossier_entrées:
                     art.discussion,
                     "\nRéférences : ",
                     art.references,
-
                 ]:
                     sortie.write(élément.encode())

@@ -2,6 +2,7 @@ from os import PathLike, path
 from typing import Union, List
 import PyPDF2
 
+from .champ import Champ
 from .transcription import Transcription
 from .title import extract_information as trouve_titre
 from .auteur import auteur as trouve_auteurs
@@ -9,6 +10,7 @@ from .pars_abstract import pars_Abstract
 from .references import find_references
 from .conclusion import find_conclusion
 from .discussion import find_discussion
+
 
 class Article:
     """
@@ -35,13 +37,15 @@ class Article:
         début_corps = self.texte[0].trouve_début_corps()
 
         # Faire appel aux fonctions adéquates pour déterminer ces attributs.
-        self.titre = trouve_titre(
+        self.titre: Champ = trouve_titre(
             self.texte,
             métatitre=métadonnées
             and métadonnées.title,  # fourni seulement si on a les métadonnées
         )
         self.auteurs: List[str] = [
-            trouve_auteurs(self.texte, titre=self.titre, début_corps=début_corps)
+            trouve_auteurs(
+                self.texte, fin_titre=self.titre.ligne_fin, début_corps=début_corps
+            )
         ]
 
         self.texte.normalise()

@@ -75,7 +75,7 @@ for entrée in dossier_entrées:
                     "Nom du fichier : ",
                     art.nom,
                     "\nTitre du papier : ",
-                    str(art.titre),
+                    art.titre,
                     "\nAuteurs : ",
                     ", ".join(art.auteurs),
                     "\nRésumé : ",

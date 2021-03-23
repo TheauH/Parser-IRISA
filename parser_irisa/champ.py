@@ -21,3 +21,6 @@ class Champ:
 
     def __str__(self) -> str:
         return str(self.contenu)
+
+    def encode(self) -> bytes:
+        return str(self.contenu).encode()

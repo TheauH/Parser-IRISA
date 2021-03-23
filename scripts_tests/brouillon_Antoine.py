@@ -1,3 +1,4 @@
+import PyPDF2
 from config import transcription
 from pathlib import Path
 from os import scandir, mkdir
@@ -16,6 +17,7 @@ except NotADirectoryError:
 # rmtree("txt", ignore_errors=True)
 # mkdir("txt")
 
+# """ Corpus normalisé """
 # for entrée in dossier_entrées:
 #     if entrée.name.endswith(".pdf") and entrée.is_file:
 #         with open(Path("txt") / (entrée.name[:-3] + "txt"), "wb") as sortie:
@@ -23,14 +25,26 @@ except NotADirectoryError:
 #             t.normalise()
 #             sortie.write(str(t).encode())
 
-with open("en-têtes.txt", "wb") as sortie:
+# """ En-têtes du corpus"""
+# with open("en-têtes.txt", "wb") as sortie:
+#     for entrée in dossier_entrées:
+#         if not (entrée.name.endswith(".pdf") and entrée.is_file):
+#             continue
+#         print(entrée.name)
+#         sortie.write(b"----- " + entrée.name.encode() + b"\xc2\xa0:\n")
+#         t = transcription.Transcription(chemin_entrées / entrée.name)
+#         pp: page.Première_page = t[0]
+#         for ligne in pp[: pp.trouve_début_corps()]:
+#             sortie.write(ligne.encode())
+#             sortie.write(b"\n")
+
+""" Métadonnées du corpus """
+with open("métadonnées.txt", "wb") as sortie:
     for entrée in dossier_entrées:
         if not (entrée.name.endswith(".pdf") and entrée.is_file):
             continue
-        print(entrée.name)
         sortie.write(b"----- " + entrée.name.encode() + b"\xc2\xa0:\n")
-        t = transcription.Transcription(chemin_entrées / entrée.name)
-        pp: page.Première_page = t[0]
-        for ligne in pp[: pp.trouve_début_corps()]:
-            sortie.write(ligne.encode())
-            sortie.write(b"\n")
+        pdf = PyPDF2.PdfFileReader(open(chemin_entrées / entrée.name, "rb"))
+        métadonnées = pdf.getDocumentInfo()
+        if métadonnées.author:
+            sortie.write(métadonnées.author.encode() + b"\n")

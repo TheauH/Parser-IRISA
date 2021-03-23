@@ -42,11 +42,12 @@ class Article:
             métatitre=métadonnées
             and métadonnées.title,  # fourni seulement si on a les métadonnées
         )
-        self.auteurs: List[str] = [
-            trouve_auteurs(
-                self.texte, fin_titre=self.titre.ligne_fin, début_corps=début_corps
-            )
-        ]
+        self.auteurs: Champ = trouve_auteurs(
+            self.texte,
+            métaauteurs=métadonnées and métadonnées.author,
+            fin_titre=self.titre.ligne_fin,
+            début_corps=début_corps,
+        )
 
         self.texte.normalise()
         self.résumé = pars_Abstract(self.texte)

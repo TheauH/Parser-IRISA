@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
+from PyPDF2 import generic
+from typing import Union
+
+from .champ import Champ
 from .transcription import Transcription
 
 
-def auteur(trans: Transcription, fin_titre: int, début_corps: int = -1):
+def auteur(
+    trans: Transcription,
+    métaauteurs: Union[generic.TextStringObject, None] = None,
+    fin_titre: int = 2,
+    début_corps: int = -1,
+):
     page = trans[0]
     # Saut du titre :
     i = fin_titre
@@ -10,14 +19,22 @@ def auteur(trans: Transcription, fin_titre: int, début_corps: int = -1):
         i += 1
     if i == 0:
         i = 1  # Les auteurs ne sont jamais sur la première ligne.
+    début_bloc = i
 
     result = []
     if début_corps == -1:
-        return " ".join(page[i].split())
+        result.append(" ".join(page[i].split()))
+    fin_bloc = i + 1
     while i < début_corps:
+        if not page[i]:
+            i += 1
+            continue
         result += " " + " ".join(page[i].split())
         i += 1
-    return "".join(result)
+        fin_bloc = i
+    result = ["".join(result)]
+
+    return Champ(result, 0, début_bloc, 0, fin_bloc)
 
 
 """ Test de tout le corpus

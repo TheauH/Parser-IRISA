@@ -4,7 +4,6 @@ Created on Tue Feb  9 15:52:15 2021
 
 @author: sosob
 """
-from os import PathLike
 from PyPDF2 import generic
 import re
 from typing import Union

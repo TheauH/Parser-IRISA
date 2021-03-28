@@ -2,10 +2,11 @@ from os import PathLike, path
 from typing import Union, List
 import PyPDF2
 
+from .page import Première_page
 from .champ import Champ
 from .transcription import Transcription
 from .title import extract_information as trouve_titre
-from .auteur import auteur as trouve_auteurs
+from .auteur import Auteur
 from .pars_abstract import pars_Abstract
 from .references import find_references
 from .conclusion import find_conclusion
@@ -34,7 +35,9 @@ class Article:
 
         self.nom = path.basename(source)  # Nom du fichier d’origine
         self.texte = Transcription(source)
-        début_corps = self.texte[0].trouve_début_corps()
+
+        self.texte.normalise()
+        première_page: Première_page = self.texte[0]
 
         # Faire appel aux fonctions adéquates pour déterminer ces attributs.
         self.titre: Champ = trouve_titre(
@@ -42,14 +45,12 @@ class Article:
             métatitre=métadonnées
             and métadonnées.title,  # fourni seulement si on a les métadonnées
         )
-        self.auteurs: Champ = trouve_auteurs(
+        self.auteurs: Champ = Auteur.trouve_auteurs(
             self.texte,
             métaauteurs=métadonnées and métadonnées.author,
             fin_titre=self.titre.ligne_fin,
-            début_corps=début_corps,
         )
 
-        self.texte.normalise()
         self.résumé = pars_Abstract(self.texte)
         self.references = find_references(self.texte)
         self.conclusion = find_conclusion(self.texte)

@@ -48,7 +48,9 @@ for entrée in dossier_entrées:
                     str(art.titre),
                     "</titre>",
                     "<auteurs>\n<auteur>",
-                    "</auteur>\n<auteur".join(art.auteurs.contenu),
+                    "\n</auteur>\n<auteur>".join(
+                        [str(auteur) for auteur in art.auteurs.contenu]
+                    ),
                     "</auteur>\n</auteurs>",
                     "<abstract>",
                     art.résumé,
@@ -77,7 +79,7 @@ for entrée in dossier_entrées:
                     "\nTitre du papier : ",
                     art.titre,
                     "\nAuteurs : ",
-                    ", ".join(art.auteurs.contenu),
+                    ", ".join([str(auteur) for auteur in art.auteurs.contenu]),
                     "\nRésumé : ",
                     art.résumé,
                     "\nConclusion : ",

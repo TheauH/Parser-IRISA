@@ -4,8 +4,8 @@ from .transcription import Transcription
 def find_conclusion(transcri: Transcription):
     """ motif rechercher : """
     string = "Conclusion"
-    string2 = "Results"
-    string3 = "CONCLUSION"
+    string2 = "Discussion"
+    string3 = "ONCLUSION"
     string4 = "Acknowledgement"
     string5 = "Acknowledgment"
     string6 = "Reference"
@@ -21,36 +21,43 @@ def find_conclusion(transcri: Transcription):
     page1 = 0
     i=0
     k=0
-    for np in range(len(transcri) - 1, -1, -1):
-        for nl in range(len(transcri[np])):    
+    for np in range(len(transcri) -1, -1, -1):
+        for nl in range(len(transcri[np]) -1, -1, -1):    
             if ((string in transcri[np][nl]) or (string2 in transcri[np][nl]) or (string3 in transcri[np][nl]) ):
                 page = np
                 ligne = nl
-                break
    
             if ((string4 in transcri[np][nl]) or (string5 in transcri[np][nl]) or (string6 in transcri[np][nl]) or (string7 in transcri[np][nl])):
                 page1 = np
                 ligne1 = nl
-                break  
 
-        
-        if page and ligne or page1 and ligne1: 
+        #sort de la boucle après que page et page1 soit trouvé
+        if page and page1: 
             break
     
+    #si le début n'est pas trouvé, rendre vide
+    if (page==0):
+    	return ""
     
-    #while et ajouter ligne par ligne
+    #si la fin est avant le début, prendre les 3 lignes après le début
+    if (page>page1):
+    	page1=page
+    	ligne1=ligne+3
     
-
-    # n = 0
-    # on se positionne à la page p et après la ligne n et on renvoie 3 lignes :
-    # for ligne in transcri[-p]:
-    #     if j > 0 and n < 5:
-    #         buf += "\n" + ligne.strip()
-    #         n += 1
-    #     else:
-    #         j -= 1
-    # buf += "..."
-    return "\n".join(transcri[page][ligne : ligne1 - ligne - 1])
+    #géré la première page s'il n'y a qu'une ou plusieurs page à prendre
+    if (page<page1):
+        result="\n".join(transcri[page][ligne:len(transcri[page])-1])
+        ligne=0
+        page+=1
+    else:
+    	return "\n".join(transcri[page][ligne:ligne1-1])
+    	
+    
+    #boucle pour avoir toute lignes rajouté
+    while (page<page1):
+    	result+="\n".join(transcri[page][0:len(transcri[page])-1])
+    	page+=1
+    return result+"\n".join(transcri[page][ligne:ligne1-1])
     
 
 

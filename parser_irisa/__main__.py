@@ -3,7 +3,7 @@ from pathlib import Path
 from os import *
 from os import scandir, mkdir
 from shutil import rmtree
-from menu import choixSortiePDF,menu
+from .menu import choixSortiePDF,menu
 import codecs
 
 from .article import Article

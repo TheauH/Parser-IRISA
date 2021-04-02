@@ -9,6 +9,7 @@ import os
 
 from .transcription import Transcription
 from .page import Première_page
+from .champ import Champ
 
 
 def pars_Abstract(texte: Transcription):
@@ -25,19 +26,27 @@ def pars_Abstract(texte: Transcription):
     string2 = "Result"
     string3 = "ONCLUSION"
     string4 = "Discussion"
-    ligne = 0
     page = 0
 
     for np in range(len(texte)):
-        for nl in range(len(texte[np])):    
-            if ((string in texte[np][nl]) or (string2 in texte[np][nl]) or (string3 in texte[np][nl]) or (string4 in texte[np][nl]) ):
+        for nl in range(len(texte[np])):
+            if (
+                (string in texte[np][nl])
+                or (string2 in texte[np][nl])
+                or (string3 in texte[np][nl])
+                or (string4 in texte[np][nl])
+            ):
                 page = np
-                ligne = nl
-    #si le début n'est pas trouvé, rendre vide
-    if (page==0):
-    	return ""
+    # si le début n'est pas trouvé, rendre vide
+    if page == 0:
+        return Champ(nom="abstract", contenu="")
 
-    return "\n".join(lines[lines.début_corps : lines.début_corps + 12])
+    return Champ(
+        nom="abstract",
+        contenu="\n".join(lines[lines.début_corps : lines.début_corps + 12]),
+        ligne_début=lines.début_corps,
+        ligne_fin=lines.début_corps + 12,
+    )
 
 
 """création fichier txt ou ecrire les résultats a partir du pdf convertit en txt"""
@@ -53,10 +62,11 @@ def creationFichierResumer(f):
 
 
 def rechercheMot(mot):
-    
+
     pos = mot.find("Abstract")
-    #return mot[pos:nl]
+    # return mot[pos:nl]
     return nl
+
 
 if __name__ == "__main__":
     fi = "./Corpus_2021/texte/Nasr.txt"

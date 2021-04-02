@@ -6,7 +6,7 @@ from typing import Union, List
 class Transcription(List[Page]):
     def __init__(self, chemin_source: Union[str, bytes, PathLike]):
         try:  # On essaie d’abord avec le module `pdftotext`
-            # raise Exception # Décommenter pour utiliser la commande système
+            raise Exception # Décommenter pour utiliser la commande système
             from textract import process
 
             pages_transcrites = [

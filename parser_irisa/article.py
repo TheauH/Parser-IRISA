@@ -33,7 +33,9 @@ class Article:
             pdf = PyPDF2.PdfFileReader(fichier, strict=False)
             métadonnées = pdf.getDocumentInfo()
 
-        self.nom = path.basename(source)  # Nom du fichier d’origine
+        self.nom = Champ(
+            nom="preamble", contenu=path.basename(source)
+        )  # Nom du fichier d’origine
         self.texte = Transcription(source)
 
         self.texte.normalise()

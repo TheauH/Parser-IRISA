@@ -1,0 +1,79 @@
+----- Boudin-Torres-2006.pdf :
+        Florian Boudin \ and Marc El-Bèze \                         Juan-Manuel Torres-Moreno \,[
+         \
+           Laboratoire Informatique d’Avignon                       [
+                                                                      École Polytechnique de Montréal
+         339 chemin des Meinajaries, BP1228,                       CP 6079 Succ. Centre Ville H3C 3A7
+            84911 Avignon Cedex 9, France.                              Montréal (Québec), Canada.
+            florian.boudin@univ-avignon.fr                         juan-manuel.torres@univ-avignon.fr
+              marc.elbeze@univ-avignon.fr
+----- Das_Martins.pdf :
+                     Dipanjan Das             André F.T. Martins
+                          Language Technologies Institute
+                            Carnegie Mellon University
+                          {dipanjan, afm}@cs.cmu.edu
+
+                                  November 21, 2007
+----- Gonzalez_2018_Wisebe.pdf :
+ Carlos-Emiliano González-Gallardo1,2(B) and Juan-Manuel Torres-Moreno1,2
+ 1
+     LIA - Université d’Avignon et des Pays de Vaucluse, 339 chemin des Meinajaries,
+                                 84140 Avignon, France
+           carlos-emiliano.gonzalez-gallardo@alumni.univ-avignon.fr,
+                         juan-manuel.torres@univ-avignon.fr
+              2
+                Département de GIGL, École Polytechnique de Montréal,
+           C.P. 6079, succ. Centre-ville, Montréal, Québec H3C 3A7, Canada
+----- Iria_Juan-Manuel_Gerardo.pdf :
+       Iria da Cunha                 Juan-Manuel Torres-Moreno                              Gerardo Sierra
+    Institute for Applied                Laboratoire Informatique                  Instituto de Ingeniería (UNAM),
+  Linguistics (UPF), Spain             d’Avignon (UAPV), France                                  Mexico
+   Instituto de Ingeniería           Instituto de Ingeniería (UNAM),                gsierram@iingen.unam.
+     (UNAM), Mexico                                Mexico                                          mx
+  Laboratoire Informatique           École Polytechnique de Montréal,
+ d’Avignon (UAPV), France                          Canada
+iria.dacunha@upf.edu                juan-manuel.torres@univ-
+                                               avignon.fr
+----- jing-cutepaste.pdf :
+                          Hongyan   Jing and Kathleen         R. McKeown
+                                Department of Computer Science
+                                        Columbia University
+                                   N e w Y o r k , N Y 10027, U S A
+                                  hjing, kathyQcs.columbia.edu
+----- kessler94715.pdf :
+                1st Rémy Kessler                       2nd Nicolas Béchet                         3rd Giuseppe Berio
+             Université Bretagne Sud                Université Bretagne Sud                    Université Bretagne Sud
+                   CNRS 6074A                              CNRS 6074A                                  CNRS 6074A
+               56017 Vannes,France                    56017 Vannes,France                          56017 Vannes,France
+             remy.kessler@univ-ubs.fr                 nicolas.bechet@irisa.fr                   giuseppe.berio@univ-ubs.fr
+----- kesslerMETICS-ICDIM2019.pdf :
+    1st Rémy Kessler         2nd Nicolas Béchet            3rd Gudrun Ledegen              4rd Frederic Pugnière-Saavedra
+Université Bretagne Sud Université Bretagne Sud     Université Rennes II            Université Bretagne Sud
+      CNRS 6074A              CNRS 6074A               PREFics, EA 4246                    PREFics, EA 4246
+  56017 Vannes,France     56017 Vannes,France         5043 Rennes, France                56017 Vannes, France
+remy.kessler@univ-ubs.fr nicolas.bechet@irisa.fr gudrun.ledegen@univ-rennes2.fr frederic.pugniere-saavedra@univ-ubs.fr
+----- mikheev J02-3002.pdf :
+Andrei Mikheev∗
+University of Edinburgh
+----- Mikolov.pdf :
+                                                          Tomas Mikolov                                     Kai Chen
+                                                  Google Inc., Mountain View, CA                  Google Inc., Mountain View, CA
+                                                   tmikolov@google.com                              kaichen@google.com
+arXiv:1301.3781v3 [cs.CL] 7 Sep 2013
+
+
+
+
+                                                          Greg Corrado                                     Jeffrey Dean
+                                                  Google Inc., Mountain View, CA                  Google Inc., Mountain View, CA
+                                                   gcorrado@google.com                                jeff@google.com
+----- Nasr.pdf :
+    Alexis Nasr Frédéric Béchet Jean-François Rey Benoı̂t Favre Joseph Le Roux∗
+           Laboratoire d’Informatique Fondamentale de Marseille- CNRS - UMR 6166
+                                    Université Aix-Marseille
+    (alexis.nasr,frederic.bechet,jean-francois.rey,benoit.favre,joseph.le.roux)
+                                 @lif.univ-mrs.fr
+----- Torres-moreno1998.pdf :
+Efficient Adaptive Learning for Classification Tasks with
+----- Torres.pdf :
+   Juan-Manuel Torres-Moreno, Horacio Saggion, Iria da Cunha, Eric SanJuan, and Patricia Velázquez-Morales

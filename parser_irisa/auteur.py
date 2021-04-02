@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 from PyPDF2 import generic
 from typing import List, Union
 
@@ -20,6 +21,27 @@ class Auteur:
     def __str__(self) -> str:
         # "Antoine Jamelot <jamelot.e1500523@etud.univ-ubs.fr>"
         return self.nom + (self.courriel and " <" + self.courriel + ">")
+
+    def xml(self) -> str:
+        return (
+            "<auteur>"
+            + self.nom
+            + (self.courriel and " (" + self.courriel + ")")
+            + "</auteur>"
+            + (
+                self.affiliation
+                and "<affiliation>" + self.affiliation + "</affiliation>"
+            )
+        )
+
+    def txt(self) -> str:
+        return (
+            self.nom
+            + (self.courriel and " <" + self.courriel + ">")
+            + (self.affiliation and " (" + self.affiliation + ")")
+        )
+
+    format_courriel = re.compile(r"[^\sA-Z]+[@Q][^\sA-Z]")
 
     @staticmethod
     def trouve_auteurs(
@@ -46,11 +68,12 @@ class Auteur:
             if any([auteur in page[début_bloc] for auteur in métaliste]):
                 méta_fiable = True
                 return Champ(
-                    [Auteur(nom=nom) for nom in métaliste],
-                    0,
-                    début_bloc,
-                    0,
-                    Auteur.fin_bloc(page),
+                    nom="auteurs",
+                    contenu=[Auteur(nom=nom) for nom in métaliste],
+                    page_début=0,
+                    ligne_début=début_bloc,
+                    page_fin=0,
+                    ligne_fin=Auteur.fin_bloc(page),
                 )
 
         """
@@ -71,14 +94,21 @@ class Auteur:
                 i += 1
                 fin_bloc = i
 
-        return Champ(result, 0, début_bloc, 0, fin_bloc)
+        return Champ(
+            nom="auteurs",
+            contenu=result,
+            page_début=0,
+            ligne_début=début_bloc,
+            page_fin=0,
+            ligne_fin=fin_bloc,
+        )
 
     def fin_bloc(page: Première_page) -> int:
         """
         Numéro de ligne de fin [exclue] du bloc des auteurs.
         La première page donnée doit être normalisée.
         """
-        n = page.début_corps
+        n = page.début_corps - 1
         while not page[n]:
             n -= 1
         return n + 1

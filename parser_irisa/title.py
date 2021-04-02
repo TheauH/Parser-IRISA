@@ -30,7 +30,14 @@ def extract_information(
     else:
         titre = str(métatitre)
 
-    return Champ(titre, 0, 0, 0, 2 if pdf_text[0][1].strip() in titre else 1)
+    return Champ(
+        nom="titre",
+        contenu=titre,
+        page_début=0,
+        ligne_début=0,
+        page_fin=0,
+        ligne_fin=2 if pdf_text[0][1].strip() in titre else 1,
+    )
 
 
 if __name__ == "__main__":

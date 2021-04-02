@@ -1,6 +1,6 @@
 """
 @author: Théau Huteau
-"""
+""" 
 
 from .transcription import Transcription
 
@@ -22,7 +22,7 @@ def find_references(transcri: Transcription):
                 page = p
                 ligne = nl
                 # Champ trouvé
-                return "\n".join(page[ligne + 1 : ligne + 4]) + "…"
+                return "\n".join(page[0:][ligne + 1 : ligne + 100]) 
 
     # Champ non trouvé
     return "—"

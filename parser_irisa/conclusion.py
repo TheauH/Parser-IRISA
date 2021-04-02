@@ -4,7 +4,7 @@ from .transcription import Transcription
 def find_conclusion(transcri: Transcription):
     """ motif rechercher : """
     string = "Conclusion"
-    string2 = "Discussion"
+    string2 = "Result"
     string3 = "ONCLUSION"
     string4 = "Acknowledgement"
     string5 = "Acknowledgment"

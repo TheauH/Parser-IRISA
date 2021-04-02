@@ -5,12 +5,17 @@ from .transcription import Transcription
 def find_conclusion(transcri: Transcription):
     """ motif rechercher : """
     string = "Conclusion"
-    string2 = "Result"
+    string1 = "VI. CONCLUSION"
+    string2 = "5 Conclusion"
     string3 = "ONCLUSION"
+    stringbis = "FUTURE WORK"
     string4 = "Acknowledgement"
     string5 = "Acknowledgment"
     string6 = "Reference"
-    string7 = "REFERENCE"
+    string7 = "D ISCUSSION"
+    string8 = "Discussion"
+    string9 = "R EFERENCES"
+    string10 = "7       Follow-Up Work"
 
     """declaration variable contenant le résultat """
 
@@ -26,17 +31,23 @@ def find_conclusion(transcri: Transcription):
         for nl in range(len(transcri[np]) - 1, -1, -1):
             if (
                 (string in transcri[np][nl])
+                or (string1 in transcri[np][nl])
                 or (string2 in transcri[np][nl])
                 or (string3 in transcri[np][nl])
+                or (stringbis in transcri[np][nl])
             ):
                 page = np
                 ligne = nl
+                print("ok")
 
             if (
                 (string4 in transcri[np][nl])
                 or (string5 in transcri[np][nl])
                 or (string6 in transcri[np][nl])
                 or (string7 in transcri[np][nl])
+                or (string8 in transcri[np][nl])
+                or (string9 in transcri[np][nl])
+                or (string10 in transcri[np][nl])
             ):
                 page1 = np
                 ligne1 = nl

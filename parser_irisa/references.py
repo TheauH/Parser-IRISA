@@ -11,6 +11,7 @@ def find_references(transcri: Transcription):
     string = "References"
     string2 = "REFERENCES"
     string3 = "Références"
+    string4 = "R EFERENCES"
     """declaration variable contenant le résultat """
     """compteur de page"""
     # Page et numéro de la ligne qui nous intéressent

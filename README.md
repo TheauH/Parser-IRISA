@@ -14,6 +14,8 @@ Environnement : Linux GNU (seulement).
 
 Modules additionnels utilisé : pdftotext : https://pypi.org/project/pdftotext/  
 
-Commande pour lancer le projet : 'python3 -m parser_irisa "CHEMIN.../NOMDUDOSSIER/" [-t-m]' en ligne de commande 
-ou   : 'python3 -m parser_irisa menu -t' pour un menu.
+Commande pour lancer le projet : 'python3 -m parser_irisa "CHEMIN.../NOMDUDOSSIER/" -t|-x' en ligne de commande 
+ou   : 'python3 -m parser_irisa menu -t|-x' pour un menu.
+-t : pour format txt 
+-x : pour format xml 
 

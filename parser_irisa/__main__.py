@@ -1,7 +1,7 @@
 from sys import argv
 from pathlib import Path
-from os import *
-from os import scandir, mkdir
+#from os import *
+from os import scandir, mkdir, path
 from shutil import rmtree
 from .menu import choixSortiePDF,menu
 import codecs
@@ -163,6 +163,7 @@ else :#si menu saisie en argument :
                     ]:
                         sortie.write(élément.encode() + b"\n")
         else : # si sortie texte :
+
             with open(chemin_sorties / (nom[:-3] + "txt"), "wb") as sortie:
 
                     art = Article(entrée)

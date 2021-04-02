@@ -10,6 +10,7 @@ def find_references(transcri: Transcription):
     string = "References"
     string2 = "REFERENCES"
     string3 = "Références"
+    string4 = "R EFERENCES"
     """declaration variable contenant le résultat """
     buf = ""
     """compteur de page"""

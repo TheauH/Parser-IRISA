@@ -7,9 +7,9 @@ def find_discussion(transcri: Transcription):
     string2 = "Conclusion"
     string3 = "ONCLUSION"
     string4 = "Acknowledgement"
-    string5 = "Acknowledgment"
+    string5 = "Acknowledgments"
     string6 = "Reference"
-    string7 = "REFERENCE"
+    string7 = "References"
 
     """declaration variable contenant le résultat """
     
@@ -26,8 +26,7 @@ def find_discussion(transcri: Transcription):
             if ((string in transcri[np][nl])):
                 page = np
                 ligne = nl
-   
-            if ((string2 in transcri[np][nl]) or (string3 in transcri[np][nl]) or (string4 in transcri[np][nl]) or (string5 in transcri[np][nl]) or (string6 in transcri[np][nl]) or (string7 in transcri[np][nl])):
+            if ((string2 in transcri[np][nl]) or (string3 in transcri[np][nl]) or (string6 in transcri[np][nl]) or (string7 in transcri[np][nl])):
                 page1 = np
                 ligne1 = nl
 

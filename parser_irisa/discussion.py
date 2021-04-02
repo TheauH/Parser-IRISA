@@ -4,9 +4,13 @@ from .transcription import Transcription
 def find_discussion(transcri: Transcription):
     """ motif rechercher : """
     string = "Discussion"
-    string2 = "Acknowled"
-    string3 = "Conclusion"
-    
+    string2 = "Conclusion"
+    string3 = "ONCLUSION"
+    string4 = "Acknowledgement"
+    string5 = "Acknowledgment"
+    string6 = "Reference"
+    string7 = "REFERENCE"
+
     """declaration variable contenant le résultat """
     
     """compteur de page"""
@@ -19,11 +23,11 @@ def find_discussion(transcri: Transcription):
     k=0
     for np in range(len(transcri) -1, -1, -1):
         for nl in range(len(transcri[np]) -1, -1, -1):    
-            if ((string in transcri[np][nl]) or (string in transcri[np][nl])):
+            if ((string in transcri[np][nl])):
                 page = np
                 ligne = nl
    
-            if ((string3 in transcri[np][nl])):
+            if ((string2 in transcri[np][nl]) or (string3 in transcri[np][nl]) or (string4 in transcri[np][nl]) or (string5 in transcri[np][nl]) or (string6 in transcri[np][nl]) or (string7 in transcri[np][nl])):
                 page1 = np
                 ligne1 = nl
 

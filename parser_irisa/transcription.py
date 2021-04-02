@@ -1,3 +1,4 @@
+import platform
 from os import PathLike
 from parser_irisa.page import Page, Première_page
 from typing import Union, List
@@ -6,7 +7,9 @@ from typing import Union, List
 class Transcription(List[Page]):
     def __init__(self, chemin_source: Union[str, bytes, PathLike]):
         try:  # On essaie d’abord avec le module `pdftotext`
-            raise Exception # Décommenter pour utiliser la commande système
+            if platform.system() == "Windows":  # Différent sur Windows
+                raise Exception
+
             from textract import process
 
             pages_transcrites = [
@@ -17,7 +20,6 @@ class Transcription(List[Page]):
             ]
 
         except Exception:  # à défaut, on utilise la commande système
-            print("Échec de Textract, recours à la commande du système...")
             from os import system, remove
 
             system('pdftotext -layout "' + str(chemin_source) + '" tmp.txt')

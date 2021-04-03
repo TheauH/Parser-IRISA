@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import re
 from PyPDF2 import generic
-from typing import List, Union
+from typing import Dict, List, Tuple, Union
 
-from .page import Page, Première_page
+from .page import Première_page
 from .champ import Champ
 from .transcription import Transcription
+from .strop import format_courriel, recherche_sans_accents
 
 
 class Auteur:
@@ -41,7 +42,6 @@ class Auteur:
             + (self.affiliation and " (" + self.affiliation + ")")
         )
 
-    format_courriel = re.compile(r"[^ \n]+@[^ \n]+")
     # format_courriel = re.compile(
     #     r"(?:(?:[^ \n]|, )+|(?:\{.+\}|\(.+\))[ \n]*)[@Q](?:\n *)?(?:[\w\.\-]|\-\n +)+\.[a-z]{,4}"
     # )
@@ -65,43 +65,11 @@ class Auteur:
             nom="auteurs", contenu=[], ligne_début=i, ligne_fin=Auteur.fin_bloc(page)
         )
 
-        # if champ_auteurs.ligne_fin - champ_auteurs.ligne_début > 2:
-        #     """
-        #     Recherche simple de colonnes à séparer pour l’analyse
-        #     """
-        #     carte_vide: List[bool] = page.largeur() * [True]  # True = trou
-        #     for ligne in page[champ_auteurs.ligne_début : champ_auteurs.ligne_fin]:
-        #         for c, caractère in enumerate(ligne):
-        #             if caractère != " ":
-        #                 carte_vide[c] = False
+        # La séquence de lignes à explorer
+        bloc = page[champ_auteurs.ligne_début : champ_auteurs.ligne_fin]
 
-        #     séparations: List[int] = [0]  # Colonnes sur lesquelles couper le bloc
-        #     i = 0  # Parcours de la carte du vide
-        #     # 1. parcours de la marge de gauche
-        #     while i < len(carte_vide) and carte_vide[i]:
-        #         i += 1
-        #     vide = False
-        #     # 2. Parcours de la partie intéressante
-        #     while i < len(carte_vide):
-        #         if vide and not carte_vide[i]:  # vide → caractère
-        #             séparations.append(i)
-        #             vide = False
-        #         elif carte_vide[i]:  # caractère → vide
-        #             vide = True
-        #         i += 1
-
-        #     blocs: List[List[str]] = [[] for _ in séparations]
-        #     for ligne in page[champ_auteurs.ligne_début : champ_auteurs.ligne_fin]:
-        #         for i in range(1, len(séparations)):
-        #             blocs[i - 1].append(ligne[séparations[i - 1] : séparations[i]])
-        #         blocs[-1].append(ligne[séparations[-1] :])
-
-        # else:
-        #     blocs = [page[champ_auteurs.ligne_début : champ_auteurs.ligne_fin]]
-
-        # for bloc in blocs:
-        #     for ligne in bloc:
-        #         print(ligne)
+        # Les lignes et colonnes de début et de fin (exclue) de chaque auteur
+        coordonnées: Dict[Auteur, List[int, int, int, int]] = {}
 
         """
         Vérification de la fiabilité des métadonnées :
@@ -115,27 +83,42 @@ class Auteur:
                 méta_fiable = True
                 champ_auteurs.contenu = [Auteur(nom=n) for n in métaliste]
 
+        # Recherche des courriels et des emplacements des auteurs
         if méta_fiable:
             courriels: List[str] = []
-            for ligne in page[champ_auteurs.ligne_début : champ_auteurs.ligne_fin]:
-                courriels += Auteur.format_courriel.findall(ligne)
-
-            éléments_adresses: List[List[str]] = [
-                re.split(r"[^a-z]+", adresse.split("@")[0]) for adresse in courriels
-            ]
-
-            for adresse, courriel in zip(éléments_adresses, courriels):
+            coord_courriels: List[Tuple[int, int, int, int]] = []
+            for l, ligne in enumerate(bloc):
+                courriels_trouvés = format_courriel.finditer(ligne)
+                for ct in courriels_trouvés:
+                    courriels.append(ligne[ct.span()[0] : ct.span()[1]])
+                    coord_courriels.append((l, ct.span()[0], l, ct.span()[1]))
                 for auteur in champ_auteurs.contenu:
-                    if not auteur.courriel and (
-                        any([élément in auteur.nom.lower() for élément in adresse])
-                        or any(
-                            [
-                                élément in courriel
-                                for élément in auteur.nom.lower().split()
+                    if not coordonnées.get(auteur):
+                        nom_trouvé = recherche_sans_accents(auteur.nom, ligne)
+                        if nom_trouvé:  # Si l’on a trouvé le nom
+                            coordonnées[auteur] = [
+                                l,
+                                nom_trouvé.span()[0],
+                                l,
+                                nom_trouvé.span()[1],
                             ]
-                        )
+                            auteur.nom = nom_trouvé[0]
+
+            # Attribution des adresses aux auteurs
+            for courriel, coord_courriel in zip(courriels, coord_courriels):
+                for auteur in champ_auteurs.contenu:
+                    """
+                    Pour attribuer l’adresse à un auteur, il faut
+                    que les deux se trouvent au moins sur une colonne commune.
+                    """
+                    print(coordonnées[auteur], coord_courriel)
+                    if (
+                        not auteur.courriel
+                        and coord_courriel[1] < coordonnées[auteur][3]
+                        and coord_courriel[3] > coordonnées[auteur][1]
                     ):
                         auteur.courriel = courriel
+                        coordonnées[auteur][2] = coord_courriel[2]
                         break
 
         else:  # = if not méta_fiable:
@@ -167,11 +150,3 @@ class Auteur:
         while not page[n]:
             n -= 1
         return n + 1
-
-    """ Test de tout le corpus
-    dossier_entrées = scandir(Path("../../Corpus_2021"))
-    for entrée in dossier_entrées:
-        if entrée.name.endswith(".pdf") and entrée.is_file:
-            fichier = open(entrée, "rb")
-            print("auteur : "+auteur(Transcription(fichier)))
-    """

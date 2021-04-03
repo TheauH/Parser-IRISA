@@ -22,8 +22,8 @@ class Transcription(List[Page]):
         except Exception:  # à défaut, on utilise la commande système
             from os import system, remove
 
-            system('pdftotext -layout "' + str(chemin_source) + '" tmp.txt')
-            with open("tmp.txt", "r") as résultat:
+            system('pdftotext -layout -eol unix "' + str(chemin_source) + '" tmp.txt')
+            with open("tmp.txt", "r", encoding="utf-8") as résultat:
                 pages_transcrites = résultat.read().split("\f")  # Résultat découpé
             remove("tmp.txt")
 

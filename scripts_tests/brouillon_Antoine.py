@@ -31,7 +31,7 @@ with open("bloc-auteur.txt", "wb") as sortie:
         if not (entrée.name.endswith(".pdf") and entrée.is_file):
             continue
         print(entrée.name)
-        sortie.write(b"----- " + entrée.name.encode() + b"\xc2\xa0:\n")
+        sortie.write(("----- " + entrée.name + " :\n").encode())
         a = article.Article(chemin_entrées / entrée.name)
         for ligne in a.texte[0][a.auteurs.ligne_début : a.auteurs.ligne_fin]:
             sortie.write(ligne.encode())

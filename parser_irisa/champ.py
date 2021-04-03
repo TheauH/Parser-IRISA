@@ -50,4 +50,4 @@ class Champ:
             if isinstance(self.contenu, list)
             else self.contenu
         )
-        return self.nom + " :\n    " + contenu
+        return self.nom.capitalize() + " :\n    " + contenu

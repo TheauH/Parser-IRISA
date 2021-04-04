@@ -207,16 +207,40 @@ class Auteur:
                 sousBlocs.append(SousBloc(at, {objAuteur}))
 
         # Parcours et classement des lignes et sous-lignes du bloc
-        for ligne in bloc:
-            pass
+        for sousBloc in sousBlocs:
+            # Ajout en vrac
+            for l, ligne in enumerate(
+                bloc[sousBloc.coordonnées[0] + 1 : sousBloc.coordonnées[2]]
+            ):
+                sousBloc.ajoute(
+                    SousLigne(
+                        typeDonnée.affiliation,
+                        (l + 1, sousBloc.coordonnées[1], sousBloc.coordonnées[3]),
+                    )
+                )
 
-        # Attribution des courriels aux auteurs
+        # Attribution des courriels aux auteurs qui n’en ont pas
         for sousBloc in sousBlocs:
             adresses = list(
                 filter(lambda sl: sl.type == typeDonnée.courriel, sousBloc.sousLignes)
             )
             for auteur, adresse in zip(sousBloc.auteurs, adresses):
-                auteur.courriel = adresse.contenu(bloc)
+                if not auteur.courriel:
+                    auteur.courriel = adresse.contenu(bloc)
+
+        # Attribution des lignes concernant l’affiliation à chaque auteur
+        for sousBloc in sousBlocs:
+            affiliation = "  ".join(
+                [
+                    sl.contenu(bloc)
+                    for sl in filter(
+                        lambda sl: sl.type == typeDonnée.affiliation,
+                        sousBloc.sousLignes,
+                    )
+                ]
+            )
+            for auteur in sousBloc.auteurs:
+                auteur.affiliation = affiliation
 
         # Retrait d’un espace éventuel dû à l’expression régulière
         for auteur in champ_auteurs.contenu:

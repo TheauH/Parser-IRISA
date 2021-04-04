@@ -135,6 +135,8 @@ class Première_page(Page):
         après l’en-tête contenant le titre et les auteurs.
         Sert à la normalisation (découpe-page)
         """
+        # Nombre de lignes non vides parcourues en tout
+        non_vides = 0  # Il en faut au moins deux d’abord.
         # Nombre de lignes vides consécutives venant d’être parcourues
         lignes_vides = 0
 
@@ -143,8 +145,11 @@ class Première_page(Page):
 
         for numéro, ligne in enumerate(self):
             if ligne == "":
-                lignes_vides += 1
+                if non_vides >= 2:
+                    lignes_vides += 1
             else:
+                if non_vides < 2:
+                    non_vides += 1
                 if lignes_vides >= 2:
                     # Si l’on vient de passer un groupe
                     # de plusieurs lignes vides, c’est suspect.

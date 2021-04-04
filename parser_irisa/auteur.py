@@ -1,12 +1,80 @@
 # -*- coding: utf-8 -*-
-import re
+from enum import Enum, auto
 from PyPDF2 import generic
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Set, Tuple, Union
 
 from .page import Première_page
 from .champ import Champ
 from .transcription import Transcription
-from .strop import format_courriel, recherche_sans_accents
+from .strop import format_nom, format_courriel, recherche_sans_accents
+
+
+class typeDonnée(Enum):
+    nom = auto()
+    affiliation = auto()
+    courriel = auto()
+
+
+class SousLigne:
+    """
+    Représente une partie de ligne
+    donnant une information d’un type donné
+    """
+
+    def __init__(
+        self, typeD: typeDonnée = typeDonnée.affiliation, coordonnées: Tuple[int] = ()
+    ) -> None:
+        self.type = typeD
+        self.coordonnées = coordonnées  # (ligne, colonne début, colonne fin)
+
+    def contenu(self, bloc_relatif: List[str]) -> str:
+        """
+        Texte porté par la sous-ligne, en considérant qu’elle est
+        définie relativement au bloc `bloc_relatif`
+        """
+        return bloc_relatif[self.coordonnées[0]][
+            self.coordonnées[1] : self.coordonnées[2]
+        ]
+
+    def est_face_à(self, sousBloc: "SousBloc") -> bool:
+        """
+        Indique si la sous-ligne a des colonnes en commun
+        avec un sous-bloc donné
+        """
+        return (
+            self.coordonnées[2] > sousBloc.coordonnées[1]
+            and sousBloc.coordonnées[3] > self.coordonnées[1]
+        )
+
+
+class SousBloc:
+    """
+    Représente une colonne à l’intérieur de la section des auteurs,
+    correspondant en principe soit à un seul auteur, soit à un ensemble
+    d’auteurs partageant les mêmes coordonnées
+    """
+
+    def __init__(self, sousLigne: SousLigne, auteurs: Set["Auteur"] = {}) -> None:
+        self.sousLignes = {sousLigne}
+        self.auteurs = auteurs
+        self.coordonnées: Tuple[int] = (
+            sousLigne.coordonnées[0],  # ligne début
+            sousLigne.coordonnées[1],  # colonne début
+            sousLigne.coordonnées[0],  # ligne fin
+            sousLigne.coordonnées[2],  # colonne fin
+        )
+
+    def ajoute(self, sousLigne: "SousLigne") -> None:
+        """
+        Ajoute une sous-ligne
+        """
+        self.sousLignes.add(sousLigne)
+        self.coordonnées = (
+            min(self.coordonnées[0], sousLigne.coordonnées[0]),
+            min(self.coordonnées[1], sousLigne.coordonnées[1]),
+            max(self.coordonnées[2], sousLigne.coordonnées[0]),
+            max(self.coordonnées[3], sousLigne.coordonnées[2]),
+        )
 
 
 class Auteur:
@@ -68,97 +136,73 @@ class Auteur:
         # La séquence de lignes à explorer
         bloc = page[champ_auteurs.ligne_début : champ_auteurs.ligne_fin]
 
+        # Liste des sous-blocs composant la section
+        sousBlocs: List[SousBloc] = []
+
         # Les lignes et colonnes de début et de fin (exclue) de chaque auteur
         coordonnées: Dict[Auteur, List[int, int, int, int]] = {}
 
         """
-        Vérification de la fiabilité des métadonnées :
-        on devrait trouver au moins l’un des noms donnés
-        sur la première ligne du bloc.
+        Recherche des lignes d’adresses électroniques,
+        car il est facile de reconnaître plusieurs courriels à la suite
+        pour séparer les blocs.
+        """
+        les_blocs_sont_délimités_par_les_courriels = False
+        for l, ligne in enumerate(bloc):
+            courriels_trouvés = [
+                SousLigne(
+                    typeD=typeDonnée.courriel,
+                    coordonnées=(l, ct.span()[0], ct.span()[1]),
+                )
+                for ct in format_courriel.finditer(ligne)
+            ]
+            if not sousBlocs and len(courriels_trouvés) >= 2:
+                les_blocs_sont_délimités_par_les_courriels = True
+                for ct in courriels_trouvés:
+                    sousBlocs.append(SousBloc(ct))
+
+        """
+        Retour au sommet de la section, où l’on recherche
+        les noms des auteurs.
         """
         méta_fiable = False
         if métaauteurs:
             métaliste: List[str] = [auteur.strip() for auteur in métaauteurs.split(";")]
-            if any(
-                (
-                    recherche_sans_accents(auteur, page[début_bloc])
-                    for auteur in métaliste
-                )
-            ):
-                méta_fiable = True
-                champ_auteurs.contenu = [Auteur(nom=n) for n in métaliste]
-
-        # Recherche des courriels et des emplacements des auteurs
-        if méta_fiable:
-            courriels: List[str] = []
-            coord_courriels: List[Tuple[int, int, int, int]] = []
-            for l, ligne in enumerate(bloc):
-                courriels_trouvés = format_courriel.finditer(ligne)
-                for ct in courriels_trouvés:
-                    courriels.append(ligne[ct.span()[0] : ct.span()[1]])
-                    coord_courriels.append((l, ct.span()[0], l + 1, ct.span()[1]))
-                for auteur in champ_auteurs.contenu:
-                    if not coordonnées.get(auteur):
-                        nom_trouvé = recherche_sans_accents(auteur.nom, ligne)
-                        if nom_trouvé:  # Si l’on a trouvé le nom
-                            coordonnées[auteur] = [
-                                l,
-                                nom_trouvé.span()[0],
-                                l + 1,
-                                nom_trouvé.span()[1],
-                            ]
-                            auteur.nom = nom_trouvé[0]
+            auteurs_trouvés: List[SousLigne] = []
+            for auteur in métaliste:
+                auteur_trouvé = recherche_sans_accents(auteur, bloc[0])
+                if auteur_trouvé:
+                    auteurs_trouvés.append(
+                        SousLigne(
+                            typeDonnée.nom,
+                            (0, auteur_trouvé.span()[0], auteur_trouvé.span()[1]),
+                        )
+                    )
+            if auteurs_trouvés:
+                méta_fiable: bool = True
+        if not méta_fiable:
+            auteurs_trouvés = [
+                SousLigne(typeDonnée.nom, (0, at.span()[0], at.span()[1]))
+                for at in format_nom.finditer(bloc[0])
+            ]
+        for at in auteurs_trouvés:
+            print(at.contenu(bloc))
+            champ_auteurs.contenu.append(Auteur(at.contenu(bloc)))
+            at_ajouté = False
+            if les_blocs_sont_délimités_par_les_courriels:
+                for sb in sousBlocs:
+                    if at.est_face_à(sb):
+                        sb.ajoute(at)
+                        at_ajouté = True
+            if not at_ajouté:
+                sousBlocs.append(SousBloc(at, champ_auteurs.contenu[-1]))
 
             # Attribution des adresses aux auteurs
-            for courriel, coord_courriel in zip(courriels, coord_courriels):
-                for auteur in champ_auteurs.contenu:
-                    """
-                    Pour attribuer l’adresse à un auteur, il faut
-                    que les deux se trouvent au moins sur une colonne commune.
-                    """
-                    if (
-                        not auteur.courriel
-                        and coord_courriel[1] < coordonnées[auteur][3]
-                        and coord_courriel[3] > coordonnées[auteur][1]
-                    ):
-                        auteur.courriel = courriel
-                        coordonnées[auteur][2] = coord_courriel[2]  # ligne fin
-                        coordonnées[auteur][1] = min(  # colonne début
-                            coordonnées[auteur][1], coord_courriel[1]
-                        )
-                        coordonnées[auteur][3] = max(  # colonne fin
-                            coordonnées[auteur][3], coord_courriel[3]
-                        )
-                        break
 
             # Recherche des coordonnées d’affiliation de chaque auteur
-            for auteur in champ_auteurs.contenu:
-                bloc_affiliation: List[str] = []
-                for ligne in bloc[
-                    coordonnées[auteur][0] + 1 : coordonnées[auteur][2] - 1
-                ]:
-                    bloc_affiliation.append(
-                        ligne[coordonnées[auteur][1] : coordonnées[auteur][3]]
-                    )
-                auteur.affiliation = "\n".join(bloc_affiliation)
 
-        else:  # = if not méta_fiable:
-            liste_auteurs: List[Auteur] = []  # Liste des auteurs
-
-            fin_bloc = i + 1
-            if not hasattr(trans[0], "début_corps"):
-                liste_auteurs.append(" ".join(page[i].split()))
-            else:
-
-                while i < page.début_corps:
-                    if not page[i]:
-                        i += 1
-                        continue
-                    liste_auteurs.append(Auteur(nom=" ".join(page[i].split())))
-                    i += 1
-                    fin_bloc = i
-
-            champ_auteurs.ligne_fin = fin_bloc
+        for auteur in champ_auteurs.contenu:
+            auteur.nom = auteur.nom.rstrip()
 
         return champ_auteurs
 

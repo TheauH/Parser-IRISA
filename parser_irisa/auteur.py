@@ -31,7 +31,7 @@ class Auteur:
             + "</auteur>"
             + (
                 self.affiliation
-                and "<affiliation>" + self.affiliation + "</affiliation>"
+                and "\n<affiliation>\n" + self.affiliation + "\n</affiliation>"
             )
         )
 
@@ -79,7 +79,12 @@ class Auteur:
         méta_fiable = False
         if métaauteurs:
             métaliste: List[str] = [auteur.strip() for auteur in métaauteurs.split(";")]
-            if any([auteur in page[début_bloc] for auteur in métaliste]):
+            if any(
+                (
+                    recherche_sans_accents(auteur, page[début_bloc])
+                    for auteur in métaliste
+                )
+            ):
                 méta_fiable = True
                 champ_auteurs.contenu = [Auteur(nom=n) for n in métaliste]
 
@@ -91,7 +96,7 @@ class Auteur:
                 courriels_trouvés = format_courriel.finditer(ligne)
                 for ct in courriels_trouvés:
                     courriels.append(ligne[ct.span()[0] : ct.span()[1]])
-                    coord_courriels.append((l, ct.span()[0], l, ct.span()[1]))
+                    coord_courriels.append((l, ct.span()[0], l + 1, ct.span()[1]))
                 for auteur in champ_auteurs.contenu:
                     if not coordonnées.get(auteur):
                         nom_trouvé = recherche_sans_accents(auteur.nom, ligne)
@@ -99,7 +104,7 @@ class Auteur:
                             coordonnées[auteur] = [
                                 l,
                                 nom_trouvé.span()[0],
-                                l,
+                                l + 1,
                                 nom_trouvé.span()[1],
                             ]
                             auteur.nom = nom_trouvé[0]
@@ -111,15 +116,31 @@ class Auteur:
                     Pour attribuer l’adresse à un auteur, il faut
                     que les deux se trouvent au moins sur une colonne commune.
                     """
-                    print(coordonnées[auteur], coord_courriel)
                     if (
                         not auteur.courriel
                         and coord_courriel[1] < coordonnées[auteur][3]
                         and coord_courriel[3] > coordonnées[auteur][1]
                     ):
                         auteur.courriel = courriel
-                        coordonnées[auteur][2] = coord_courriel[2]
+                        coordonnées[auteur][2] = coord_courriel[2]  # ligne fin
+                        coordonnées[auteur][1] = min(  # colonne début
+                            coordonnées[auteur][1], coord_courriel[1]
+                        )
+                        coordonnées[auteur][3] = max(  # colonne fin
+                            coordonnées[auteur][3], coord_courriel[3]
+                        )
                         break
+
+            # Recherche des coordonnées d’affiliation de chaque auteur
+            for auteur in champ_auteurs.contenu:
+                bloc_affiliation: List[str] = []
+                for ligne in bloc[
+                    coordonnées[auteur][0] + 1 : coordonnées[auteur][2] - 1
+                ]:
+                    bloc_affiliation.append(
+                        ligne[coordonnées[auteur][1] : coordonnées[auteur][3]]
+                    )
+                auteur.affiliation = "\n".join(bloc_affiliation)
 
         else:  # = if not méta_fiable:
             liste_auteurs: List[Auteur] = []  # Liste des auteurs

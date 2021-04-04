@@ -54,9 +54,9 @@ class SousBloc:
     d’auteurs partageant les mêmes coordonnées
     """
 
-    def __init__(self, sousLigne: SousLigne, auteurs: Set["Auteur"] = {}) -> None:
-        self.sousLignes = {sousLigne}
-        self.auteurs = auteurs
+    def __init__(self, sousLigne: SousLigne, auteurs: Set["Auteur"] = set()) -> None:
+        self.sousLignes = [sousLigne]
+        self.auteurs = auteurs or set()
         self.coordonnées: Tuple[int] = (
             sousLigne.coordonnées[0],  # ligne début
             sousLigne.coordonnées[1],  # colonne début
@@ -68,7 +68,7 @@ class SousBloc:
         """
         Ajoute une sous-ligne
         """
-        self.sousLignes.add(sousLigne)
+        self.sousLignes.append(sousLigne)
         self.coordonnées = (
             min(self.coordonnées[0], sousLigne.coordonnées[0]),
             min(self.coordonnées[1], sousLigne.coordonnées[1]),
@@ -86,6 +86,7 @@ class Auteur:
         self.nom = nom
         self.courriel = courriel
         self.affiliation = affiliation
+        print("nouvel auteur avec le nom", self.nom)
 
     def __str__(self) -> str:
         # "Antoine Jamelot <jamelot.e1500523@etud.univ-ubs.fr>"
@@ -130,7 +131,10 @@ class Auteur:
         début_bloc = i
 
         champ_auteurs = Champ(
-            nom="auteurs", contenu=[], ligne_début=i, ligne_fin=Auteur.fin_bloc(page)
+            nom="auteurs",
+            contenu=[],
+            ligne_début=début_bloc,
+            ligne_fin=Auteur.fin_bloc(page),
         )
 
         # La séquence de lignes à explorer
@@ -138,9 +142,6 @@ class Auteur:
 
         # Liste des sous-blocs composant la section
         sousBlocs: List[SousBloc] = []
-
-        # Les lignes et colonnes de début et de fin (exclue) de chaque auteur
-        coordonnées: Dict[Auteur, List[int, int, int, int]] = {}
 
         """
         Recherche des lignes d’adresses électroniques,
@@ -158,7 +159,13 @@ class Auteur:
             ]
             if not sousBlocs and len(courriels_trouvés) >= 2:
                 les_blocs_sont_délimités_par_les_courriels = True
-                for ct in courriels_trouvés:
+            for ct in courriels_trouvés:  # Un sous-bloc par adresse
+                courriel_ajouté: bool = False
+                for sb in sousBlocs:
+                    if ct.est_face_à(sb):
+                        sb.sousLignes.append(ct)
+                        courriel_ajouté = True
+                if not courriel_ajouté:
                     sousBlocs.append(SousBloc(ct))
 
         """
@@ -187,20 +194,31 @@ class Auteur:
             ]
         for at in auteurs_trouvés:
             print(at.contenu(bloc))
-            champ_auteurs.contenu.append(Auteur(at.contenu(bloc)))
+            objAuteur = Auteur(at.contenu(bloc))
+            champ_auteurs.contenu.append(objAuteur)
             at_ajouté = False
-            if les_blocs_sont_délimités_par_les_courriels:
+            if sousBlocs:
                 for sb in sousBlocs:
                     if at.est_face_à(sb):
                         sb.ajoute(at)
                         at_ajouté = True
+                        sb.auteurs.add(objAuteur)
             if not at_ajouté:
-                sousBlocs.append(SousBloc(at, champ_auteurs.contenu[-1]))
+                sousBlocs.append(SousBloc(at, {objAuteur}))
 
-            # Attribution des adresses aux auteurs
+        # Parcours et classement des lignes et sous-lignes du bloc
+        for ligne in bloc:
+            pass
 
-            # Recherche des coordonnées d’affiliation de chaque auteur
+        # Attribution des courriels aux auteurs
+        for sousBloc in sousBlocs:
+            adresses = list(
+                filter(lambda sl: sl.type == typeDonnée.courriel, sousBloc.sousLignes)
+            )
+            for auteur, adresse in zip(sousBloc.auteurs, adresses):
+                auteur.courriel = adresse.contenu(bloc)
 
+        # Retrait d’un espace éventuel dû à l’expression régulière
         for auteur in champ_auteurs.contenu:
             auteur.nom = auteur.nom.rstrip()
 

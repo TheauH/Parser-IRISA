@@ -5,7 +5,6 @@ from pathlib import Path
 from os import scandir, mkdir, path
 from shutil import rmtree
 from .menu import choixSortiePDF, menu
-import codecs
 
 from .article import Article
 

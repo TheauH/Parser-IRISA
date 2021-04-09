@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from enum import Enum, auto
 from PyPDF2 import generic
-from typing import Dict, List, Set, Tuple, Union
+from typing import List, Set, Tuple, Union
 
 from .page import Première_page
 from .champ import Champ
 from .transcription import Transcription
-from .strop import format_nom, format_courriel, recherche_sans_accents
+from .strop import format_nom, format_sousLigne, format_courriel, recherche_sans_accents
 
 
 class typeDonnée(Enum):
@@ -44,6 +44,19 @@ class SousLigne:
         return (
             self.coordonnées[2] > sousBloc.coordonnées[1]
             and sousBloc.coordonnées[3] > self.coordonnées[1]
+        )
+
+    def est_dans(self, sousBloc: "SousBloc") -> bool:
+        """
+        Indique si la sous-ligne se trouve au moins en partie
+        dans les limites du sous-bloc donné
+        """
+        return (
+            self.coordonnées[2] > sousBloc.coordonnées[1]
+            and sousBloc.coordonnées[3] > self.coordonnées[1]
+            and sousBloc.coordonnées[0]
+            <= self.coordonnées[0]
+            <= sousBloc.coordonnées[2]
         )
 
 
@@ -143,22 +156,25 @@ class Auteur:
         # Liste des sous-blocs composant la section
         sousBlocs: List[SousBloc] = []
 
+        # Liste des emplacements des sous-lignes déjà classées
+        sousLignes_classées: Set[Tuple[int]] = set()
+
         """
         Recherche des lignes d’adresses électroniques,
         car il est facile de reconnaître plusieurs courriels à la suite
         pour séparer les blocs.
         """
-        les_blocs_sont_délimités_par_les_courriels = False
         for l, ligne in enumerate(bloc):
-            courriels_trouvés = [
-                SousLigne(
-                    typeD=typeDonnée.courriel,
-                    coordonnées=(l, ct.span()[0], ct.span()[1]),
+            courriels_trouvés: List[SousLigne] = []
+            for ct in format_courriel.finditer(ligne):
+                courriels_trouvés.append(
+                    SousLigne(
+                        typeD=typeDonnée.courriel,
+                        coordonnées=(l, ct.span()[0], ct.span()[1]),
+                    )
                 )
-                for ct in format_courriel.finditer(ligne)
-            ]
-            if not sousBlocs and len(courriels_trouvés) >= 2:
-                les_blocs_sont_délimités_par_les_courriels = True
+                sousLignes_classées.add((l, ct.span()[0]))
+
             for ct in courriels_trouvés:  # Un sous-bloc par adresse
                 courriel_ajouté: bool = False
                 for sb in sousBlocs:
@@ -185,13 +201,16 @@ class Auteur:
                             (0, auteur_trouvé.span()[0], auteur_trouvé.span()[1]),
                         )
                     )
+                    sousLignes_classées.add((0, auteur_trouvé.span()[0]))
             if auteurs_trouvés:
                 méta_fiable: bool = True
         if not méta_fiable:
-            auteurs_trouvés = [
-                SousLigne(typeDonnée.nom, (0, at.span()[0], at.span()[1]))
-                for at in format_nom.finditer(bloc[0])
-            ]
+            auteurs_trouvés: List[SousLigne] = []
+            for at in format_nom.finditer(bloc[0]):
+                auteurs_trouvés.append(
+                    SousLigne(typeDonnée.nom, (0, at.span()[0], at.span()[1]))
+                )
+                sousLignes_classées.add((0, at.span()[0]))
         for at in auteurs_trouvés:
             print(at.contenu(bloc))
             objAuteur = Auteur(at.contenu(bloc))
@@ -207,17 +226,22 @@ class Auteur:
                 sousBlocs.append(SousBloc(at, {objAuteur}))
 
         # Parcours et classement des lignes et sous-lignes du bloc
-        for sousBloc in sousBlocs:
-            # Ajout en vrac
-            for l, ligne in enumerate(
-                bloc[sousBloc.coordonnées[0] + 1 : sousBloc.coordonnées[2]]
-            ):
-                sousBloc.ajoute(
-                    SousLigne(
-                        typeDonnée.affiliation,
-                        (l + 1, sousBloc.coordonnées[1], sousBloc.coordonnées[3]),
-                    )
-                )
+        for l, ligne in enumerate(bloc):
+            for ct in format_sousLigne.finditer(ligne):
+                sousLignes_trouvées: List[SousLigne] = []
+                for sl in format_sousLigne.finditer(ligne):
+                    if not (l, sl.span()[0]) in sousLignes_classées:
+                        sousLignes_trouvées.append(
+                            SousLigne(
+                                typeD=typeDonnée.affiliation,
+                                coordonnées=(l, sl.span()[0], sl.span()[1]),
+                            )
+                        )
+
+            for sousLigne in sousLignes_trouvées:
+                for sousBloc in sousBlocs:
+                    if sousLigne.est_dans(sousBloc):
+                        sousBloc.ajoute(sousLigne)
 
         # Attribution des courriels aux auteurs qui n’en ont pas
         for sousBloc in sousBlocs:
@@ -230,7 +254,7 @@ class Auteur:
 
         # Attribution des lignes concernant l’affiliation à chaque auteur
         for sousBloc in sousBlocs:
-            affiliation = "  ".join(
+            affiliation = "\n".join(
                 [
                     sl.contenu(bloc)
                     for sl in filter(

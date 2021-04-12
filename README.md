@@ -1,32 +1,10 @@
-# Parser-IRISA
-
-Bienvenue sur Parseur-Irisa !
-
-Ce projet a pour but de produires des résumés d'articles scientifiques, au format texte ou xml.
-
-Equipe de dévelopement : Sofiane Ben Massaoud, Antoine Jamelot, Baptiste Colas, Théau Huteau
-Scrum master : Théau Huteau
-
-Langage utilisé ?
-Python
-
-Environnement : Linux GNU (seulement).
-
-Modules additionnels utilisé : pdftotext : https://pypi.org/project/pdftotext/  
-
-Commande pour lancer le projet : 'python3 -m parser_irisa "CHEMIN.../NOMDUDOSSIER/" -t|-x' en ligne de commande 
-ou   : 'python3 -m parser_irisa menu -t|-x' pour un menu.
--t : pour format txt 
--x : pour format xml 
-
-# Titre du projet
-_(juste en dessous des badges sympatiques à placer)_
+# PASFT
 
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
 
-Bienvenue sur Parseur-Irisa !
+Bienvenue sur PASFT!
 
-Ce projet a pour but de produires des résumés d'articles scientifiques, au format texte ou xml. L'outil peut-être utilisé en ligne de commande ou avec un menu graphique tkinter.
+Ce projet a pour but de produires des résumés d'articles scientifiques, au format texte ou xml. L'outil peut-être utilisé en ligne de commande ou avec un menu graphique tkinter. Cet outil a été créer pour le laboratoires [IRISA](http://www.irisa.fr)
 
 ## Pour commencer
 
@@ -53,7 +31,8 @@ Ensuite vous pouvez montrer ce que vous obtenez au final...
 
 ## Démarrage
 
-Dites comment faire pour lancer votre projet
+Pour lancer l'outil, 2 solutions : 
+
 ### En ligne de commande 
 
 'python3 -m parser_irisa "CHEMIN.../NOMDUDOSSIER/" -t|-x'
@@ -64,17 +43,14 @@ Dites comment faire pour lancer votre projet
 
 ## Fabriqué avec
 
-Entrez les programmes/logiciels/ressources que vous avez utilisé pour développer votre projet
-
-_exemples :_
 * [Visual Studio Code](https://code.visualstudio.com)
-* 
+* [Python](https://www.python.org)
 
 
 
 ## Versions
 
-_exemple :_
+
 **Dernière version stable :**
 **Dernière version :** 
 Liste des versions : [Cliquer pour afficher](https://github.com/your/project-name/tags)

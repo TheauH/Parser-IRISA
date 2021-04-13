@@ -16,7 +16,7 @@ Ce qu'il est requis pour commencer avec votre projet...
 
 - textract https://pypi.org/project/textract/
 - PYPDF2 https://pypi.org/project/PyPDF2/
-- pdftotext 
+- pdftotext https://pypi.org/project/pdftotext/
 
 ### Installation
 
@@ -45,8 +45,6 @@ Pour lancer l'outil, 2 solutions :
 
 * [Visual Studio Code](https://code.visualstudio.com)
 * [Python](https://www.python.org)
-
-
 
 ## Versions
 

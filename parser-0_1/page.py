@@ -123,7 +123,3 @@ class Page(List[str]):
             nouvelle_page.append(self[x])
 
         return nouvelle_page
-
-
-maPage = Page('Bonjour,\nM. Lapin.')
-print(maPage)

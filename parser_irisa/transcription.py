@@ -2,30 +2,16 @@ import platform
 from os import PathLike
 from parser_irisa.page import Page, Première_page
 from typing import Union, List
+from os import system, remove
 
 
 class Transcription(List[Page]):
     def __init__(self, chemin_source: Union[str, bytes, PathLike]):
-        try:  # On essaie d’abord avec le module `pdftotext`
-            if platform.system() == "Windows":  # Différent sur Windows
-                raise Exception
 
-            from textract import process
-
-            pages_transcrites = [
-                page.decode()
-                for page in process(
-                    chemin_source, method="pdftotext", layout=True
-                ).split(b"\f")
-            ]
-
-        except Exception:  # à défaut, on utilise la commande système
-            from os import system, remove
-
-            system('pdftotext -layout -eol unix "' + str(chemin_source) + '" tmp.txt')
-            with open("tmp.txt", "r", encoding="utf-8") as résultat:
-                pages_transcrites = résultat.read().split("\f")  # Résultat découpé
-            remove("tmp.txt")
+        system('pdftotext -layout -eol unix "' + str(chemin_source) + '" tmp.txt')
+        with open("tmp.txt", "r", encoding="utf-8") as résultat:
+            pages_transcrites = résultat.read().split("\f")  # Résultat découpé
+        remove("tmp.txt")
 
         self.append(Première_page(pages_transcrites[0]))
         for i in range(1, len(pages_transcrites)):

@@ -38,7 +38,6 @@ def find_conclusion(transcri: Transcription):
             ):
                 page = np
                 ligne = nl
-                print("ok")
 
             if (
                 (string4 in transcri[np][nl])

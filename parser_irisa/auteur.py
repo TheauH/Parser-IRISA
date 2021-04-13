@@ -99,7 +99,6 @@ class Auteur:
         self.nom = nom
         self.courriel = courriel
         self.affiliation = affiliation
-        print("nouvel auteur avec le nom", self.nom)
 
     def __str__(self) -> str:
         # "Antoine Jamelot <jamelot.e1500523@etud.univ-ubs.fr>"
@@ -212,7 +211,6 @@ class Auteur:
                 )
                 sousLignes_classées.add((0, at.span()[0]))
         for at in auteurs_trouvés:
-            print(at.contenu(bloc))
             objAuteur = Auteur(at.contenu(bloc))
             champ_auteurs.contenu.append(objAuteur)
             at_ajouté = False

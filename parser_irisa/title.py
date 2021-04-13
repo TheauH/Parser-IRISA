@@ -27,11 +27,9 @@ def extract_information(
         title = re.sub(p, r"\1 \2", concatenation)
         # Le titre fait une ou deux lignes.
         titre = title
-        print("pas bath")
 
     else:
         titre = str(métatitre)
-        print("bath")
 
     ligne_fin = 2 if page[1].strip() in titre else 1
 

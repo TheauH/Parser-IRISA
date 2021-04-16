@@ -16,36 +16,36 @@ def pars_Abstract(texte: Transcription):
     """fonction de parsage qui résume la partie Abstract :"""
     """TODO : a optimiser par la suite"""
     lines: Première_page = texte[0]  # On ne s’intéresse qu’à la première page
-    # string = "Abstract"
-    # buf = ""
-    # for i in range(len(lines)):
-    #     if string in lines[i]:
-    #         buf = "\n".join(lines[i : i + 3]) + "..."
-    #         break
-    string = "Conclusion"
-    string2 = "Result"
-    string3 = "ONCLUSION"
-    string4 = "Discussion"
+    ab = "Abstract"
+    string = "I   "
+    int1 =  r"([1-9])"
+    int2 = "Introduction"
+    int3 = "1. Introduction"
+    page1 = 0
     page = 0
+    ligne = 0
+    ligne1 = 0
 
     for np in range(len(texte)):
         for nl in range(len(texte[np])):
             if (
-                (string in texte[np][nl])
-                or (string2 in texte[np][nl])
-                or (string3 in texte[np][nl])
-                or (string4 in texte[np][nl])
+                (ab in texte[np][nl])
             ):
                 page = np
-    # si le début n'est pas trouvé, rendre vide
-    if page == 0:
-        return Champ(nom="abstract", contenu="")
-
+                ligne = nl
+            if (
+                (int1 in texte[np][nl])
+                or (int2 in texte[np][nl])
+            ):
+                page1 = np       
+                ligne1 = nl
+            if page and page1:
+                break   
+   
     return Champ(
         nom="abstract",
-        contenu="\n".join(lines[lines.début_corps : lines.début_corps + 12]),
-        ligne_début=lines.début_corps,
-        ligne_fin=lines.début_corps + 12,
+       contenu="\n".join(texte[page][ligne : ligne1])
+
     )
 
 

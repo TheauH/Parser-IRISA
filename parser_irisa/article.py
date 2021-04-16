@@ -12,6 +12,7 @@ from .references import find_references
 from .conclusion import find_conclusion
 from .discussion import find_discussion
 from .introduction import find_introduction
+from .corps import find_corps
 
 
 class Article:
@@ -59,3 +60,10 @@ class Article:
         self.conclusion = find_conclusion(self.texte)
         self.discussion = find_discussion(self.texte)
         self.introduction = find_introduction(self.texte)
+        if self.conclusion:
+            champ_fin=self.conclusion
+        elif self.discussion:
+            champ_fin=self.discussion
+        else:
+            champ_fin=self.references
+        self.corps = find_corps(self.texte, self.introduction, champ_fin)

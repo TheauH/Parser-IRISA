@@ -29,6 +29,9 @@ def find_introduction(transcri: Transcription):
         if page!=-1:
             break
     
+    if page==-1: #Cas où introduction n'est pas trouvé
+        return None
+
     if "1. " in transcri[page][ligne]:
         stringp2_1= "2. "
     elif " I. " in transcri[page][ligne]:

@@ -60,10 +60,14 @@ class Article:
         self.conclusion = find_conclusion(self.texte)
         self.discussion = find_discussion(self.texte)
         self.introduction = find_introduction(self.texte)
+        if self.introduction:
+            champ_debut=self.introduction
+        else:
+            champ_debut=self.résumé
         if self.conclusion:
             champ_fin=self.conclusion
         elif self.discussion:
             champ_fin=self.discussion
         else:
             champ_fin=self.references
-        self.corps = find_corps(self.texte, self.introduction, champ_fin)
+        self.corps = find_corps(self.texte, champ_debut, champ_fin)

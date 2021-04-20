@@ -1,0 +1,93 @@
+<preamble>
+On_the_Morality_of_Artificial_Intelligence.pdf
+</preamble>
+<titre>
+On the Morality of Artificial Intelligence Alexandra Luccioni and Yoshua Bengio∗
+</titre>
+<auteurs>
+<auteur>Universit</auteur>
+<auteur>Montr</auteur>
+<auteur>Mila</auteur>
+</auteurs>
+<abstract>
+
+
+
+
+
+
+
+
+
+
+
+
+</abstract>
+<conclusion>
+4    Conclusion
+Technology in general, and ML more specifically, carries a great potential for change and disruption. While
+neither of these is guaranteed to make the world a better place, this potential can most definitely be used
+to have a positive impact on the world. In the present article, we have illustrated some inspiring projects
+that aim to make the world a better place and by using the powerful techniques and approaches that ML has
+brought forward. We believe that as ML researchers and practitioners, we have the responsibility to leverage
+our (super)powers to contribute to these efforts. This can be done by connecting with established actors from
+industry and policy or experts from other relevant disciplines, by learning from their past experiences, and
+by working together to propose innovative solutions to major problems, deployed in places where they will
+have a positive impact.
+     We live in a world with many global and local challenges and issues that are in constant evolution, and
+it is easy to be overwhelmed by this flux of information and focus on a small sandbox in which we feel
+safe and in control, in order to develop and study the aspects of ML that interest us most. But it is naive
+
+
+to believe that our sandbox is an isolated isle that is not connected to the rest of the world – since even in
+the case of theoretical work, communication and cross-pollination are unavoidable – and each of us is also
+a citizen who is concerned collective debates, while many of us could worry about the world in which our
+descendants will live. We believe that there are thought processes that should take place in the head of every
+ML practitioner regarding the nature of the work they are doing and the potential pitfalls and impacts of
+this work in the world around them, some of which we have listed in the first part of the current paper. And
+while we do not claim to have all the answers to all of these tough questions, we hope that we can start a
+conversation that will accompany ML research and practice throughout its infancy towards its tumultuous
+teenage years in the coming decades, and eventually towards mature adulthood beyond that.
+
+</conclusion>
+<biblio>
+Robert G Abbott. Automated expert modeling for automated student evaluation. In International Confer-
+  ence on Intelligent Tutoring Systems, pages 1–10. Springer, 2006.
+M Allen, P Antwi-Agyei, F Aragon-Durand, M Babiker, P Bertoldi, M Bind, S Brown, M Buckeridge,
+ I Camilloni, A Cartwright, et al. Technical summary: Global warming of 1.5c. an ipcc special report
+ on the impacts of global warming of 1.5c above pre-industrial levels and related global greenhouse gas
+ emission pathways, in the context of strengthening the global response to the threat of climate change,
+ sustainable development, and efforts to eradicate poverty, 2019.
+Julia Angwin, Jeff Larson, Surya Mattu, and Lauren Kirchner. Machine bias, propub-
+  lica. https://www.propublica.org/article/machine-bias-risk-assessments-
+  in-criminal-sentencing, 2016. Accessed: 2019-11-25.
+Filippo Arcadu, Fethallah Benmansour, Andreas Maunz, Jeff Willis, Zdenka Haskova, and Marco Prunotto.
+   Deep learning algorithm predicts diabetic retinopathy progression in individual patients. NPJ digital
+   medicine, 2(1):1–9, 2019.
+UN General Assembly. Universal declaration of human rights. UN General Assembly, 302(2), 1948.
+Tolga Bolukbasi, Kai-Wei Chang, James Y Zou, Venkatesh Saligrama, and Adam T Kalai. Man is to
+  computer programmer as woman is to homemaker? debiasing word embeddings. In Advances in neural
+  information processing systems, pages 4349–4357, 2016.
+Joy Buolamwini and Timnit Gebru. Gender shades: Intersectional accuracy disparities in commercial gen-
+  der classification. In Conference on fairness, accountability and transparency, pages 77–91, 2018.
+Simone Carr-Cornish, Peta Ashworth, John Gardner, and Stephen J Fraser. Exploring the orientations
+  which characterise the likely public acceptance of low emission energy technologies. Climatic change,
+  107(3-4):549–565, 2011.
+Devendra Singh Chaplot, Eunhee Rhim, and Jihie Kim. Predicting student attrition in moocs using senti-
+  ment analysis and neural networks. In AIED Workshops, volume 53, pages 54–57, 2015.
+Cristina Conati, Kaska Porayska-Pomsta, and Manolis Mavrikis. Ai in education needs interpretable ma-
+  chine learning: Lessons from open learner modelling. arXiv preprint arXiv:1807.00154, 2018.
+Jeffrey Dastin. Amazon scraps secret ai recruiting tool that showed bias against women, reuters business
+   news.       https://www.reuters.com/article/us-amazon-com-jobs-automation-
+   insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-
+   against-women-idUSKCN1MK08G, 2018. Accessed: 2019-11-25.
+Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. Imagenet: A large-scale hierarchical
+   image database. In 2009 IEEE conference on computer vision and pattern recognition, pages 248–255.
+   Ieee, 2009.
+Clement Duhart, Gershon Dublon, Brian Mayton, and Joseph Paradiso. Deep learning locally trained
+  wildlife sensing in real acoustic wetland environment. In International Symposium on Signal Processing
+  and Intelligent Recognition Systems, pages 3–14. Springer, 2018.
+
+
+                                                     10
+</biblio>

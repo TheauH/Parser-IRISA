@@ -29,6 +29,14 @@ Pisa, Italy
      ability of a model to detect truly related word
      pairs, as well as to perform in-depth analy-
      ses of the types of semantic relations that a
+     model favors. We discuss the motivations for
+     BLESS, describe its construction and struc-
+
+     ture, and present examples of its usage in the
+     evaluation of distributional semantic models.
+
+
+
 </abstract>
 <introduction>
 1   Introduction
@@ -1630,7 +1638,8 @@ Ken McRae, George Cree, Mark Seidenberg, and Chris
 
 
 </conclusion>
-<biblio>
+<Reference : >
+References
 
 Herv Abdi and Lynne Williams. 2010. Newman-Keuls
 
@@ -1730,4 +1739,41 @@ Ken McRae, George Cree, Mark Seidenberg, and Chris
    nal of Artificial Intelligence Research, 37:141–188.
 
  Peter Turney. 2006. Similarity of semantic relations.
-</biblio>
+   Computational Linguistics, 32(3):379–416.
+ Morton E. Winston, Roger Chaffin, and Douglas Her-
+   rmann. 1987. A taxonomy of part-whole relations.
+   Cognitive Science, 11:417–444.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</Reference : >

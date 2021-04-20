@@ -20,18 +20,24 @@ Meylan, France
 </affiliation>
 </auteurs>
 <abstract>
-
-                  Véronique Moriceau
-              Univ. Paris-Sud, LIMSI-CNRS
-                      Orsay, France
-                moriceau@limsi.fr
-
                        Abstract
 
      We present an approach for detecting salient
      (important) dates in texts in order to auto-
      matically build event timelines from a search
      query (e.g. the name of an event or person,
+     etc.). This work was carried out on a corpus
+     of newswire texts in English provided by the
+     Agence France Presse (AFP). In order to ex-
+     tract salient dates that warrant inclusion in an
+
+     event timeline, we first recognize and normal-
+     ize temporal expressions in texts and then use
+     a machine-learning approach to extract salient
+     dates that relate to a particular topic. We fo-
+     cused only on extracting the dates and not the
+     events to which they are related.
+
 </abstract>
 <introduction>
 1   Introduction
@@ -952,7 +958,8 @@ tan unrest timeline”, “Lebanon’s new government: a timeline”,
  objective as possible.
 
 </discussion>
-<biblio>
+<Reference : >
+References
 
 Salah Aı̈t-Mokhtar, Jean-Pierre Chanod, and Claude
   Roux. 2002. Robustness beyond Shallowness: Incre-
@@ -1052,4 +1059,64 @@ Sanda Harabagiu and Cosmin Adrian Bejan. 2005.
    Annual International ACM SIGIR Conference on Re-
 
    search and Development in Information Retrieval, Sal-
-</biblio>
+
+   vador, Brazil. ACM Press, New York City, NY, USA.
+ Thomas Mestl, Olga Cerrato, Jon Ølnes, Per Myrseth,
+   and Inger-Mette Gustavsen. 2009. Time Challenges -
+   Challenging Times for Future Information Search. D-
+   Lib Magazine, 15(5/6).
+ James Pustejovsky, Kiyong Lee, Harry Bunt, and Lau-
+   rent Romary. 2010. Iso-timeml: An international
+   standard for semantic annotation. In Nicoletta Calzo-
+   lari (Conference Chair), Khalid Choukri, Bente Mae-
+   gaard, Joseph Mariani, Jan Odijk, Stelios Piperidis,
+   Mike Rosner, and Daniel Tapias, editors, Proceed-
+   ings of the Seventh International Conference on Lan-
+   guage Resources and Evaluation (LREC’10), Valletta,
+   Malta, may. European Language Resources Associa-
+   tion (ELRA).
+ Claude Roux. 2004. Annoter les documents XML avec
+   un outil d’analyse syntaxique. In 11ème Confrence
+   annuelle de Traitement Automatique des Langues Na-Estela Saquete, Jose L. Vicedo, Patricio Martı́nez-Barco,
+   Rafael Muñoz, and Hector Llorens. 2009. Enhancing
+   QA Systems with Complex Temporal Question Pro-
+   cessing Capabilities. Journal of Articifial Intelligence
+   Research, 35:775–811.
+David A. Smith. 2002. Detecting events with date and
+   place information in unstructured text. In JCDL ’02:
+   Proceedings of the 2nd ACM/IEEE-CS joint confer-
+   ence on Digital libraries, pages 191–196, New York,
+   NY, USA. ACM.
+Russell Swan and James Allen. 2000. Automatic genera-
+   tion of overview timelines. In Proceedings of the 23rd
+   annual international ACM SIGIR conference on Re-
+   search and development in information retrieval, SI-
+   GIR ’00, pages 49–56, New York, NY, USA. ACM.
+Marc Verhagen, Robert Gaizauskas, Franck Schilder,
+   Mark Hepple, Graham Katz, and James Pustejovsky.
+   2007. SemEval-2007 - 15: TempEval Temporal Rela-
+   tion Identification. In Proceedings of SemEval work-
+   shop at ACL 2007, Prague, Czech Republic, June. As-
+   sociation for Computational Linguistics, Morristown,
+   NJ, USA.
+Rui Yan, Liang Kong, Congrui Huang, Xiaojun Wan, Xi-
+   aoming Li, and Yan Zhang. 2011a. Timeline gen-
+   eration through evolutionary trans-temporal summa-
+   rization. In Proceedings of the 2011 Conference on
+   Empirical Methods in Natural Language Processing,
+   EMNLP 2011, 27-31 July 2011, Edinburgh, UK, pages
+   433–443.
+Rui Yan, Xiaojun Wan, Jahna Otterbacher, Liang Kong,
+   Xiaoming Li, and Yan Zhang. 2011b. Evolution-
+   ary timeline summarization: a balanced optimization
+   framework via iterative substitution. In Proceeding
+   of the 34th International ACM SIGIR Conference on
+   Research and Development in Information Retrieval,
+   SIGIR 2011, Beijing, China, July 25-29, 2011, pages
+   745–754.
+Y. Yang, T. Pierce, and J. G. Carbonell. 1998. A study on
+   retrospective and on-line event detection. In Proceed-
+   ings of the 21st Annual International ACM SIGIR Con-
+   ference on Research and Development in Information
+   Retrieval, Melbourne, Australia, August. ACM Press,
+</Reference : >

@@ -8,6 +8,9 @@ This article appeared in a journal published by Elsevier. The attached copy is f
 
 </auteurs>
 <abstract>
+This article appeared in a journal published by Elsevier. The attached
+copy is furnished to the author for internal non-commercial research
+and education use, including for instruction at the authors institution
                     and sharing with colleagues.
    Other uses, including reproduction and distribution, or selling or
  licensing copies, or posting to personal, institutional or third party
@@ -782,7 +785,8 @@ order to improve results. We also plan to use a categorization of jobs to take i
 oper’’ and ‘‘programmer’’. Finally we propose to measure the CV quality by building an evaluation on an Internet portal. Our
 aim with this evaluation is to present a job-seeker with a list of the most suitable job ads according to his proﬁle.
 </conclusion>
-<biblio>
+<Reference : >
+References
 
 Audras, I., & Ganascia, J.-G. (2006). Apprentissage du frantais langue TtrangFre et TALN: Analyses de corpus Tcrits a l’aide d’outils d’extraction automatique
      du langage. In J.-M. Viprey (Ed.), 8Fmes JournTes d’Analyse de DonnTes Textuelles (pp. 67–78). Univ. de Franche ComtT, Besanton 2006.
@@ -809,6 +813,49 @@ Fan, R.-E., Chen, P.-H., & Lin, C.-J. (2005). Working set selection using the se
      1889–1918.
 Fawcett, T. (2006). An introduction to ROC analysis. Pattern Recognition Letters, 27, 861–874.
 Ferri, C., Flach, P., & Hernandez-Orallo, J. (2002). Learning decision trees using the area under the ROC curve. In Proceedings of ICML 2002: Sydney, NSW,
-     Australia (pp. 139–146).
-Gorenak, I., & Mlaker KaF, S. S. O. (2010). Cross-cultural comparison of online job advertisements. JLST, Journal of Logistics and Sustainable Transport, 2, 37–52.
-</biblio>
+     Australia (pp. 139–146).                                                       Author's personal copy
+
+                                        R. Kessler et al. / Information Processing and Management 48 (2012) 1124–1135                                       1135
+
+
+Joachims, T. (1997). A probabilistic analysis of the rocchio algorithm with tﬁdf for text categorization. In ICML 1997, Nashville, Tennessee, USA (pp. 143–151).
+    San Francisco, CA, USA.
+Kessler, R., Béchet, N., Roche, M., El-Bèze, M., & Torres-Moreno, J. M. (2008a). Automatic proﬁling system for ranking candidates answers in human
+    resources. In OTM ’08 in Monterrey, Mexico (pp. 625–634).
+Kessler, R., Béchet, N., Roche, M., El-Bèze, M., & Torres-Moreno, J. M. (2009). Job offer management: How improve the ranking of candidates. Prague: ISMIS.
+    431–441.
+Kessler, R., Torres-Moreno, J. M., & El-Bèze, M. (2007). E-Gen: Automatic job offer processing system for human ressources. In MICAI, Aguscalientes, Mexique
+    (pp. 985–995).
+Kessler, R., Torres-Moreno, J. M., & El-Bèze, M. (2008b). E-Gen: Proﬁlage automatique de candidatures. In TALN 2008, Avignon, France (pp. 370–379).
+Loth, R., Battistelli, D., Chaumartin, F., De Mazancourt, H., Minel, J. L., & Vinckx, A. (2010). Linguistic information extraction for job ads (SIRE project). In
+    RIAO’2010 9th conference 28–30 April, Paris, France (pp. 300–303).
+Marchal, E., Mellet, K., & Rieucau, G. (2007). Job board toolkits: Internet matchmaking and changes in job advertisements. Human Relations, 60(7),
+    1091–1113.
+Mocho, M., Paslaru, E., & Simperl, B. (2006). Practical guidelines for building semantic e-recruitment applications. In I-Know’06 special track on advanced
+    semantic technologies, Graz, Austria, September 2006.
+Morin, E., LeclFre, M., & Trichet, F. (2004). The semantic web in e-recruitment. In The ﬁrst European symposium of semantic Web (ESWS’2004) (pp. 67–78).
+Quilan, J. (1993). C4.5: Programs for machine learning. San Mateo, CA, San Francisco, CA, USA: Morgan Kaufmann.
+Rafter, R., Bradley, K., & Smyt, B. (2000). Automated collaborative ﬁltering applications for online recruitment services. In International conference on adaptive
+    hypermedia and adaptive web-based systems, Trento, Italy (pp. 363–368).
+Robertson, S., Walker, S., Jones, S., Hancock-Beaulieu, M. M., & Gatford, M. (1994). Okapi at trec-3. NIST Special Publication 500-225: TREC-3, pp. 109–126.
+Rocchio, J. (1971). Relevance feedback in information retrieval. In The smart system: Experiments in automatic document processing (pp. 313–323). Prentice-
+    Hall.
+Roche, M., & Kodratoff, Y., 2006. Pruning terminology extracted from a specialized corpus for CV ontology acquisition. In OTM’06, Montpellier, France (pp.
+    1107–1116).
+Roche, M., & Prince, V. (2008). Evaluation et dTtermination de la pertinence pour des syntagmes candidats a la collocation. In JADT (pp. 1009–1020).
+Salton, G., & Buckley, C. (1990). Improving retrieval performance by relevance feedback. Journal of the American Society for Information Science, 288–297.
+Salton, G., & Mcgill, M. J. (1986). Introduction to modern information retrieval. New York, NY, USA: McGraw-Hill Inc.
+Smyth, B., & Bradley, K. (2003). Personalized information ordering: A case-study in online recruitment. Journal of Knowledge-Based Systems, 269–275.
+Sparck Jones, K. (1970). Some thoughts on classiﬁcation for retrieval. Journal of Documentation, 89–101.
+Sutton, R. S., & Barto, A. G. (1998). Reinforcement learning: An introduction (adaptive computation and machine learning). The MIT Press.
+Tolksdorf, R., Mocho, M., Heese, R., Oldakowski, R., & Christian, B. (2006). Semantic-Web-Technologien im Arbeitsvermittlungsprozess.
+    Wirtschaftsinformatik, 17–26.
+Torres-Moreno, J. M., Velázquez-Morales, P., & Meunier, M. (2001). CORTEX, un algorithme pour la condensation automatique de textes. In ARCo (Vol. 2, pp.
+    365–371).
+Torres-Moreno, J. M., St-Onge, P.-L., Gagnon, M., El-Bèze, M., & Bellot, P. (2009). Automatic summarization system coupled with a question-answering
+    system (qaas). In CoRR abs/0905.2990.
+Torres-Moreno, J. M., Velazquez-Morales, P., & Meunier, J. (2002). Condensés de textes par des méthodes numériques. JADT, St Malo, France, 2, 723–734.
+Viterbi, A. J. (1967). Error bounds for convolutional codes and an asymptotically optimal decoding algorithm. IEEE Transactions on Information Theory, 13,
+    260–269.
+Yahiaoui, L., Boufaı¨da, Z., & Prié, Y. (2006). Semantic annotation of documents applied to e-recruitment. In SWAP 2006 – Semantic web applications and
+</Reference : >

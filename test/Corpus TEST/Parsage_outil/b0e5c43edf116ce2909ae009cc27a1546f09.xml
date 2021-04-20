@@ -37,10 +37,6 @@ The University of Texas at Austin
      achieves accuracies of .84 and .85 on two existing datasets and that can be interpreted as selecting
      the dimensions that are relevant for distributional inclusion.
 
-1    Introduction
-One of the main criticisms of distributional models has been that they fail to distinguish between semantic
-relations: Typical nearest neighbors of dog are words like cat, animal, puppy, tail, or owner, all obviously
-related to dog, but through very different types of semantic relations. On these grounds, Murphy (2002)
 </abstract>
 <introduction>
 1    Introduction
@@ -855,7 +851,8 @@ relevant features automatically. We also would like to explore detection of othe
 as meronymy. Finally, we would like to perform an extrinsic evaluation of our hypernymy detection
 approach in an actual RTE system.
 </conclusion>
-<biblio>
+<Reference : >
+References
 Marco Baroni and Alessandro Lenci. 2011. How we BLESSed distributional semantic evaluation. In Proceedings
  of the GEMS 2011 Workshop on GEometrical Models of Natural Language Semantics, pages 1–10, Edinburgh,
  UK, July. Association for Computational Linguistics.
@@ -897,6 +894,71 @@ Roxana Girju, Adriana Badulescu, and Dan Moldovan. 2003. Learning semantic const
   10
        http://www.tacc.utexas.edu
 
+Roxana Girju, Adriana Badulescu, and Dan Moldovan. 2006. Automatic discovery of part-whole relations. Com-
+  putational Linguistics, 32(1):83–135.
 
-                                                    1034
-</biblio>
+Marti A. Hearst. 1992. Automatic acquisition of hyponyms from large text corpora. In Proceedings of the 14th
+ Conference on Computational Linguistics, pages 539–545, Stroudsburg, PA, USA. Association for Computa-
+ tional Linguistics.
+
+Aurélie Herbelot and Mohan Ganesalingam. 2013. Measuring semantic content in distributional vectors. In
+  Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short
+  Papers), pages 440–445, Sofia, Bulgaria, August. Association for Computational Linguistics.
+
+Lili Kotlerman, Ido Dagan, Idan Szpektor, and Maayan Zhitomirsky-geffet. 2010. Directional distributional
+   similarity for lexical inference. Natural Language Engineering, 16:359–389, 10.
+
+Alessandro Lenci and Giulia Benotto. 2012. Identifying hypernyms in distributional semantic spaces. In *SEM
+  2012: The First Joint Conference on Lexical and Computational Semantics – Volume 1: Proceedings of the
+  main conference and the shared task, and Volume 2: Proceedings of the Sixth International Workshop on Se-
+  mantic Evaluation (SemEval 2012), pages 75–79, Montréal, Canada, 7-8 June. Association for Computational
+  Linguistics.
+
+Alessandro Lenci. 2008. Distributional approaches in linguistic and cognitive research. Italian Journal of Lin-
+  guistics, 20(1):1–31.
+
+Dekang Lin, Shaojun Zhao, Lijuan Qin, and Ming Zhou. 2003. Identifying synonyms among distributionally
+  similar words. In Proceedings of the 18th international Joint Conference on Artificial intelligence, pages 1492–
+  1493.
+
+Dekang Lin. 1998. An information-theoretic definition of similarity. In Proceedings of the 15th International
+  Conference on Machine Learning, volume 98, pages 296–304.
+
+Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. 2013. Linguistic regularities in continuous space word rep-
+  resentations. In Proceedings of the 2013 Conference of the North American Chapter of the Association for
+  Computational Linguistics: Human Language Technologies, pages 746–751, Atlanta, Georgia, June. Associa-
+  tion for Computational Linguistics.
+
+Gregory L. Murphy. 2002. The Big Book of Concepts. MIT Press, Boston, MA.
+
+Patrick Pantel and Marco Pennacchiotti. 2006. Espresso: Leveraging generic patterns for automatically harvesting
+  semantic relations. In Proceedings of the 21st International Conference on Computational Linguistics and the
+  44th annual meeting of the Association for Computational Linguistics.
+
+Fabian Pedregosa, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel, Bertran Thirion, Olivier Grisel, Mathieu
+  Blondel, Peter Prettenhofer, Ron Weiss, Vincent Dubourg, Jake Vanderplas, Alexandre Passos, David Courna-
+  peau, Matthieu Brucher, MMatthieu Perrot, and Édouard Duchesnay. 2011. Scikit-learn: Machine learning in
+  Python. Journal of Machine Learning Research, 12:2825–2830.
+
+Enrico Santus. 2013. SLQS: An entropy measure. Master’s thesis, University of Pisa.
+
+Rion Snow, Daniel Jurafsky, and Andrew Y. Ng. 2005. Learning syntactic patterns for automatic hypernym dis-
+  covery. In Lawrence K. Saul, Yair Weiss, and Léon Bottou, editors, Advances in Neural Information Processing
+  Systems 17, pages 1297–1304, Cambridge, MA. MIT Press.
+
+Rion Snow, Daniel Jurafsky, and Andrew Y. Ng. 2006. Semantic taxonomy induction from heterogenous evidence.
+  In Proceedings of the 21st International Conference on Computational Linguistics and the 44th Annual Meeting
+  of the Association for Computational Linguistics, ACL-44, pages 801–808, Stroudsburg, PA, USA. Association
+  for Computational Linguistics.
+
+Peter Turney and Patrick Pantel. 2010. From frequency to meaning: Vector space models of semantics. Journal
+  of Artificial Intelligence Research, 37:141–188.
+
+Peter D. Turney. 2006. Similarity of semantic relations. Computational Linguistics, 32(3):379–416.
+
+Julie Weeds and David Weir. 2003. A general framework for distributional similarity. In Michael Collins and Mark
+   Steedman, editors, Proceedings of the 2003 Conference on Empirical Methods in Natural Language Processing,
+   pages 81–88.
+
+
+</Reference : >

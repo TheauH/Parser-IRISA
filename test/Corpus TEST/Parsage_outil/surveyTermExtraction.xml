@@ -1346,7 +1346,8 @@ necessarily include semantic aspects if the efficiency of the system is to be
 improved with regard to the existing ones.
 
 </conclusion>
-<biblio>
+<Reference : >
+References
 
 Arppe, A. 1995. “Term extraction from unrestricted text”. Lingsoft Web Site:
   http://www.lingsoft.com
@@ -1374,6 +1375,43 @@ Dagan, I. and Church, K. 1994. “Termight: Identifying and translating technica
   Language Processing, 34-40.
 Daille, B. 1994. Approche mixte pour l'extraction de terminologie: statistique
   lexicale et filtres linguistiques. PhD dissertation. Paris: Université Paris VII.
-Daille, B. and Jacquemin, C 1998. “Lexical database and information access: a
-  fruitfull association?”. First International Conference on LREC. Granada.
-</biblio>
+Daille, B. and Jacquemin, C 1998. “Lexical database and information access: a   AUTOMATIC TERM DETECTION: A REVIEW OF CURRENT SYSTEMS
+                                                      31
+
+David, S. and Plante, P. 1991. “Le progiciel TERMINO: de la nécessité d'une
+  analyse morphosyntaxique pour le dépouillement terminologique des textes”.
+  Proceedings of the Montreal Colloquium Les industries de la langue:
+  perspectives des années 1990, 1: 71-88.
+Enguehard, C. and Pantera, L. 1994. “Automatic Natural Acquisition of a
+  Terminology”. Journal of Quantitative Linguistics, 2, 1: 27-32.
+Estopà, R. 1999. Extracció de terminologia: elements per a la construcció d’un
+  SEACUSE (Sistema d’extracció automàtica de candidats a unitats de
+  significació especialitzada). PhD thesis, Barcelona: Universitat Pompeu Fabra.
+Estopà, R. and Vivaldi, J. 1998. “Systèmes de détection automatique de
+  (candidats à) termes: vers une proposition intégratrice”. Actes des 7èmes
+  Journées ERLA-GLAT, Brest, 385-410
+Evans, D.A. and Zhai, C. 1996. “Noun-phrase Analysis in Unrestricted Text for
+  information retrieval”. Proceedings of ACL, Santa Cruz, University of
+  California, 17-24.
+Frantzi, K. and Ananiadou, S. 1995. Statistical measures for terminological
+  extraction. Working paper of the Department of Computing of Manchester
+  Metropolitan University.
+Frantzi, K. T. 1997. “Incorporating context information for extraction of terms”.
+  Proceedings of ACL/EACL, Madrid, 501-503.
+Habert, B., Naulleau, E. and Nazarenko, A. 1996. “Symbolic word clustering for
+  medium-size corpora”. Proceedings of Coling’96: 490-495.
+Heid, U., Jauss, S., Krüger, K. and Hohmann, A. 1996. “Term extraction with
+  standard tools for corpus exploration. Experience from German”. In: TKE ‘96:
+  Terminology and Knowledge Engineering,, 139-150. Berlin: Indeks Verlag.
+Jacquemin, C. 1994. “Recycling Terms into a Partial Parser”. Proceedings of
+  ANLP’94, 113-118.
+Jacquemin, C. 1999. “Syntagmatic and paradigmatic representations of term
+  variation”. Proceedings of ACL'99, University of Maryland, 341-348.
+Jacquin, C. and Liscouet, M. 1996. “Terminology extraction from texts corpora:
+  application to document keeping via Internet”. In: TKE ‘96: Terminology and
+  Knowledge Engineering, 74-83. Berlin: Indeks Verlag.
+Justeson, J. and Katz, S. 1995. “Technical terminology: some linguistic
+  properties and an algorithm for identification in text”. Natural Language
+  Engineering, 1, 1: 9-27.
+Kageura, K. and Umino, B. 1996. “Methods of Automatic Term Recognition”.
+</Reference : >

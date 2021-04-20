@@ -12,10 +12,13 @@ and Prasenjit Majumdera
 </affiliation>
 </auteurs>
 <abstract>
+                                         An Empirical Evaluation of Text Representation Schemes on
+                                         Multilingual Social Web to Filter the Textual Aggression
 
-
-
-
+                                         Sandip Modha        a   and Prasenjit Majumdera
+                                         a
+                                             DA-IICT Gandhinagar,India;
+arXiv:1904.08770v1 [cs.IR] 16 Apr 2019
 
 
 
@@ -1145,7 +1148,8 @@ transfer between problems and the application of derived knowledge in user inter
 are areas directions for future work.
 
 </conclusion>
-<biblio>
+<Reference : >
+References
 
 Aroyehun, Segun Taofeek and Gelbukh, Alexander (2018). Aggression detection in social media:
   Using deep neural networks, data augmentation, and pseudolabeling.Proceedings of the First
@@ -1171,6 +1175,60 @@ Conover, Michael and Ratkiewicz, Jacob and Francisco, Matthew R and Gonçalves 
   Menczer, Filippo and Flammini, Alessandro (2011). Political polarization on twitter.,Icwsm,
   vol-133, pp.89–96.
 
+Conover, Michael D and Gonçalves, Bruno and Ratkiewicz, Jacob and Flammini, Alessandro
+  and Menczer, Filippo (2011). Predicting the political alignment of twitter users, Privacy,
+  Security, Risk and Trust (PASSAT) and 2011 IEEE Third Inernational Conference on Social
+  Computing (SocialCom), 2011 IEEE Third International Conference on, pp.192–199.
+Davidson, Thomas and Warmsley, Dana and Macy, Michael and Weber, Ingmar (2017). Au-
+  tomated Hate Speech Detection and the Problem of Offensive Langemuage. Proceedings of
+  ICWSM.
+Deriu, Jan and Gonzenbach, Maurice and Uzdilli, Fatih and Lucchi, Aurelien and Luca, Valeria
+  De and Jaggi, Martin (2016). Swisscheese at semeval-2016 task 4: Sentiment classification
+  using an ensemble of convolutional neural networks with distant supervision. Proceedings of
+  the 10th international workshop on semantic evaluation,pp.1124–1128.
+Hltcoe, J (2013).Semeval-2013 task 2: Sentiment analysis in Twitter,vol-312 Atlanta, Georgia,
+  USA.
+Howard, Jeremy & Ruder, Sebastian 2018. Universal language model fine-tuning for text clas-
+  sification”,arXiv preprint arXiv:1801.06146,
+Harris, Zellig S (1954),Distributional structure Word,10, number=2-3,pp.146–162, 1954, Taylor
+  & Francis.
+Kumar, Ritesh and Reganti, Aishwarya N. and Bhatia, Akshit and Maheshwari,Tushar (2018),
+  Aggression-annotated Corpus of Hindi-English Code-mixed Data, Proceedings of the 11th
+  Language Resources and Evaluation Conference (LREC), Miyazaki, Japan.
+Kumar, Ritesh and Ojha, Atul Kr. and Malmasi, Shervin and Zampieri Marcos (2018). Bench-
+  marking Aggression Identification in Social Media, Proceedings of the First Workshop on
+  Trolling, Aggression and Cyberbulling (TRAC), Santa Fe, USA
+Kwok, Irene and Wang, Yuzhou (2013),Locate the hate: Detecting Tweets Against Blacks
+  ,Twenty-Seventh AAAI Conference on Artificial Intelligence.
+Lau, Jey Han and Baldwin, Timothy (2016). An empirical evaluation of doc2vec with practical
+  insights into document embedding generation. arXiv preprint arXiv:1607.05368.
+Le, Quoc and Mikolov, Tomas (2014) Distributed representations of sentences and docu-
+  ments.International Conference on Machine Learning, pp.1188–1196
+Majumder, Prasenjit and Mandl, Thomas and Modha Sandip (2018)Filtering Aggression from
+  the Multilingual Social Media Feed Proceedings of the First Workshop on Trolling, Aggres-
+  sion and Cyberbullying (TRAC-2018), pp. 199–207
+Malmasi, Shervin and Zampieri, Marcos (2017)Detecting Hate Speech in Social Media Pro-
+  ceedings of the International Conference Recent Advances in Natural Language Processing
+  (RANLP), pp.467–472.
+Malmasi, Shervin and Zampieri, Marcos (2018).Challenges in Discriminating Profanity from
+  Hate Speech Journal of Experimental & Theoretical Artificial Intelligence pp.1–16, vol-30,
+  issue-2,Taylor & Francis.
+Maynard, Diana and Funk, Adam (2011) Automatic detection of political opinionsin tweets,
+  Extended Semantic Web Conference,pp. 88–99, Springer.
+Mikolov, Tomas and Chen, Kai and Corrado, Greg and Dean, Jeffrey (2013). Efficient estima-
+  tion of word representations in vector space,arXiv preprint arXiv:1301.3781.
+Mikolov, Tomas and Grave, Edouard and Bojanowski, Piotr and Puhrsch, Christian and Joulin,
+  Armand (2018). Advances in Pre-Training Distributed Word Representations,Proceedings of
+  the International Conference on Language Resources and Evaluation (LREC 2018).
+Modha, Sandip and Agrawal, Krati and Verma, Deepali and Majumder, Prasenjit and Man-
+  dalia, Chintak 2016. DAIICT at TREC RTS 2016: Live Push Notification and Email Di-
+  gest.,TREC.
+Mohammad, Saif M and Kiritchenko, Svetlana and Zhu, Xiaodan (2013). NRC-Canada: Build-
+  ing the state-of-the-art in sentiment analysis of tweets.arXiv preprint arXiv:1308.6242.
+Nakov, Preslav and Ritter, Alan and Rosenthal, Sara and Sebastiani, Fabrizio and Stoyanov,
+  Veselin (2016). SemEval-2016 task 4: Sentiment analysis in Twitter,Proceedings of the 10th
+  international workshop on semantic evaluation (semeval-2016), pp. 1–18.
+Pennington, Jeffrey and Socher, Richard and Manning, Christopher Glove: Global vectors for
 
-                                              19
-</biblio>
+
+</Reference : >

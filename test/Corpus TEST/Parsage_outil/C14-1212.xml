@@ -17,13 +17,13 @@ Department of Informatics,
 University of Sussex,
 Brighton, UK
 </affiliation>
-<auteur>Jeremy Reffin</auteur>
+<auteur>Jeremy Reffin (juliewe,D.Clarke,J.P.Reffin,davidw,billk@sussex.ac.uk)</auteur>
 <affiliation>
 Department of Informatics,
 University of Sussex,
 Brighton, UK
 </affiliation>
-<auteur>David Weir (juliewe,D.Clarke,J.P.Reffin,davidw,billk@sussex.ac.uk)</auteur>
+<auteur>David Weir</auteur>
 <affiliation>
 Department of Informatics,
 University of Sussex,
@@ -41,9 +41,6 @@ Brighton, UK
     information about the target words in the training data, giving a 15% reduction in error rate over
     unsupervised approaches.
 
-1   Introduction
-Over recent years there has been much interest in the field of distributional semantics, drawing on the
-distributional hypothesis: words that occur in similar contexts tend to have similar meanings (Harris,
 </abstract>
 <introduction>
 1   Introduction
@@ -487,7 +484,8 @@ bag-of-words (windowed) vectors instead of grammatical relations for this task.
 paper, can be used as a useful benchmark in evaluating future advances in this area, both for supervised
 and unsupervised methods.
 </conclusion>
-<biblio>
+<Reference : >
+References
 Marco Baroni and Alessandro Lenci. 2011. How we BLESSed distributional semantic evaluation. In Proceedings
  of the GEMS 2011 workshop on Geometric Models of Natural Language Semantics, EMNLP 2011.
 Marco Baroni and Roberto Zamparelli. 2010. Nouns are vectors, adjectives are matrices: Representing adjective-
@@ -506,6 +504,71 @@ Danushka Bollegala, David Weir, and John Carroll. 2011. Using multiple sources t
   sitive thesaurus for cross-domain sentiment classification. In Proceedings of the 49th Annual Meeting of the
   Association for Computational Linguistics: Human Language Technologies (ACL-HLT 2011).
 
+Kenneth Ward Church and Patrick Hanks. 1989. Word association norms, mutual information, and lexicography.
+  In Proceedings of the 27th Annual Meeting on Association for Computational Linguistics, ACL ’89, pages
+  76–83, Stroudsburg, PA, USA. Association for Computational Linguistics.
 
-                                                     2257
-</biblio>
+Daoud Clarke. 2009. Context-theoretic semantics for natural language: an overview. In Proceedings of the
+  Workshop of Geometric Models for Natural Language Semantics.
+
+James Curran. 2004. From Distributional to Semantic Similarity. Ph.D. thesis, University of Edinburgh.
+
+Georgiana Dinu and Stefan Thater. 2012. Saarland: Vector-based models of semantic textual similarity. In
+  Proceedings of the First Joint Conference on Lexical and Computational Semantics.
+
+Christaine Fellbaum, editor. 1989. WordNet: An Electronic Lexical Database. The MIT Press, Cambridge,
+  Massachusetts.
+
+Trevor Fountain and Mirella Lapata. 2012. Taxonomy induction using hierarchical random graphs. In Proceed-
+  ings of the 2012 Conference of the North American Chapter of the Association for Computational Linguistics:
+  Human Language Technologies, pages 466–476, Montréal, Canada, June.
+
+Maayan Geffet and Ido Dagan. 2005. Lexical entailment and the distributional inclusion hypothesis. In Proceed-
+ ings of the 43rd meeting of the Association for Computational Liuguistics (ACL), pages 107–114.
+
+Edward Grefenstette, Mehrnoosh Sadrzadeh, Stephen Clark, Bob Coecke, and Stephen Pulman. 2011. Concrete
+  sentence spaces for compositional distributional models of meaning. Proceedings of the 9th International Con-
+  ference on Computational Semantics (IWCS 2011), pages 125–134.
+
+Zelig Harris. 1954. Distributional structure. Word, 10:146–162.
+
+Mitesh Khapra, Anup Kulkarni, Saurabh Sohoney, and Pushpak Bhattacharyya. 2010. All words domain adapted
+  WSD: Finding a middle ground between supervision and unsupervision. In Proceedings of the 48th Annual
+  Meeting of the Association for Computational Linguistics, pages 1532–1541, Uppsala, Sweden, July.
+
+Adam Kilgarriff and Colin Yallop. 2000. What’s in a thesaurus?           In Proceedings of the 2nd International
+  Conference on Language Resources and Evaluation (LREC2000).
+
+Lili Kotlerman, Ido Dagan, Idan Szpektor, and Maayan Zhitomirsky-Geffet. 2010. Directional distributional simi-
+   larity for lexical inference. Special Issue of Natural Language Engineering on Distributional Lexical Semantics,
+   4(16):359–389.
+
+Lillian Lee. 1999. Measures of distributional similarity. In Proceedings of the 37th Annual Meeting of the
+   Association for Computational Linguistics, pages 25–32, College Park, Maryland, USA, June.
+
+Alessandro Lenci and Giulia Benotto. 2012. Identifying hypernyms in distributional semantic spaces. In Proceed-
+  ings of the First Joint Conference on Lexical and Computational Semantics (*Sem).
+
+Dekang Lin. 1998. Automatic retrieval and clustering of similar words. In Proceedings of the 17th International
+  Conference on Computational Linguistics (COLING 1998).
+
+Tara McIntosh. 2010. Unsupervised discovery of negative categories in lexicon bootstrapping. In Proceedings of
+  the 2010 Conference on Empirical Methods in Natural Language Processing, pages 356–365, Cambridge, MA,
+  October. Association for Computational Linguistics.
+
+Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. 2013. Linguistic regularities in continuous space word rep-
+  resentations. In Proceedings of the 2013 Conference of the North American Chapter of the Association for
+  Computational Linguistics: Human Language Technologies, pages 746–751, Atlanta, Georgia, June.
+
+Tristan Miller, Chris Biemann, Torsten Zesch, and Iryna Gurevych. 2012. Using distributional similarity for
+   lexical expansion in knowledge-based word sense disambiguation. In Proceedings of COLING 2012, pages
+   1781–1796, Mumbai, India, December.
+
+Jeff Mitchell and Mirella Lapata. 2008. Vector-based models of semantic composition. In Proceedings of ACL-08:
+   HLT, pages 236–244, Columbus, Ohio, June. Association for Computational Linguistics.
+
+Joakim Nivre. 2004. Incrementality in deterministic dependency parsing. In Proceedings of the ACL workshop on
+  Incremental Parsing, pages 50–57.
+
+
+</Reference : >

@@ -12,6 +12,7 @@ from .references import find_references
 from .conclusion import find_conclusion
 from .discussion import find_discussion
 from .introduction import find_introduction
+from .results import find_results
 from .corps import find_corps
 
 
@@ -57,6 +58,7 @@ class Article:
 
         self.résumé = pars_Abstract(self.texte)
         self.references = find_references(self.texte)
+        self.results = find_results(self.texte)
         self.conclusion = find_conclusion(self.texte)
         self.discussion = find_discussion(self.texte)
         self.introduction = find_introduction(self.texte)

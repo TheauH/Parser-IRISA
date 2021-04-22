@@ -94,206 +94,7 @@ sions are absolute dates.
    finding salient dates, as well as the results obtained,
    are given in Section 51 .
 </introduction>
-<corps>
-   2       Related Work
-
-   The ISO-TimeML language (Pustejovsky et al.,
-   2010) is a specification language for manual anno-
-   tation of temporal information in texts, but, to the
-   best of our knowledge, it has not yet actually been
-   used in information retrieval systems. Neverthe-
-       1
-       This work has been partially funded by French National
-   Research Agency (ANR) under project Chronolines (ANR-10-
-   CORD-010). We would like to thank the French News Agency
-less, (Alonso et al., 2007; Alonso, 2008; Kanhabua,
-2009) and (Mestl et al., 2009), among others, have
-highlighted that the analysis of temporal informa-
-tion is often an essential component in text under-
-standing and is useful in a wide range of informa-
-tion retrieval applications. (Harabagiu and Bejan,
-2005; Saquete et al., 2009) highlight the importance
-of processing temporal expressions in Question An-
-swering systems. For example, in the TREC-10 QA
-evaluation campaign, more than 10% of questions
-required an element of temporal processing in order
-to be correctly processed (Li et al., 2005a). In multi-
-document summarization, temporal processing en-
-ables a system to detect redundant excerpts from
-various texts on the same topic and to present re-
-sults in a relevant chronological order (Barzilay and
-Elhadad, 2002). Temporal processing is also useful
-for aiding medical decision-making. (Kim and Choi,
-2011) present work on the extraction of temporal in-
-formation in clinical narrative texts. Similarly, (Jung
-et al., 2011) present an end-to-end system that pro-
-cesses clinical records, detects events and constructs
-timelines of patients’ medical histories.
-   The various editions of the TDT task have given
-rise to the development of different systems that de-
-tect novelty in news streams (Allan, 2002; Kumaran
-and Allen, 2004; Fung et al., 2005). Most of these
-systems are based on statistical bag-of-words mod-
-els that use similarity measures to determine prox-
-imity between documents (Li et al., 2005b; Brants
-et al., 2003). (Smith, 2002) used spatio-temporal in-
-formation from texts to detect events from a digital
-library. His method used place/time collocations and
-ranked events according to statistical measures.
-   Some efforts have been made for automatically
-building textual and graphical timelines. For ex-
-ample, (Allan et al., 2001) present a system that
-uses measures of pertinence and novelty to con-
-struct timelines that consist of one sentence per date.
-(Chieu and Lee, 2004) propose a similar system that
-extracts events relevant to a query from a collection
-of documents. Important events are those reported
-in a large number of news articles and each event is
-constructed according to one single query and rep-
-resented by a set of sentences. (Swan and Allen,
-2000) present an approach to generating graphical
-timelines that involves extracting clusters of noun
-phrases and named entities. More recently, (Yan et
- al., 2011b; Yan et al., 2011a) used a summarization-
- based approach to automatically generate timelines,
- taking into account the evolutionary characteristics
- of news.
-
- 3     Resources and System Overview
-
- 3.1    AFP Corpus
- For this work, we used a corpus of newswire texts
- provided by the AFP French news agency. The En-
- glish AFP corpus is composed of 1.3 million texts
- that span the 2004-2011 period (511 documents/day
- in average and 426 millions words). Each document
- is an XML file containing a title, a date of creation
- (DCT), set of keywords, and textual content split
- into paragraphs.
-
- 3.2    AFP Chronologies
- AFP “chronologies” (textual event timelines) are a
- specific type of articles written by AFP journal-
- ists in order to contextualize current events. These
- chronologies may concern any topic discussed in the
- media, and consist in a list of dates (typically be-
- tween 10 and 20) associated with a text describing
- the related event(s). Figure 1 shows an example of
- such a chronology. Further examples are given in
- Figure 2. We selected 91 chronologies satisfying the
- following constraints:
-
-     • All dates in the chronologies are between 2004
-       and 2011 to be sure that the related events
-       are described in the corpus. For example,
-       “Chronology of climax to Vietnam War” was
-       excluded because its corresponding dates do
-       not appear in the content of the articles.
-
-     • All dates in the chronology are anterior to the
-       chronology’s creation date. For example, the
-       chronology “Space in 2005: A calendar”, pub-
-       lished in January 2005 and listing scheduled
-       events, was not selected (because almost no
-       rocket launches finally happened on the ex-
-       pected day).
-
-     • The temporal granularity of the chronology is
-       the day. For example, “A timeline of how the
-       London transport attacks unfolded”, relating
-<NewsML Version="1.2">
-
- <NewsItem xml:lang="en">
-
-  <HeadLine>Key      dates     in   Thai-
-  land’s   political   crisis</HeadLine>
-  <DateId>20100513T100519Z</DateId>
-   <NameLabel>Thailand-politics</NameLabel>
-  <DataContent>
-   <p>The following is a timeline of events since
-   the protests began, soon after Thailand’s Supreme
-   Court confiscated 1.4 billion dollars of Thaksin’s
-   wealth for abuse of power.</p>
-   <p>March 14: Tens of thousands of Red Shirts
-   demonstrate in the capital calling for Abhisit’s gov-
-   ernment to step down, [...]</p>
-   <p>March 28: The government and the Reds en-
-   ter into talks but hit a stalemate after two days
-   [...]</p>
-   <p>April 3: Tens of thousands of protesters move
-   from Bangkok’s historic district into the city’s com-
-   mercial heart [...]</p>
-   <p>April 7: Abhisit declares state of emergency
-   in capital after Red Shirts storm parliament.</p>
-   <p>April 8: Authorities announce arrest warrants
-   for protest leaders.</p>
-   ...
-  </DataContent>
- </NewsItem>
-</NewsML>
-
-   Figure 1: Example of an AFP manual chronology.
-
-   For learning and evaluation purposes, all
-chronologies were converted to a single XML
-format. Each document was manually associated
-with a user search query made up of the keywords
-required to retrieve the chronology.
-
-3.3    System Overview
-Figure 3 shows the general architecture of the sys-
-tem. First, pre-processing of the AFP corpus tags
-and normalizes temporal expressions in each of the
-articles (step ¬ in the Figure). Next, the corpus is
-indexed by the Lucene search engine2 (step ­).
-
-   Given a query, a number of documents are re-
-
-trieved by Lucene (®). These documents can be fil-
-
-tered (¯), and dates are extracted from the remain-
-
-ing documents. These dates are then ranked in order
-
-to show the most important ones to the user (°), to-
-
-  2
-      http://lucene.apache.org
- - Chronology of 18 months of trouble in Ivory Coast
- - Chechen rebels’ history of hostage-takings
-
- - Iraqi political wrangling since March 7 election
- - Athletics: Timeline of men’s 800m world record
- - Major accidents in Chinese mines
- - Space in 2005: A calendar
- - Developments in Iranian nuclear standoff
- - Chronology of climax to Vietnam War
- - Timeline of ex-IMF chief’s sex attack case
- - A timeline of how the London transport attacks un-
- folded
-
-         Figure 2: Examples of AFP chronologies.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-               Figure 3: System overview.
-
-
- gether with the sentences that contain them.
- 4     Temporal and Linguistic Processing
-
+<Results>
  In this section, we describe the linguistic and tempo-
  ral information extracted during the pre-processing
  phase and how the extraction is carried out. We
@@ -315,7 +116,6 @@ to show the most important ones to the user (°), to-
  XIP performs complete linguistic processing rang-
 
  ing from tokenization to deep grammatical depen-
-
 nition (NER) of the most usual named entity cat-
 egories and recognizes temporal expressions. Lin-
 guistic units manipulated by the parser are either
@@ -416,8 +216,7 @@ includes finding the absolute value of relative dates.
 
 
  salient dates is the modality associated with time-
- stamped events in text. For instance, the status of a
-ing takes place on Friday” has to be distinguished
+ stamped events in text. For instance, the status of aing takes place on Friday” has to be distinguished
 from the one in “The meeting should take place on
 
 Friday” or “The meeting will take place on Friday,
@@ -523,8 +322,7 @@ our corpus. We decided that the TEs today and
  are not considered to be relevant. The first one being
  a generic TE and the second one being of granular-
  ity superior to a year. The annotation of the relevant
- TE has the attribute indicating that it time-stamps an
-malized value of the TE corresponds to the 5th of
+ TE has the attribute indicating that it time-stamps anmalized value of the TE corresponds to the 5th of
 January 2005, which is a Wednesday. NEs are also
 
 
@@ -660,8 +458,7 @@ dent’s t-test (t(90) = 1.9867).
 
  5.2     Salient Date Extraction with XIP Results
          and Simple Filtering
- In these experiments, we considered a Lucene index
-   Model        MAP Score Model                 MAP Score
+ In these experiments, we considered a Lucene index   Model        MAP Score Model                 MAP Score
  Salient date runs with all dates
    SDluc        0.6962         SDtf.idf         0.6982
  Salient dates runs with filtering
@@ -795,7 +592,6 @@ for baselines, since results are systematically lower.
 
  them. Instead, we used the predicted probability
  P (d) returned by the classifier, and mixed it with
-
                  Model      MAP Score
                Machine-Learning Runs
                  M Lluc
@@ -893,7 +689,7 @@ tan unrest timeline”, “Lebanon’s new government: a timeline”,
 
  objective as possible.
 
-</corps>
+</Results>
 <conclusion>
 
 </conclusion>

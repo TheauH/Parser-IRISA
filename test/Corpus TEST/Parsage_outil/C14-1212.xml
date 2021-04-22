@@ -17,13 +17,13 @@ Department of Informatics,
 University of Sussex,
 Brighton, UK
 </affiliation>
-<auteur>Jeremy Reffin (juliewe,D.Clarke,J.P.Reffin,davidw,billk@sussex.ac.uk)</auteur>
+<auteur>Jeremy Reffin</auteur>
 <affiliation>
 Department of Informatics,
 University of Sussex,
 Brighton, UK
 </affiliation>
-<auteur>David Weir</auteur>
+<auteur>David Weir (juliewe,D.Clarke,J.P.Reffin,davidw,billk@sussex.ac.uk)</auteur>
 <affiliation>
 Department of Informatics,
 University of Sussex,
@@ -119,276 +119,7 @@ vector operations are useful when identifying different ontological relationship
 difference between the vectors for pairs of words is appropriate for the entailment task, whereas adding
 the vectors works well for the co-hyponym task.
 </introduction>
-<corps>
-2     Related Work
-Lee (1999) noted that the substitutability of one word for another was asymmetric and proposed the
-alpha-skew divergence measure, an asymmetric version of the Kullback-Leibler divergence measure. She
-found that this measure improved results in language modelling, when a word’s distribution is smoothed
-using the distributions of its nearest neighbours.
-   Weeds et al. (2004) proposed a notion of distributional generality, observing that more general words
-tend to occur in a larger variety of contexts than more specific words. For example, we would expect to be
-able to replace any occurrence of cat with animal and so all of the contexts of cat must be plausible
-
-
-contexts for animal. However, not all of the contexts of animal would be plausible for cat, e.g.,
-“the monstrous animal barked at the intruder”. Weeds et al. (2004) attempt to capture this asymmetry
-by framing word similarity in terms of co-occurrence retrieval (Weeds and Weir, 2003), where precision
-and recall are defined as:
-                              Σf ∈F (u)∩F (v) I(u, f )                  Σf ∈F (u)∩F (v) I(v, f )
-               Pww (u, v) =                            and Rww (u, v) =
-                                Σf ∈F (u) I(u, f )                        Σf ∈F (v) I(v, f )
-
-where I(n, f ) is the pointwise mutual information (PMI) between noun n and feature f and F(n) is the
-set of all features f for which I(n, f ) > 0.
-   By comparing the precision and recall of one word’s retrieval of another word’s contexts, they were
-able to successfully identify the direction of an entailment relation in 71% of pairs drawn from WordNet.
-However, this was not significantly better than a baseline which proposed that the most frequent word
-was the most general.
-   Clarke (2009) formalised the idea of distributional generality using a partially ordered vector space.
-He also argued for using a variation of co-occurrence retrieval where precision and recall are defined as:
-
-               Σf ∈F (u)∩F (v) min(I(u, f ), I(v, f ))                  Σf ∈F (u)∩F (v) min(I(u, f ), I(v, f ))
-Pcl (u, v) =                                           and Rcl (u, v) =
-                         Σf ∈F (u) I(u, f )                                       Σf ∈F (v) I(v, f )
-
-   Lenci and Benotto (2012) took the notion further and hypothesised that more general terms should
-have high recall and low precision, which would thus make it possible to distinguish them from other
-related terms such as synonyms and co-hyponyms. They proposed a variant of the Clarke (2009) measure
-to identify hypernyms:
-                                                 q
-                                                  2
-                               invCL(u, v) =          Pcl (u, v) ∗ (1 − Rcl (u, v))
-
-Evaluation on the BLESS data set (Baroni and Lenci, 2011), showed that this measure is better at distin-
-guishing hypernyms from other relations than the measures of Weeds et al. (2004) and Clarke (2009).
-   Geffet and Dagan (2005) proposed an approach based on feature inclusion, which extends the rationale
-of Weeds et al. (2004) to lexical entailment. Using data from the web they demonstrated a strong cor-
-relation between complete inclusion of prominent features and lexical entailment. However, they were
-unable to assess this using an off-line corpus due to data sparseness.
-   Szpektor and Dagan (2008) found that the Pww measure tends to promote relationships between infre-
-quent words with narrow vectors (i.e. those with relatively few distinct context features). They proposed
-using the geometric average of Pww and the symmetric similarity measure of Lin (1998) in order to
-penalise low frequency words.
-   Kotlerman et al. (2010) apply the IR evaluation method of Average Precision to the problem of identi-
-fying lexical inference and use the balancing approach of Szpektor and Dagan (2008) to demote similar-
-ities for narrow feature vectors; their measure is called balAPinc. They show that all of the asymmetric
-similarity measures previously proposed perform much better than symmetric similarity measures on
-a directionality detection experiment, and that their method and that of Clarke (2009) outperform the
-others with statistical significance. They also show that their measure is superior when used for term
-expansion in an event detection task.
-   Baroni et al. (2012) investigate the relation between phrasal and lexical entailment, and demonstrate
-that support vector machines can generalise entailment relations between quantifier phrases to entailment
-involving unseen quantifiers. They compare the performance of their system with the balAPinc measure.
-   The Stanford WordNet project (Snow et al., 2004) expands the WordNet taxonomy by analysing large
-corpora to find patterns that are indicative of hyponymy. For example, the pattern “NP X and other NP Y ”
-is an indication that NP X is a NP Y , i.e. that NP X is a hyponym of NP Y . They use machine learning
-to identify other such patterns from known hyponym-hypernym pairs, and then use these patterns to find
-new relations in the corpus. The transitivity relation of the taxonomy is enforced by searching only over
-valid taxonomies and evaluating the likelihood of each taxonomy given the available evidence (Snow
-
-
-et al., 2006). The approach is similar to ours in providing a supervised method of learning semantic
-relations, but relies on having features for occurrences of pairs of terms rather than just vectors for terms
-themselves. Our approach is therefore more generally applicable to systems which compose distribu-
-tional representations of meaning.
-   Most recently, Rei and Briscoe (2013) note that hyponyms are well suited for lexical substitution.
-In their experiments with smoothing edge scores for parser lexicalisation, they find that a directional
-similarity measure, WeightedCosine2 , performs best. Also of note, Mikolov et al. (2013) propose a vector
-offset method to capture syntactic and semantic regularities between word representations learnt by a
-recurrent neural network language model. Yih et al. (2012) present a method for distinguishing synonyms
-and antonyms by inducing polarity in a document-term matrix before applying Latent Semantic Analysis.
-Santus et al. (2014) propose identifying hypernyms using a new measure based on entropy, SLQS, which
-is based on the hypothesis that the most typical linguistic contexts of a hypernym are less informative
-than the most typical linguistic contexts of its hyponyms. Evaluated on pairs extracted from the BLESS
-dataset (Baroni and Lenci, 2011), this measure outperforms Pww at both discriminating hypernym test
-pairs from other types of relation and at determining the direction of the entailment relation.
-
-3       Methodology
-The code used to perform our experiments has been open sourced, and is available online.3
-
-3.1      Vector Representations
-Distributional information was collected for all of the nouns from Wikipedia provided they had oc-
-curred 100 or more times. We used a Wikimedia dump of Wikipedia from June 2011 and extracted
-text using wp2txt4 . This was part-of-speech tagged, lemmatised and dependency parsed using the Malt
-Parser (Nivre, 2004). All major grammatical dependency relations involving open class parts of speech
-(nsubj, dobj, iobj, conj, amod, nnmod) and also occurring 100 or more times were ex-
-tracted as features of the POS-tagged and lemmatised nouns. The value of each feature is the positive
-point wise mutual information (PPMI) (Church and Hanks, 1989) between the noun and the feature. The
-total number of noun vectors which can be harvested from Wikipedia with these parameters is 124, 345.
-   Our goal is to build classifiers that establish whether or not a given semantic relation, rel, holds be-
-tween two similar words A and B. Support vector machines (SVMs), which are effective across a variety
-of classification scenarios, learn a boundary between two classes from a set of positive and negative ex-
-ample vectors. The two classes correspond to the relation rel holding or not holding. Here, however, we
-do not start with a single vector, but with two distributional vectors vA and vB for the words A and B,
-respectively. These vectors must be combined in some way to produce the SVM’s input, and a number
-of ways were considered, defined in Table 2. Of these operations, the vector difference (used by svm-
-DIFF and knnDIFF) and direct sum (used by svmCAT) are asymmetric, whereas the sum and pointwise
-multiplication (used by svmADD and svmMULT) are symmetric.
-   We now motivate the use of each of these operations. First, we note that pointwise multiplication
-(svmMULT) is intersective. Similar vectors will have a large intersection and it might be possible to
-learn the features that nouns occurring in different semantic relations should share. However, it does
-not retain any information about non-shared features and it is symmetric so it is difficult to see how it
-would be possible to use it to distinguish hypernyms from hyponyms. Pointwise addition (svmADD)
-effectively performs the union of the features, giving emphasis to the shared features. Whilst it does
-retain information about the non-shared features, it is also symmetric, making it difficult again to see
-how it would be useful in determining the direction of an entailment relation
-   Vector difference (as used in svmDIFF and knnDIFF), on the other hand, is asymmetric. Further,
-we might expect a small difference vector (containing many zeroes) to be indicative of similar nouns.
-Further, considering the majority sign of features in this difference vector might indicate the direction of
-    2
-      The details of this measure are unpublished.
-    3
-      https://github.com/SussexCompSem/learninghypernyms
-    4
-      https://github.com/yohasebe/wp2txt
-
-
-entailment. Using an SVM, we might expect to be able to effectively learn which of these features should
-be ignored and which should be combined, to decide the correct direction of entailment in the majority
-number of cases in our training data. However, note that if one uses vector difference it is impossible to
-distinguish between the case where a feature occurred with both nouns (to the same extent) and the case
-where a feature occurs with neither noun. Accordingly, a small difference vector may indicate that both
-nouns do not occur in many distinct contexts. A possible solution to this problem is to use the direct
-sum of the vectors (i.e., the concatenation of the two vectors) which retains all of the information from
-the original vectors. Finally, we consider the use of the single vector corresponding to the second word
-(svmSING) as a baseline. High performance by this operation would indicate that we can learn features
-of words which tend to be hypernyms (or co-hyponyms) without any regard to the other word in the
-putative relationship.
-   We also note that the behaviour of these methods may differ depending on the weighting used for vec-
-tors. For example, PMI is the log of a ratio of probabilities and therefore one might expect vector addition
-where vectors are weighted using PMI to correspond to multiplication where vectors are weighted using
-frequency or probability. However, the use of positive PMI (where negative PMI scores are regarded
-equal to zero), which is consistent with other work in this area, means that this correspondence is lost.
-   Because of the nature of our datasets, we were concerned that systems could learn information about
-the taxonomy from the relations in the training data, without making use of information in the vectors
-themselves. To investigate this, we constructed random vectors to be used in place of the vectors derived
-from Wikipedia. The dimensionality of the random vectors was chosen to be 1000 since this substantially
-exceeds the average number (398) of non-zero features in the Wikipedia vectors.
-
-3.2   Classifiers
-We constructed linear SVMs for each of the vector operations outlined in Section 3.1. We used linear
-SVMs for speed and simplicity, since the point is to compare the different vector representations of
-the pairings. For comparison, we also constructed a number of supervised, unsupervised, and weakly
-supervised classifiers. These are listed in Table 2. For the linear SVMs and kNN classifier, we used the
-scikit-learn implementations with default settings. For k nearest neighbours, we performed a parameter
-search, using nested cross-validation, varying k between 1 and 50.
-   For weakly supervised approaches, we evaluated the measure on the training set, then found the best
-threshold p on the training set that best divides the two classes using that measure. When classifying, we
-determine that the relation holds if the value of the measure exceeds p.
-
- svmDIFF        A linear SVM trained on the vector difference vB − vA
- svmMULT        A linear SVM trained on the pointwise product vector vB ∗ vA
- svmADD         A linear SVM trained on the vector sum vB + vA
- svmCAT         A linear SVM trained on the vector concatenation vB ⊕ vA
- svmSING        A linear SVM trained on the vector vB
- knnDIFF        k nearest neighbours (knn) trained on the vector difference vB − vA .1 < k < 50
- widthdiff      width(B) > width(A) → rel(A, B) where width(A) is number of non-zero features in A
- singlewidth    width(B) > p → rel(A, B)
- cosineP        simcos (A, B) > p → rel(A, B) where simcos (A, B) is cosine similarity using PPMI
- linP           simlin (A, B) > p → rel(A, B) (Lin, 1998)
- CRdiff         Pww (A, B) > Rww (A, B) → rel(A, B) (Weeds et al., 2004)
- clarkediff     Pcl (A, B) > Rcl (A, B) → rel(A, B) (Clarke, 2009)
- invCLP         invCL(A, B) > p → rel(A, B) (Lenci and Benotto, 2012)
- balAPincP      balAPinc(A, B) > p → rel(A, B) (Kotlerman et al., 2010)
- most freq      The most frequent label in the training data is assigned to every test point.
-
-                                     Table 2: Implemented classifiers
-
-
-
-3.3     Data Sets
-One of key the challenges of this work has been to construct a data set which accurately and validly tests
-our hypotheses. All four of our datasets detailed below are available online 5 .
-   In order to test our hypotheses, a data set needs to be balanced in many respects in order to prevent the
-supervised classifiers making use of artefacts of the data. This would not only make it unfair to compare
-the supervised approaches with the unsupervised approaches, but also make it unlikely that our results
-would be generalisable to other data. Here, we outline the requirements for the data sets, the importance
-of which is demonstrated by our initial results for a data set which does not satisfy all of them.
-   There should be an equal number of positive and negative examples of a semantic relation. Thus,
-random guessing or labelling with the most frequently seen label in the training data will yield 50%
-accuracy and precision. An advantage of incorporating this requirement means that evaluation can be in
-terms of simple accuracy (or error rate).
-   It should not be possible to do well simply by considering the distributional similarity of the terms.
-Hence, the negative examples need to be pairs of equally similar words, but where the relationship under
-consideration does not hold.
-   It should not be possible to do well by pre-supposing an entailment relation and guessing the direction.
-For example, it has been shown (Weeds et al., 2004) that given a pair of entailing words selected from
-WordNet, over 70% of the time the more frequent word is also the entailed word.
-   It should not be possible to do well using ontological information learnt about one or both of the
-words from the training data that is not generalisable to their distributional representations. For example,
-it should not be possible for the classifier simply to learn directly from the training pairs hcat ISA
-mammali and hmammal ISA animali that hcat ISA animali. Furthermore, we must ensure that
-a classifier cannot learn that a particular word is near the top of the ontological hierarchy, and, as a
-result, do well by guessing that a particular pairing probably has an entailment relation. For example,
-given many pairs such as hcat ISA animali, hdog ISA animali, a system which guessed hrabbit
-ISA animali but not hanimal ISA rabbiti would do better than random guessing. Whilst both
-of these types of information could be useful in a hybrid system, they do not require any distributional
-information and therefore we would not be learning anything about the distributional features of animal
-which make it likely to be a hypernym.
-
-3.3.1     BLESS
-We have constructed two data sets from BLESS (Baroni and Lenci, 2011) which is a collection of ex-
-amples of hypernyms, co-hyponyms, meronyms and random unrelated words for each of 200 concrete,
-largely monosemous nouns. We will refer to these 200 nouns as the BLESS concepts.
-hyponymBLESS is a set of 1976 labelled pairs of nouns. For each BLESS concept, 80% of the hypernyms
-were randomly selected to provide positive examples of entailment. The remaining hypernyms for the
-given concept were reversed and taken with the same number of co-hyponyms, meronyms and random
-words to form negative examples of entailment. A filter was applied to ensure that duplicate pairs were
-not included (e.g., if hcat, animali is a positive pair then hanimal, cati cannot be a negative pair).
-cohyponymBLESS is a set of 5835 labelled pairs of nouns. For each BLESS concept, the co-hyponyms
-were taken as positive examples of this relation. The same total number of (and split evenly between)
-hypernyms, meronyms and random words was taken to form the negative examples. The order of 50%
-of the pairs was reversed and again duplicate pairs were disallowed.
-  In both cases the pairs are labelled as positive or negative for the specified semantic relation and in
-both cases there are equal (±1) numbers of positive and negative examples. For 99% of the generated
-BLESS pairs, both nouns had associated vectors harvested from Wikipedia. If a noun does not have an
-associated vector, the classifiers use a zero vector.
-   5
-       https://github.com/SussexCompSem/learninghypernyms
-
-
-3.3.2 WordNet
-We constructed two data sets using WordNet. Whilst these data sets are similar in size to the BLESS
-data sets they more adequately satisfy the requirements laid out above6 . We constructed a list of all non-
-rare, largely monosemous, single word terms in WordNet. To be considered non-rare, a word needed to
-have occurred in SemCor at least once (i.e. frequency information is provided about it in the WordNet
-package) and to have occurred in Wikipedia at least 100 times. To be considered largely monosemous,
-the predominant sense of the word needed to account for over 50% of the occurrences in the SemCor
-frequency information provided with WordNet. This led to a list of 7613 nouns.
-hyponymWN is a set of 2564 labelled pairs of nouns constructed in the following way. Pairs hA, Bi were
-found in the list of nouns where B is an ancestor of A (i.e., A lexically entails B). Each found pair is
-added either as a positive or a negative in the ratio 2:1 provided that the reverse pairing has not already
-been added and provided that each word has not previously been used in that position. Co-hyponym
-pairs (i.e., words which share a direct hypernym) were also found within the list of nouns. Each found
-pair is added to the data set (as a negative) provided the reverse pairing has not already been added, and
-provided that neither word has already been seen in that position in a pairing (either in the entailment
-pairs or the co-hyponym pairs). The same number of co-hyponym pairs as hypernym-hyponym negatives
-is selected. This provides a balanced data set where half of the pairs are positive examples of entailment
-and the other half are semantically similar but not entailing.
-cohyponymWN is a set of 3771 labelled pairs of nouns. It was constructed in the same way as hyponymWN
-except the same number of co-hyponym pairs were selected as the total number of entailment pairs (in
-either direction). These co-hyponym pairs were labelled as positive and the entailment pairs were labelled
-as negative. Thus, this provides a balanced data set where half of the pairs are positive examples of co-
-hyponyms and the other half, the negative examples, are entailment pairs (with direction unspecified)
-   In both these sets, the average path distance between entailment pairs is 1.64, whereas path distance
-between co-hyponym pairs is 2.
-3.4    Experimental Setup
-Most of our experiments were carried out using an implementation of five-fold cross-validation using
-each combination of data set, vector set and classifier. In this setup, the pairs are randomly partitioned
-into five subsets, one subset is held out for testing whilst the classifiers are trained on the remaining four,
-and this process is repeated using each subset as the test set.
-   In initial experiments with the BLESS datasets, the SVM classifiers were able to achieve classification
-accuracy of over 95% for hyponymBLESS and over 90% for cohyponymBLESS . However, the results us-
-ing random vectors were not significantly different from using the distributional vectors harvested from
-Wikipedia. This indicated that the classifiers were learning ontological information implicit in the train-
-ing data. In order to address this, when using the BLESS datasets, we removed any pair from the training
-data if either word was present in the test data. In order to preserve a reasonable amount of training data,
-we implemented this approach with ten-fold cross-validation. In all subsequent experiments, across all
-datasets and classifiers, we found performance by the random vectors was no higher than 52%. This
-indicates that the performance seen in Table 3 is due to learning from distributional features rather than
-any ontological information implicit in the training set.
-
-4     Results
+<Results>
 In Table 3, we compare average accuracy for a number of different classifiers on each of two tasks,
 distinguishing hyponyms and distinguishing co-hyponyms, on each of the two datasets.
    Looking at the results for the hyponymBLESS data set, we can see that the SVM methods do generally
@@ -398,7 +129,6 @@ comparing the vector representations of the two terms under consideration.
    6
      Note that imposing these requirements on the BLESS data sets would lead to very small data sets, since information is only
 provided for 200 nouns.
-
 
       dataset      svmDIFF     svmMULT     svmADD     svmCAT      svmSING       knnDIFF
   hyponymBLESS       0.74        0.56       0.66       0.68         0.75         0.54
@@ -453,8 +183,7 @@ hyponymWN dataset. Our task is slightly different to that of (Kotlerman et al., 
 mining the existence (or not) of hyponymy, rather than the direction of entailment for pairs where it is
 known that a relationship exists. It could be that the measure is particularly suited to the latter task.
 
-
-</corps>
+</Results>
 <conclusion>
 5   Conclusions and Further Work
 We have shown that it is possible to predict to a large extent whether or not there is a specific semantic

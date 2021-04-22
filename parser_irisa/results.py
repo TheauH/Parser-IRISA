@@ -13,6 +13,14 @@ def find_results(transcri: Transcription):
     string5 = "3.5. Results"
     string6 = "In this section,"
     string7 = r"([7-9])"
+    string8 = "the performance of the two"
+    string9 = "Selective Distributional Inclusion"
+    string10 = "normalized distributions"
+    stringl18 = "Table 3 shows f-score ROUGE"
+    stringendl18 = "Human Evaluation"
+    stringc14 = "we compare average accuracy"
+    sendc14 = "2256"
+    sbless = "normalized distributions"
 
     """declaration variable contenant le résultat """
 
@@ -31,6 +39,11 @@ def find_results(transcri: Transcription):
                 or (string1 in transcri[np][nl])
                 or (string5 in transcri[np][nl])
                 or (string6 in transcri[np][nl])
+                or (string8 in transcri[np][nl])
+                or (stringl18 in transcri[np][nl])
+                or (stringc14 in transcri[np][nl])
+                or (sbless in transcri[np][nl])
+
             ):
                 page = np
                 ligne = nl
@@ -38,6 +51,9 @@ def find_results(transcri: Transcription):
                 (string2 in transcri[np][nl])
                 or (string3 in transcri[np][nl])
                 or (string4 in transcri[np][nl])
+                or (string9 in transcri[np][nl])
+                or (stringendl18 in transcri[np][nl])
+                or (sendc14 in transcri[np][nl])
             ):
                 page1 = np
                 ligne1 = nl

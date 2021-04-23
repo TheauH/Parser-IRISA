@@ -21,6 +21,7 @@ def find_results(transcri: Transcription):
     stringc14 = "we compare average accuracy"
     sendc14 = "2256"
     sbless = "normalized distributions"
+    siend = "single convolution layer."
 
     """declaration variable contenant le résultat """
 
@@ -54,6 +55,7 @@ def find_results(transcri: Transcription):
                 or (string9 in transcri[np][nl])
                 or (stringendl18 in transcri[np][nl])
                 or (sendc14 in transcri[np][nl])
+                or (siend in transcri[np][nl])
             ):
                 page1 = np
                 ligne1 = nl

@@ -16,6 +16,8 @@ def find_conclusion(transcri: Transcription):
     string8 = "Discussion"
     string9 = "R EFERENCES"
     string10 = "7       Follow-Up Work"
+    sa = "presents a task of"
+    sblend = "model for meaning."
 
     """declaration variable contenant le résultat """
 
@@ -35,6 +37,7 @@ def find_conclusion(transcri: Transcription):
                 or (string2 in transcri[np][nl])
                 or (string3 in transcri[np][nl])
                 or (stringbis in transcri[np][nl])
+                or (sa in transcri[np][nl])
             ):
                 page = np
                 ligne = nl
@@ -47,6 +50,7 @@ def find_conclusion(transcri: Transcription):
                 or (string8 in transcri[np][nl])
                 or (string9 in transcri[np][nl])
                 or (string10 in transcri[np][nl])
+                or (sblend in transcri[np][nl])
             ):
                 page1 = np
                 ligne1 = nl

@@ -489,64 +489,6 @@ classifier across diverse datasets.
 To answer this question, we designed first CNN model with one convolution layer and
 other CNN model with 3 convolution layer with different filters height. As we look
 at results shown in Table 6,7,8, and 9, one can conclude that by and large weighted
-F1 score lower for CNN model with multiple convolution layer than CNN model with
-single convolution layer.
-
-
-8. Conclusion
-
-In this Paper, Multilingual Social media stream is studied with special kind of text
-features: Aggression and fact perspective. Exhaustive experiments are performed to
-benchmark the text representation scheme on machine learning classifiers and deep
-neural nets. From the results, we conclude that deep Neural model with pre-trained
-word embedding is the better choice than machine earning classifier and transfer learn-
-ing model. Word embedding is the better text representative scheme than Bag-of-words
-for the deep neural models. In fact, performance can be improved with the help of fast-
-Text pre-trained vector. However, machine learning classifiers perform better in BoW
-with TF/IDF weighting than word embedding. We also concluded that higher drop
-out will help to counter model overfitting and improvise a standard evaluation metrics.
-CNN and LSTM are the better models for these datasets. On the English test corpus,
-we obtained a better weighted F1 score for NAG class and poor weighted F1 score
-for CAG class which supports the previous (Malmasi, et al. , 2017) findings. For the
-Facebook Hindi test corpus, the same seems not to be true. We obtained a better F1
-score for CAG class than NAG class. It is also to be noted that the model leads to
-poor result on Twitter test data since the training corpus was created from Facebook.
-In such cases, deep neural models substantially outperform machine learning classi-
-fiers. Significance test confirms these claims with 95 % confidence interval in most the
-cases. Our work shows what kind of problems are moving into the center of attention
-for research in machine learning. Using deep learning models, there is great potential
-to solve some of these problems, yet still, the performance is far from perfect. Model
-transfer between problems and the application of derived knowledge in user interfaces
-are areas directions for future work.
-
-
-References
-
-Aroyehun, Segun Taofeek and Gelbukh, Alexander (2018). Aggression detection in social media:
-  Using deep neural networks, data augmentation, and pseudolabeling.Proceedings of the First
-  Workshop on Trolling, Aggression and Cyberbullying (TRAC-2018), pp.90–97.
-Arroyo-Fernández, Ignacio and Forest, Dominic and Torres-Moreno, Juan-Manuel and
-  Carrasco-Ruiz, Mauricio and Legeleux, Thomas and Joannette,Karen (2018). Cyberbullying
-  Detection Task: the EBSI-LIA-UNAM System (ELU) at COLING’18 TRAC-1.Proceedings
-  of the First Workshop on Trolling,Aggression and Cyberbullying (TRAC-2018), pp 140–149.
-Basu, Moumitaand Ghosh, Saptarshi and Ghosh, Kripabandhu (2018). Overview of the FIRE
-  2018 track: Information Retrieval from Microblogs during Disasters (IRMiDis). Proceedings
-  of FIRE 2018 - Forum for Information Retrieval Evaluation, Gujrat, India, December .
-Baziotis, Christos and Pelekis, Nikos and Doulkeridis, Christos (2017). Datastories at semeval-
-  2017 task 4: Deep lstm with attention for message-level and topic-based sentiment analysis.
-  Proceedings of the 11th International Workshop on Semantic Evaluation (SemEval-2017),
-  pp.747–754
-Bojanowski, Piotr and Grave, Edouard and Joulin, Armand and Mikolov, Tomas (2017) En-
-  riching word vectors with subword information, Transactions of the Association for Compu-
-  tational Linguistics, vol-5,pp.135–146, MIT Press.
-Burnap, Pete and Williams, Matthew Ltitle (2015). Cyber hate speech on twitter: An applica-
-  tion of machine classification and statistical modeling for policy and decision makingPolicy
-  & Internet, vol-7 number 2, pp.223–242, Wiley Online Library.
-Conover, Michael and Ratkiewicz, Jacob and Francisco, Matthew R and Gonçalves , Bruno and
-  Menczer, Filippo and Flammini, Alessandro (2011). Political polarization on twitter.,Icwsm,
-  vol-133, pp.89–96.
-
-
 </Results>
 <conclusion>
 8. Conclusion

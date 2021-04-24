@@ -40,7 +40,13 @@ class Champ:
         contenu = (
             "\n".join([auteur.xml() for auteur in self.contenu])
             if isinstance(self.contenu, list)  # Cas de la liste d’auteurs
-            else self.contenu
+            else "".join(
+                "&amp;" if i=="&"
+                else "&lt;" if i=="<"
+                else "&gt;" if i==">"
+                else i
+                for i in self.contenu
+            )
         )
         return "<" + balise + ">\n" + contenu + "\n</" + balise + ">"
 

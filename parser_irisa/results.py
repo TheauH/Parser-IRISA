@@ -93,7 +93,7 @@ def find_results(transcri: Transcription):
         result += "\n".join(transcri[page][0 : len(transcri[page]) - 1])
         page += 1
     return Champ(
-        nom="Results",
+        nom="results",
         contenu=result + "\n".join(transcri[page][ligne : ligne1 - 1]),
         page_début=page,
         ligne_début=ligne,

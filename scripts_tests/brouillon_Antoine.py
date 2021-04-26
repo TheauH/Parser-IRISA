@@ -3,6 +3,7 @@ from config import transcription, article
 from pathlib import Path
 from os import scandir, mkdir
 from shutil import rmtree
+import xml.etree.ElementTree as ET
 
 from config import page
 
@@ -25,17 +26,17 @@ except NotADirectoryError:
 #             t.normalise()
 #             sortie.write(str(t).encode())
 
-""" Blocs d’auteurs du corpus"""
-with open("bloc-auteur.txt", "wb") as sortie:
-    for entrée in dossier_entrées:
-        if not (entrée.name.endswith(".pdf") and entrée.is_file):
-            continue
-        print(entrée.name)
-        sortie.write(("----- " + entrée.name + " :\n").encode())
-        a = article.Article(chemin_entrées / entrée.name)
-        for ligne in a.texte[0][a.auteurs.ligne_début : a.auteurs.ligne_fin]:
-            sortie.write(ligne.encode())
-            sortie.write(b"\n")
+# """ Blocs d’auteurs du corpus"""
+# with open("bloc-auteur.txt", "wb") as sortie:
+#     for entrée in dossier_entrées:
+#         if not (entrée.name.endswith(".pdf") and entrée.is_file):
+#             continue
+#         print(entrée.name)
+#         sortie.write(("----- " + entrée.name + " :\n").encode())
+#         a = article.Article(chemin_entrées / entrée.name)
+#         for ligne in a.texte[0][a.auteurs.ligne_début : a.auteurs.ligne_fin]:
+#             sortie.write(ligne.encode())
+#             sortie.write(b"\n")
 
 # """ Métadonnées du corpus """
 # with open("métadonnées.txt", "wb") as sortie:
@@ -47,3 +48,9 @@ with open("bloc-auteur.txt", "wb") as sortie:
 #         métadonnées = pdf.getDocumentInfo()
 #         if métadonnées.author:
 #             sortie.write(métadonnées.author.encode() + b"\n")
+
+""" Parsage d’un fichier X.M.L. """
+arbre = ET.parse("test/Corpus TEST/Parsage manuel/acl2012.xml")
+racine = arbre.getroot()
+print(racine)
+print(article.Article("test/Corpus_2021/Boudin-Torres-2006.pdf"))

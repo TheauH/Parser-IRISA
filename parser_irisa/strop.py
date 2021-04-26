@@ -10,6 +10,7 @@ non_ASCII = re.compile(r"[^\x00-\x7F]")
 format_nom = re.compile(r"\b(?:[A-Z])(?:(?:\.|[A-Za-zı-ͯ\.]+)[\-’' ]?)+")
 format_sousLigne = re.compile(r"(?:[^ ]+ ?)+")
 format_courriel = re.compile(r"[^ ]+@[^ ]+")
+blancs = re.compile(r"[ \n\r]")
 
 
 def recherche_sans_accents(pattern, string, flags=0):
@@ -21,11 +22,11 @@ def recherche_sans_accents(pattern, string, flags=0):
         "".join(
             (
                 "(i|ı[̀-ͯ])"
-                if c == "i"
+                if c == "i" # i ou ı avec diacritique
                 else " +"
-                if c == " "
+                if c == " " # espaces en nombre indéterminé
                 else c + "[̀-ͯ]?"
-                if c.isalpha()
+                if c.isalpha() # lettre avec ou sans diacritique
                 else c
                 for c in pattern
             )
@@ -33,3 +34,10 @@ def recherche_sans_accents(pattern, string, flags=0):
         string,
         flags,
     )
+
+
+def sans_blancs(chaîne: str) -> str:
+    """
+    Renvoie la chaîne donnée sans caractère blancs.
+    """
+    return blancs.sub("", chaîne)

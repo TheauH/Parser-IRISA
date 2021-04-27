@@ -60,7 +60,7 @@ are added by the organizers. License details: http://creativecommons.org/license
 Table 2 shows the performance of the two classifiers, Concat and Diff, on both the BLESS and ENTAIL- MENT datasets, using three underlying spaces. We use the reduced versions of the three spaces, indicated by the subscript 300. Note that the Concat classifier could not converge using features from TypeDM300, so we omit the result. With both methods, we obtain a high accuracy on the two datasets, with results around .8 against baselines around .5. Our best result is .84 on BLESS and .85 on ENTAILMENT. More- over, both approaches are in general robust to changes in space parameters (with TypeDM/Concat an outlier). Still, the U+W2300 space seems to be the best for this task: Its scores are significantly6 higher than the rest, except for TypeDM on ENTAILMENT, which achieves the same score as U+W2300. Diff achieves significantly higher results than Concat.
 When provided more information, Concat outperforms Diff. For instance, if cross-validation is done over all pairs in BLESS in the U+W2300 space, Concat achieves .98 accuracy, while Diff obtains .90. However, in this setting the same words appear in the training and test sets (albeit in different pairs). We take this to mean that Concat is memorizing, rather than learning the hypernymy relation. This emphasizes the need for our stricter evaluation that prevents repetition between training and test sets.
 Clearly, both classifiers do fairly well at predicting hypernymy relations between words, regardless of space. Naturally, one should ask what are the classifiers capturing that the unsupervised measures are missing? We propose that the supervised classifiers perform essentially the same operation as the unsupervised measures, but are learning to determine the relevance of dimensions. In particular, Diff is learning weights on vector difference features. This is equivalent to doing selective distributional inclusion. In the next section, we test this Selective Distributional Inclusion Hypothesis.
-6Wilcoxon signed-rank test, p < .001.
+6Wilcoxon signed-rank test, p &lt; .001.
 1031
 U+W2 proj, cosine
 ●
@@ -134,7 +134,7 @@ Co−hyp
 Hyper
 Mero Random
 Figure 2: Distributions of relata scores across concepts using the cosine, ClarkeDE, and invCL measures (after per-concept z-normalization). Here we use the selected dimensions of the U+W2proj space.
- </results>
+    </results>
     <conclusion>7
 Conclusion
 In this paper, we have tested the Distributional Inclusion Hypothesis, the basis for distributional ap-

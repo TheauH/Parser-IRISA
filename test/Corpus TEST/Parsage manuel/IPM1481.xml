@@ -29,7 +29,7 @@ in standalone mode on this task.</abstract>
 The evolution of the job market has resulted in that traditional methods of recruitment becoming insufficient. The
 Internet has introduced a new way of managing human resources. Theoretically, shifting job search and recruitment activ-
 ities to the Internet improves the quality of job matching by reducing search costs, increasing contact opportunities and
-rationalizing the screening process of job applicants (Marchal, Mellet, & Rieucau, 2007). Over the last few years, there has
+rationalizing the screening process of job applicants (Marchal, Mellet, &amp; Rieucau, 2007). Over the last few years, there has
 been a significant expansion of online recruitment (e.g. August 2003: 177,000 job offers, May 2008: 500,000 job offers).1
 The Internet has become essential in this process because it allows a better flow of information, either through job search
 sites or by e-mail exchanges. Nowadays, job seekers can send their curriculum vitae (CV) directly to companies (by e-mail
@@ -49,7 +49,7 @@ composed of three main modules:
 1. The first one extracts the information from a corpus of e-mails of job offers from Aktor’s database.
 2. The second module analyses the candidate’s answers (i.e. splitting e-mails into cover letter (CL) and curriculum vitae).
 3. The third module analyses and computes a relevant ranking of the candidate’s answers.
-Our first work (Kessler, Torres-Moreno, & El-Bèze, 2007) presented the first module: the identification of different parts
+Our first work (Kessler, Torres-Moreno, &amp; El-Bèze, 2007) presented the first module: the identification of different parts
 of a job offer and the extraction of relevant information (type of contract, salary, localization, etc.). The second module
 analyses the content of a candidate’s e-mail, using a combination of rules and machine learning methods (Support Vector
 Machines, SVM) and was presented in Kessler, Torres-Moreno, and El-Bèze (2008b). Furthermore, it separates the distinct
@@ -57,8 +57,8 @@ parts of CV and CL with a precision of 0.98 and a recall of 0.96. Reading a larg
 very time consuming task for a recruiting consultant. In order to facilitate this task, we propose a system capable of pro-
 viding an initial evaluation of candidate answers according to various criteria. We do not seek the best or even a good can-
 didate as no scoring is involved, but simply a candidate who has a close application to those already selected. Our previous
-work (Kessler, Béchet, Roche, El-Bèze, & Torres-Moreno, 2009) presented an approach based on a process of relevance feed-
-back, permitting a reinforcement learning (Sutton & Barto, 1998). In this paper, we present an original combination of the
+work (Kessler, Béchet, Roche, El-Bèze, &amp; Torres-Moreno, 2009) presented an approach based on a process of relevance feed-
+back, permitting a reinforcement learning (Sutton &amp; Barto, 1998). In this paper, we present an original combination of the
 E-Gen and CORTEX systems. Each document contains a number of additional information, present in many applications and
 which is partially removed by classical pre-processing. Each application added by the process of relevance feedback adds
 relevant information but also multiplies additional information. CORTEX allows us to filter these sentences and keep only the
@@ -87,12 +87,12 @@ R. Kessler et al. / Information Processing and Management 48 (2012) 1124–1135 
 Comparison of AUC score for each size of Relevance Feedback with CORTEX summarization system.
    
  Fig. 5. Results of Relevance Feedback with and without summaries of CL.
-average for each size). In fact, we compute the Residual Ranking (Billerbeck & Zobel, 2006): Documents that are used for Rel- evance Feedback are removed from the collection before ranking with the reformulated query. We assume that the Rele- vance Feedback process would behave as a reinforcement learning (Sutton & Barto, 1998) but it is impossible to experiment RFn with n > 6 with this corpus because the number of relevant candidates is too small for some job offers (see Table 1). We observe a slight improvement in results for almost any size of Relevance Feedback. We are conscious that the performance gain is low, however, it confirms previous results on the Cover Letter. Fig. 5 shows this improvement. This figure confirms that the addition of just one relevant candidate (RF1) enables the AUC value to be enhanced (i.e. an improve- ment of 0.5–1.2%). This Relevance Feedback (i.e. RF1) is not very time-consuming for the expert.
+average for each size). In fact, we compute the Residual Ranking (Billerbeck &amp; Zobel, 2006): Documents that are used for Rel- evance Feedback are removed from the collection before ranking with the reformulated query. We assume that the Rele- vance Feedback process would behave as a reinforcement learning (Sutton &amp; Barto, 1998) but it is impossible to experiment RFn with n > 6 with this corpus because the number of relevant candidates is too small for some job offers (see Table 1). We observe a slight improvement in results for almost any size of Relevance Feedback. We are conscious that the performance gain is low, however, it confirms previous results on the Cover Letter. Fig. 5 shows this improvement. This figure confirms that the addition of just one relevant candidate (RF1) enables the AUC value to be enhanced (i.e. an improve- ment of 0.5–1.2%). This Relevance Feedback (i.e. RF1) is not very time-consuming for the expert.
 Fig. 6 shows detailed results of one test. For clarity reasons, we present only 3 of the 12 jobs of our dataset in order to compare results with and without CORTEX (for each job, RFC are AUC scores with CORTEX and RF without CORTEX).
 For standard system, we observe a positive progress from 1% to 10% for 10 jobs between RF0 and RF1 (e.g. five jobs have an improvement between 5% and 10%). Note that between RF0 and RF6, 6 jobs have a significant positive progress between 10% and 12%. The combination of the E-Gen and CORTEX systems improve standard system results for five jobs from 1% to 5% between RF0 and RF1. Between RF0 and RF6, the Cortex version improves E-Gen’s results for eight jobs from 1% to 5%.
 The study of the results shows that job offer 31702 contains some relevant applications with a bad labeling (CV are la- beled CL and CL are only a hyperlink to a CV). The reduction of information on the main document of the application leads the system version using summaries to degrade the AUC scores. Job offer 34861 shows a good improvement with each size of relevance feedback (RF0:0.65, RF1:0.70, RF6:0.73) and with CORTEX (RF0:0.68, RF1:0.72, RF6:0.79). The detailed study of re- sults shows that job offer 33746 contains some empty applications labeled relevant. This leads the system with and without CORTEX to degrade final results. In the same way, an application added without CL explains the identical score in RF2 between RF and RFC for job offer 31274.</results>
     <conclusion>6. Conclusion and future work
-Job offer processing is a difficult and highly subjective task. The retrieval of relevant information concerning job descrip- tions and skills is not a trivial task (Loth et al., 2010) and results on this type of document have been quite low (Clech &
+Job offer processing is a difficult and highly subjective task. The retrieval of relevant information concerning job descrip- tions and skills is not a trivial task (Loth et al., 2010) and results on this type of document have been quite low (Clech &amp;
 Author's personal copy
 1134 R. Kessler et al. / Information Processing and Management 48 (2012) 1124–1135
 Fig. 6. Comparison of detailed results for 3 jobs with and without summaries of CL. For each job, RFC means AUC scores with CORTEX and RF without CORTEX.

@@ -54,7 +54,7 @@ between terms, etc.)
 Two relevant aspects regarding the nature of terms are termhood and
 unithood2; TE systems may be designed based on only one of these two aspects.
 Some practical experiments following each scheme for ranking a set terms
-extracted from Japanese texts are presented in (Nakagawa & Mori, 1998). They
+extracted from Japanese texts are presented in (Nakagawa &amp; Mori, 1998). They
 show that results in precision and recall are very close but the set of terms
 extracted are a somewhat different. This is still a research issue.
 Alongside term detection we find the task of automatic document indexing (i.e.

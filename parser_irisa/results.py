@@ -22,6 +22,7 @@ def find_results(transcri: Transcription):
     sendc14 = "2256"
     sbless = "normalized distributions"
     siend = "single convolution layer."
+    senda = "describe the linguistic"
 
     """declaration variable contenant le résultat """
 
@@ -56,6 +57,7 @@ def find_results(transcri: Transcription):
                 or (stringendl18 in transcri[np][nl])
                 or (sendc14 in transcri[np][nl])
                 or (siend in transcri[np][nl])
+                or (senda in transcri[np][nl])
             ):
                 page1 = np
                 ligne1 = nl

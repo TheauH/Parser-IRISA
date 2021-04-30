@@ -4,24 +4,16 @@ from .transcription import Transcription
 
 def find_results(transcri: Transcription):
     """ motif rechercher : """
-    string = r"([1-9]) Result"
-    string1 = r"([1-9]). Results"
-    string2 = "Conclusion"
-    string3 = "ONCLUSION"
-    string = r"([6-9])"
-    string4 = r"([5-9]) Conclusion"
-    string5 = "3.5. Results"
-    string6 = "In this section,"
-    string7 = r"([7-9])"
-    string8 = "the performance of the two"
-    string9 = "Selective Distributional Inclusion"
-    string10 = "normalized distributions"
-    stringl18 = "Table 3 shows f-score ROUGE"
-    stringendl18 = "Human Evaluation"
-    stringc14 = "we compare average accuracy"
+    string = "3.5. Results"
+    string2 = "In this section,"
+    string3 = "the performance of the two"
+    string4 = "Table 3 shows f-score ROUGE"
+    string5 = "we compare average accuracy"
+    string6 = "normalized distributions"
+    string7 = "Conclusion"
+    string8 = "Selective Distributional Inclusion"
+    string9 = "Human Evaluation"
     sendc14 = "2256"
-    sbless = "normalized distributions"
-    siend = "single convolution layer."
     senda = "describe the linguistic"
     sin = "around 2 % to"
 
@@ -39,26 +31,21 @@ def find_results(transcri: Transcription):
         for nl in range(len(transcri[np]) - 1, -1, -1):
             if (
                 (string in transcri[np][nl])
-                or (string1 in transcri[np][nl])
+                or (string2 in transcri[np][nl])
+                or (string3 in transcri[np][nl])
+                or (string4 in transcri[np][nl])
                 or (string5 in transcri[np][nl])
                 or (string6 in transcri[np][nl])
-                or (string8 in transcri[np][nl])
-                or (stringl18 in transcri[np][nl])
-                or (stringc14 in transcri[np][nl])
-                or (sbless in transcri[np][nl])
 
 
             ):
                 page = np
                 ligne = nl
             if (
-                (string2 in transcri[np][nl])
-                or (string3 in transcri[np][nl])
-                or (string4 in transcri[np][nl])
+                (string7 in transcri[np][nl])
+                or (string8 in transcri[np][nl])
                 or (string9 in transcri[np][nl])
-                or (stringendl18 in transcri[np][nl])
                 or (sendc14 in transcri[np][nl])
-                or (siend in transcri[np][nl])
                 or (senda in transcri[np][nl])
                 or (sin in transcri[np][nl])
             ):

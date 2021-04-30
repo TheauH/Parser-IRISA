@@ -156,8 +156,11 @@ Various Text Representation schemes are described in section 4. We formally desc
 the evaluation task and models in section 5. We report results in section 6 and present
 detail result analysis in section 7. We conclude the discussion and provide insight for
 the future work in section 8.</introduction>
-    <results>6. Results
-In this section, we first present results of classifiers TRAC dataset Kumar et al. (2018) with different text representation scheme. Latter we present result on FIRE IRMiDis 2018 Dataset. Tweets are very noisy in nature contains user mentions, Hash- tags, Emojis, and URLs. We do not perform any kind of text pre-processing on tweets in experiments with deep neural models. In experiments with machine learning classi- fier, before classification, Hashtag symbol # and User mentions are dropped from the tweets. Non-ASCII characters and stop-words are removed from tweet text (Modha et al. , 2016).</results>
+    <results>
+In this section, we will present the comprehensive result analysis and try to answer
+the research questions which framed before the experiments were performed. As we
+look at the table 6 7, and 8, Overall, LSTM and CNN with pre-trained fastText word
+embedding marginally outperform (around 2 % to 4%) standard machine learning</results>
 
     <conclusion>8. Conclusion
 In this Paper, Multilingual Social media stream is studied with special kind of text

@@ -37,7 +37,7 @@ Pour lancer l'outil, 2 solutions :
 
 ```bash
 python3 -m parser_irisa "CHEMIN.../NOMDUDOSSIER/" -t|-x
-
+```
 
 ### Menu tkinter 
 

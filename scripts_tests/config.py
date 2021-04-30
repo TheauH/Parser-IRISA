@@ -7,4 +7,4 @@ import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from parser_irisa import page, transcription, article, strop
+from parser_irisa import page, transcription, article, strop, auteur

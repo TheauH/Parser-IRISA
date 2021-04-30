@@ -11,7 +11,7 @@ from os import PathLike, scandir
 from sys import argv
 from pathlib import Path
 import xml.etree.ElementTree as ET
-from config import strop, article
+from config import strop, article, auteur
 from difflib import SequenceMatcher
 
 
@@ -28,7 +28,6 @@ def précision(
     champs_art = {
         "preamble": art.nom,
         "titre": art.titre,
-        "auteurs": art.auteurs,
         "abstract": art.résumé,
         "introduction": art.introduction,
         "results": art.results,
@@ -41,9 +40,9 @@ def précision(
     for élément in refXML:
         # TODO Mieux prendre en compte le cas de la section « auteurs »
         sections_attendues += 1
-        contenu_attendu = strop.sans_blancs(
-            "".join(élément.itertext()) if élément.tag == "auteurs" else élément.text
-        )
+        if élément.tag == "auteurs":
+            continue  # On voit les auteurs ensuite, indépendamment.
+        contenu_attendu = strop.sans_blancs(élément.text)
         contenu_obtenu = strop.sans_blancs(str(champs_art[élément.tag].contenu))
 
         if (not souple and contenu_attendu == contenu_obtenu) or (
@@ -51,6 +50,52 @@ def précision(
             and SequenceMatcher(None, contenu_attendu, contenu_obtenu).ratio() >= 0.9
         ):
             sections_correctes += 1
+
+    auteurs = refXML.find("auteurs")
+    auteurs_attendus = auteurs_corrects = 0
+    auteurs_affiliations: dict[str, str] = {}  # Dictionnaire des auteurs attendus
+
+    for élément in auteurs:  # Parcours pour remplir le dictionnaire
+        if élément.tag == "auteur":
+            auteurs_affiliations[élément.text] = None
+        elif élément.tag == "affiliation":
+            for identité, affiliation in reversed(auteurs_affiliations.items()):
+                # On remonte la liste des auteurs sans affiliations
+                if not affiliation:
+                    auteurs_affiliations[identité] = strop.sans_blancs(élément.text)
+                else:
+                    break
+
+    for chaqueAuteur, sonAffiliation in auteurs_affiliations.items():
+        identité = chaqueAuteur.rstrip(")").split(" (")  # [nom, courriel]
+
+        if not identité:  # Cas impossible si le parsage à la main est bien fait
+            continue
+
+        auteurs_attendus += 1
+
+        auteurMachine: Union[auteur.Auteur, None] = next(
+            (a for a in art.auteurs.contenu if a.nom == identité[0]), None
+        )  # récupère l’objet Auteur de même nom
+
+        if not auteurMachine:  # Si l’auteur n’a pas été trouvé du tout
+            continue
+
+        if len(identité) == 2 and identité[1] != auteurMachine.courriel:
+            # S’il y a un courriel non trouvé
+            continue
+
+        if sonAffiliation and sonAffiliation != strop.sans_blancs(
+            auteurMachine.affiliation
+        ):
+            # S’il y a une affiliation incorrecte
+            continue
+
+        auteurs_corrects += 1
+
+    précision_auteurs = auteurs_corrects / auteurs_attendus
+    if (not souple and précision_auteurs == 1) or (souple and précision_auteurs >= 0.9):
+        sections_correctes += 1
 
     return sections_correctes / sections_attendues
 

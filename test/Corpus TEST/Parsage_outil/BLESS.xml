@@ -95,7 +95,7 @@ formance of DSMs on such tasks represents an in-
        trinsic evaluation of DSMs, downloadable from:
        http://clic.cimec.unitn.it/distsem.
 </introduction>
-<Results>
+<results>
  The concept-by-concept z-normalized distributions
  of cosines of relata instantiating each of our rela-
  tions are presented, for each of the example mod-
@@ -751,7 +751,7 @@ dow). Traditional DSM tests, based on a single qual-
 
                  ity measure, would not have given us this broad view
                  of how models are behaving.
-</Results>
+</results>
 <conclusion>
                  6         Conclusion
 

@@ -72,7 +72,7 @@ between terms, etc.)
     Two relevant aspects regarding the nature of terms are termhood and
 unithood2; TE systems may be designed based on only one of these two aspects.
 Some practical experiments following each scheme for ranking a set terms
-extracted from Japanese texts are presented in (Nakagawa & Mori, 1998). They
+extracted from Japanese texts are presented in (Nakagawa &amp; Mori, 1998). They
 show that results in precision and recall are very close but the set of terms
 extracted are a somewhat different. This is still a research issue.
 Alongside term detection we find the task of automatic document indexing (i.e.
@@ -83,7 +83,7 @@ terminological units. This same goal explains why many extraction systems are
 rooted on IR as well as on the analysis of a specific IR system with no
 application whatsoever to TE.
 2
-  (Kageura & Umino, 1996) refer to unithood as the degree of stability of syntagmatic combinations
+  (Kageura &amp; Umino, 1996) refer to unithood as the degree of stability of syntagmatic combinations
 (collocations) and termhood as the degree in that a linguistic unit is related to a domain-specificAUTOMATIC TERM DETECTION: A REVIEW OF CURRENT SYSTEMS 3
 
 The difference between these two approaches lies in the fact that a tool for TE

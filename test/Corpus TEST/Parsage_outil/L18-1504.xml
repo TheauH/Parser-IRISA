@@ -66,7 +66,7 @@ art methods using our dataset. Finally, conclusions are set
 out in Section 5.
 
 </introduction>
-<Results>
+<results>
    Table 3 shows f-score ROUGE scores for the French, Por-
    tuguese and Spanish datasets.8 Boudin and Morin’s system
    generated better compressions with higher ROUGE scores
@@ -129,7 +129,7 @@ this system analyzes neither the grammaticality nor the
 most used n-grams in the clusters. Consequently, the base-
 line system generated compressions with the worst ROUGE
 scores.
-</Results>
+</results>
 <conclusion>
           5.    Conclusion and Future Work
 

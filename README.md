@@ -35,11 +35,15 @@ Pour lancer l'outil, 2 solutions :
 
 ### En ligne de commande 
 
-'python3 -m parser_irisa "CHEMIN.../NOMDUDOSSIER/" -t|-x'
+'''bash
+python3 -m parser_irisa "CHEMIN.../NOMDUDOSSIER/" -t|-x
+'''
 
 ### Menu tkinter 
 
-'python3 -m parser_irisa menu -t|-x'
+'''bash
+python3 -m parser_irisa menu -t|-x
+'''
 
 ### Test de précision
 

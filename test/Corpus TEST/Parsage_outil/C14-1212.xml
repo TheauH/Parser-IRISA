@@ -17,13 +17,13 @@ Department of Informatics,
 University of Sussex,
 Brighton, UK
 </affiliation>
-<auteur>Jeremy Reffin</auteur>
+<auteur>Jeremy Reffin (juliewe,D.Clarke,J.P.Reffin,davidw,billk@sussex.ac.uk)</auteur>
 <affiliation>
 Department of Informatics,
 University of Sussex,
 Brighton, UK
 </affiliation>
-<auteur>David Weir (juliewe,D.Clarke,J.P.Reffin,davidw,billk@sussex.ac.uk)</auteur>
+<auteur>David Weir</auteur>
 <affiliation>
 Department of Informatics,
 University of Sussex,
@@ -119,7 +119,7 @@ vector operations are useful when identifying different ontological relationship
 difference between the vectors for pairs of words is appropriate for the entailment task, whereas adding
 the vectors works well for the co-hyponym task.
 </introduction>
-<Results>
+<results>
 In Table 3, we compare average accuracy for a number of different classifiers on each of two tasks,
 distinguishing hyponyms and distinguishing co-hyponyms, on each of the two datasets.
    Looking at the results for the hyponymBLESS data set, we can see that the SVM methods do generally
@@ -141,7 +141,7 @@ provided for 200 nouns.
    hyponymWN         0.50        0.53       0.52       0.70         0.65         0.70     0.66       0.53
   cohyponymWN        0.50        0.50       0.55         -            -            -        -          -
 
-Table 3: Accuracy Figures for the data sets generated from BLESS and WordNet (standard errors <
+Table 3: Accuracy Figures for the data sets generated from BLESS and WordNet (standard errors &lt;
 0.02). For cohyponyms, results for measures designed to detect hyponymy have been omitted. We also
 omit results of clarkediff as these were consistently the same or less than CRdiff.
 
@@ -183,7 +183,7 @@ hyponymWN dataset. Our task is slightly different to that of (Kotlerman et al., 
 mining the existence (or not) of hyponymy, rather than the direction of entailment for pairs where it is
 known that a relationship exists. It could be that the measure is particularly suited to the latter task.
 
-</Results>
+</results>
 <conclusion>
 5   Conclusions and Further Work
 We have shown that it is possible to predict to a large extent whether or not there is a specific semantic

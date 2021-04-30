@@ -127,7 +127,7 @@ on the deep neural net is more robust than machine learning classifier when test
 on lexically different dataset than training Dataset. i.e. deep neural model substan-
 
 </introduction>
-<Results>
+<results>
 In this section, we will present the comprehensive result analysis and try to answer
 the research questions which framed before the experiments were performed. As we
 look at the table 6 7, and 8, Overall, LSTM and CNN with pre-trained fastText word
@@ -489,7 +489,7 @@ classifier across diverse datasets.
 To answer this question, we designed first CNN model with one convolution layer and
 other CNN model with 3 convolution layer with different filters height. As we look
 at results shown in Table 6,7,8, and 9, one can conclude that by and large weighted
-</Results>
+</results>
 <conclusion>
 8. Conclusion
 
@@ -540,7 +540,7 @@ Bojanowski, Piotr and Grave, Edouard and Joulin, Armand and Mikolov, Tomas (2017
   tational Linguistics, vol-5,pp.135–146, MIT Press.
 Burnap, Pete and Williams, Matthew Ltitle (2015). Cyber hate speech on twitter: An applica-
   tion of machine classification and statistical modeling for policy and decision makingPolicy
-  & Internet, vol-7 number 2, pp.223–242, Wiley Online Library.
+  &amp; Internet, vol-7 number 2, pp.223–242, Wiley Online Library.
 Conover, Michael and Ratkiewicz, Jacob and Francisco, Matthew R and Gonçalves , Bruno and
   Menczer, Filippo and Flammini, Alessandro (2011). Political polarization on twitter.,Icwsm,
   vol-133, pp.89–96.
@@ -558,10 +558,10 @@ Deriu, Jan and Gonzenbach, Maurice and Uzdilli, Fatih and Lucchi, Aurelien and L
   the 10th international workshop on semantic evaluation,pp.1124–1128.
 Hltcoe, J (2013).Semeval-2013 task 2: Sentiment analysis in Twitter,vol-312 Atlanta, Georgia,
   USA.
-Howard, Jeremy & Ruder, Sebastian 2018. Universal language model fine-tuning for text clas-
+Howard, Jeremy &amp; Ruder, Sebastian 2018. Universal language model fine-tuning for text clas-
   sification”,arXiv preprint arXiv:1801.06146,
 Harris, Zellig S (1954),Distributional structure Word,10, number=2-3,pp.146–162, 1954, Taylor
-  & Francis.
+  &amp; Francis.
 Kumar, Ritesh and Reganti, Aishwarya N. and Bhatia, Akshit and Maheshwari,Tushar (2018),
   Aggression-annotated Corpus of Hindi-English Code-mixed Data, Proceedings of the 11th
   Language Resources and Evaluation Conference (LREC), Miyazaki, Japan.
@@ -581,8 +581,8 @@ Malmasi, Shervin and Zampieri, Marcos (2017)Detecting Hate Speech in Social Medi
   ceedings of the International Conference Recent Advances in Natural Language Processing
   (RANLP), pp.467–472.
 Malmasi, Shervin and Zampieri, Marcos (2018).Challenges in Discriminating Profanity from
-  Hate Speech Journal of Experimental & Theoretical Artificial Intelligence pp.1–16, vol-30,
-  issue-2,Taylor & Francis.
+  Hate Speech Journal of Experimental &amp; Theoretical Artificial Intelligence pp.1–16, vol-30,
+  issue-2,Taylor &amp; Francis.
 Maynard, Diana and Funk, Adam (2011) Automatic detection of political opinionsin tweets,
   Extended Semantic Web Conference,pp. 88–99, Springer.
 Mikolov, Tomas and Chen, Kai and Corrado, Greg and Dean, Jeffrey (2013). Efficient estima-

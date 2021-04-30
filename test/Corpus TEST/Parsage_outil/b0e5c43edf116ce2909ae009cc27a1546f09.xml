@@ -13,14 +13,14 @@ Department of Computer Science
 Department of Linguistics
 The University of Texas at Austin
 </affiliation>
-<auteur>Katrin Erk (katrin.erk@mail.utexas.edu,)</auteur>
+<auteur>Katrin Erk (gemma.boleda@upf.edu)</auteur>
 <affiliation>
 Department of Computer Science
 †
 Department of Linguistics
 The University of Texas at Austin
 </affiliation>
-<auteur>Gemma Boleda (gemma.boleda@upf.edu)</auteur>
+<auteur>Gemma Boleda (katrin.erk@mail.utexas.edu,)</auteur>
 <affiliation>
 Department of Computer Science
 †
@@ -109,7 +109,7 @@ fraction of dimensions shared with v –, and weighting by the rank of the same 
 term, rel0 (v, r, u). The final measure, balAPinc, smooths using the LIN similarity measure (Lin, 1998).
 (We only sketch this measure here due to its complexity; details are given in Kotlerman et al. (2010).)
                                                     (
-                                                        1 if x > 0;
+                                                        1 if x &gt; 0;
                                           1(x) =
                                                         0 otherwise
                                                               Pn

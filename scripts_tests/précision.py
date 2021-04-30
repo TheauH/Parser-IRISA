@@ -6,7 +6,7 @@ corpus test, et les résultats effectifs obtenus par le parseur.
 L’option -s (souple) permet d’avoir une tolérance de 10 % sur chaque section.
 """
 
-from typing import Sequence, Union
+from typing import Union
 from os import PathLike, scandir
 from sys import argv
 from pathlib import Path

@@ -41,6 +41,16 @@ Pour lancer l'outil, 2 solutions :
 
 'python3 -m parser_irisa menu -t|-x'
 
+### Test de précision
+
+Le dossier `scripts_tests` comprend un script `précision.py`, qui compare les articles obtenus par le parseur avec les articles tels que parsés à la main en X.M.L. La commande est de la forme
+
+```bash
+python3 scripts_tests/précision.py [-s]
+```
+
+où l’option `-s` (souple) permet une tolérance de 10 % sur la validité de chaque section.
+
 ## Fabriqué avec
 
 * [Visual Studio Code](https://code.visualstudio.com)

@@ -12,34 +12,25 @@ L'outil est concu pour les environnements GNU Linux.
 
 ### Pré-requis
 
-Ce qu'il est requis pour commencer avec votre projet...
+Les modules requis pour utiliser l'outil : 
 
 - textract https://pypi.org/project/textract/
 - PYPDF2 https://pypi.org/project/PyPDF2/
 - pdftotext https://pypi.org/project/pdftotext/
 
-### Installation
 
-Les étapes pour installer votre programme....
+## Lancement de l'outil
 
-Dites ce qu'il faut faire...
+### Parsage 
+Pour lancer el parsage avec l'outil, 2 solutions : 
 
-_exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
-
-
-Ensuite vous pouvez montrer ce que vous obtenez au final...
-
-## Démarrage
-
-Pour lancer l'outil, 2 solutions : 
-
-### En ligne de commande 
+#### En ligne de commande 
 
 ```bash
 python3 -m parser_irisa "CHEMIN.../NOMDUDOSSIER/" -t|-x
 ```
 
-### Menu tkinter 
+#### Menu tkinter 
 
 ```bash
 python3 -m parser_irisa menu -t|-x
@@ -58,15 +49,9 @@ où l’option `-s` (souple) permet une tolérance de 10 % sur la validité de 
 ## Fabriqué avec
 
 * [Visual Studio Code](https://code.visualstudio.com)
+* [Spyder](https://www.spyder-ide.org)
 * [Python](https://www.python.org)
 
-## Versions
-
-
-**Dernière version stable :**
-**Dernière version :** 
-Liste des versions : [Cliquer pour afficher](https://github.com/your/project-name/tags)
-_(pour le lien mettez simplement l'URL de votre projets suivi de ``/tags``)_
 
 ## Auteurs
 Listez le(s) auteur(s) du projet ici !

@@ -2,3 +2,6 @@
 __pycache__
 test/*/txt
 test/*/xml
+rapport_final.*
+!rapport_final.tex
+!rapport_final.pdf

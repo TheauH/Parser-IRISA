@@ -108,14 +108,19 @@ souplesse = False
 
 souplesse = len(argv) >= 2 and argv[1] == "-s"
 
+nb_PDF = 0
+somme_précisions = 0
+
 for entrée_PDF in dossier_PDF:
     if entrée_PDF.name.endswith(".pdf") and entrée_PDF.is_file:
+        nb_PDF += 1
         art = article.Article(chemin_PDF / entrée_PDF.name)
-        print(
-            entrée_PDF.name,
-            précision(
-                art,
-                dossier_résultats / (entrée_PDF.name[:-3] + "xml"),
-                souple=souplesse,
-            ),
+        précision_art = précision(
+            art,
+            dossier_résultats / (entrée_PDF.name[:-3] + "xml"),
+            souple=souplesse,
         )
+        somme_précisions += précision_art
+        print(entrée_PDF.name, "{:.3f}".format(précision_art), sep="\t")
+if nb_PDF:
+    print("Moyenne", "{:.3f}".format(somme_précisions / nb_PDF), sep="\t")
